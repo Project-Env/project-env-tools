@@ -1,0 +1,29 @@
+name: "Update database"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 0 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/cache@v3
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('pom.xml') }}
+    - uses: Project-Env/project-env-github-action@v1.2.0
+      with:
+        cli-version: '3.7.1'
+    - run: mvn -B -s etc/m2/settings-ci.xml verify exec:exec -Dexec.executable="java" -Dexec.args="-classpath %classpath io.projectenv.tools.ToolsIndexProducer --index-file=index.json --debug"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - uses: peter-evans/create-pull-request@v4
+      with:
+        title: 'update tools index'
+        body: 'Updated tools index with latest info'
+        commit-message: 'update tools index'
+        branch: 'feature/update-tools-index'

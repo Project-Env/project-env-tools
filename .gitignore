@@ -1,0 +1,5 @@
+target
+.idea
+.project-env
+.tools
+.flattened-pom.xml
