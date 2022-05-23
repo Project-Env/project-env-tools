@@ -6,11 +6,7 @@ import io.projectenv.tools.ToolsIndex;
 import io.projectenv.tools.ToolsIndexExtender;
 import io.projectenv.tools.jdk.discoapi.*;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.*;
 
 public class JdkVersionsDatasource implements ToolsIndexExtender {
 
@@ -21,10 +17,15 @@ public class JdkVersionsDatasource implements ToolsIndexExtender {
 
     @Override
     public ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex) {
+        Map<String, Set<String>> jdkDistributionSynonyms = new LinkedHashMap<>(currentToolsIndex.getJdkDistributionSynonyms());
         Map<String, Map<String, Map<OperatingSystem, String>>> jdkVersions = new LinkedHashMap<>(currentToolsIndex.getJdkVersions());
 
         for (String distributionId : DISTRIBUTIONS) {
             DiscoApiDistribution distributionInfo = fetchDistributionInfo(distributionId);
+
+            Set<String> distributionSynonyms = jdkDistributionSynonyms.computeIfAbsent(distributionId, (key) -> new LinkedHashSet<>());
+            distributionSynonyms.add(distributionInfo.getName());
+            distributionSynonyms.addAll(distributionInfo.getSynonyms());
 
             var distributionVersions = distributionInfo.getVersions().stream().sorted().toList();
             for (String distributionVersion : distributionVersions) {
@@ -34,8 +35,7 @@ public class JdkVersionsDatasource implements ToolsIndexExtender {
 
                 Map<OperatingSystem, String> downloadUrls = fetchDownloadUrls(distributionId, distributionVersion);
                 if (!downloadUrls.isEmpty()) {
-                    jdkVersions.computeIfAbsent(distributionInfo.getName(), (key) -> new LinkedHashMap<>())
-                            .put(distributionVersion, downloadUrls);
+                    jdkVersions.computeIfAbsent(distributionId, (key) -> new LinkedHashMap<>()).put(distributionVersion, downloadUrls);
                 }
             }
         }
@@ -43,6 +43,7 @@ public class JdkVersionsDatasource implements ToolsIndexExtender {
         return ImmutableToolsIndex.builder()
                 .from(currentToolsIndex)
                 .jdkVersions(jdkVersions)
+                .jdkDistributionSynonyms(jdkDistributionSynonyms)
                 .build();
     }
 
