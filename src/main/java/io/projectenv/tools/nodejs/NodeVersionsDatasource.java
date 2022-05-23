@@ -34,9 +34,9 @@ public class NodeVersionsDatasource implements ToolsIndexExtender {
                     .collect(Collectors.toMap(
                             version -> version,
                             version -> Map.of(
-                                    OperatingSystem.MACOS, MessageFormat.format("https://nodejs.org/dist/{0}/node-{0}-darwin-x64.tar.xz", version),
-                                    OperatingSystem.LINUX, MessageFormat.format("https://nodejs.org/dist/{0}/node-{0}-linux-x64.tar.xz", version),
-                                    OperatingSystem.WINDOWS, MessageFormat.format("https://nodejs.org/dist/{0}/node-{0}-win-x64.zip", version)
+                                    OperatingSystem.MACOS, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-darwin-x64.tar.xz", version),
+                                    OperatingSystem.LINUX, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-linux-x64.tar.xz", version),
+                                    OperatingSystem.WINDOWS, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-win-x64.zip", version)
                             ),
                             (a, b) -> a,
                             LinkedHashMap::new));
