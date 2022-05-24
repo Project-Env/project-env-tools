@@ -8,8 +8,8 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -28,12 +28,11 @@ public class MavenVersionsDatasource implements ToolsIndexExtender {
                     .map(VERSION_PATTERN::matcher)
                     .filter(Matcher::find)
                     .map(matcher -> matcher.group(1))
-                    .sorted()
                     .collect(Collectors.toMap(
                             version -> version,
                             version -> MessageFormat.format("https://archive.apache.org/dist/maven/maven-3/{0}/binaries/apache-maven-{0}-bin.zip", version),
                             (a, b) -> a,
-                            LinkedHashMap::new));
+                            TreeMap::new));
 
             return ImmutableToolsIndex.builder()
                     .from(currentToolsIndex)
