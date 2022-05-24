@@ -8,8 +8,8 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class GradleVersionsDatasource implements ToolsIndexExtender {
@@ -23,12 +23,11 @@ public class GradleVersionsDatasource implements ToolsIndexExtender {
                     .flatMap(element -> element.children().stream())
                     .filter(element -> "a".equals(element.tagName()) && element.hasAttr("name"))
                     .map(element -> element.attr("name"))
-                    .sorted()
                     .collect(Collectors.toMap(
                             version -> version,
                             version -> MessageFormat.format("https://downloads.gradle-dn.com/distributions/gradle-{0}-bin.zip", version),
                             (a, b) -> a,
-                            LinkedHashMap::new));
+                            TreeMap::new));
 
             return ImmutableToolsIndex.builder()
                     .from(currentToolsIndex)

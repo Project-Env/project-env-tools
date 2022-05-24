@@ -17,25 +17,24 @@ public class JdkVersionsDatasource implements ToolsIndexExtender {
 
     @Override
     public ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex) {
-        Map<String, Set<String>> jdkDistributionSynonyms = new LinkedHashMap<>(currentToolsIndex.getJdkDistributionSynonyms());
-        Map<String, Map<String, Map<OperatingSystem, String>>> jdkVersions = new LinkedHashMap<>(currentToolsIndex.getJdkVersions());
+        Map<String, Set<String>> jdkDistributionSynonyms = new TreeMap<>(currentToolsIndex.getJdkDistributionSynonyms());
+        Map<String, Map<String, Map<OperatingSystem, String>>> jdkVersions = new TreeMap<>(currentToolsIndex.getJdkVersions());
 
         for (String distributionId : DISTRIBUTIONS) {
             DiscoApiDistribution distributionInfo = fetchDistributionInfo(distributionId);
 
-            Set<String> distributionSynonyms = jdkDistributionSynonyms.computeIfAbsent(distributionId, (key) -> new LinkedHashSet<>());
+            Set<String> distributionSynonyms = jdkDistributionSynonyms.computeIfAbsent(distributionId, (key) -> new TreeSet<>());
             distributionSynonyms.add(distributionInfo.getName());
             distributionSynonyms.addAll(distributionInfo.getSynonyms());
 
-            var distributionVersions = distributionInfo.getVersions().stream().sorted().toList();
-            for (String distributionVersion : distributionVersions) {
+            for (String distributionVersion : distributionInfo.getVersions()) {
                 if (distributionVersion.endsWith("-ea")) {
                     continue;
                 }
 
                 Map<OperatingSystem, String> downloadUrls = fetchDownloadUrls(distributionId, distributionVersion);
                 if (!downloadUrls.isEmpty()) {
-                    jdkVersions.computeIfAbsent(distributionId, (key) -> new LinkedHashMap<>()).put(distributionVersion, downloadUrls);
+                    jdkVersions.computeIfAbsent(distributionId, (key) -> new TreeMap<>()).put(distributionVersion, downloadUrls);
                 }
             }
         }
