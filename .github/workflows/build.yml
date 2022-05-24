@@ -13,9 +13,7 @@ jobs:
       with:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('pom.xml') }}
-    - uses: Project-Env/project-env-github-action@v1.2.0
-      with:
-        cli-version: '3.7.1'
+    - uses: Project-Env/project-env-github-action@v1.3.0
     - run: mvn -B -s etc/m2/settings-ci.xml verify
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
