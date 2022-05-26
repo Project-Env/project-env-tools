@@ -389,9 +389,9 @@
       "GraalVMCE8"
     ],
     "temurin": [
+      "temurin",
       "Temurin",
-      "TEMURIN",
-      "temurin"
+      "TEMURIN"
     ]
   },
   "gradleVersions": {
