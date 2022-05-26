@@ -2,7 +2,10 @@ package io.projectenv.tools;
 
 import io.projectenv.core.commons.process.ProcessOutput;
 import io.projectenv.tools.gradle.GradleVersionsDatasource;
-import io.projectenv.tools.jdk.JdkVersionsDatasource;
+import io.projectenv.tools.jdk.GraalVmVersionsDatasource;
+import io.projectenv.tools.jdk.TemurinVersionsDatasource;
+import io.projectenv.tools.jdk.github.GithubClient;
+import io.projectenv.tools.jdk.github.impl.SimpleGithubClient;
 import io.projectenv.tools.maven.MavenVersionsDatasource;
 import io.projectenv.tools.nodejs.NodeVersionsDatasource;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -22,6 +25,9 @@ public class ToolsIndexProducer implements Callable<Integer> {
     @Option(names = {"--index-file"}, required = true)
     private File indexFile;
 
+    @Option(names = {"--github-access-token"}, required = true)
+    private String githubAccessToken;
+
     @Option(names = {"--debug"})
     private boolean debug;
 
@@ -33,7 +39,9 @@ public class ToolsIndexProducer implements Callable<Integer> {
             }
 
             var toolsIndex = readOrCreateToolsIndex();
-            for (ToolsIndexExtender extender : List.of(new JdkVersionsDatasource(), new NodeVersionsDatasource(), new MavenVersionsDatasource(), new GradleVersionsDatasource())) {
+
+            GithubClient githubClient = SimpleGithubClient.withAccessToken(githubAccessToken);
+            for (ToolsIndexExtender extender : List.of(new TemurinVersionsDatasource(githubClient), new GraalVmVersionsDatasource(githubClient), new NodeVersionsDatasource(), new MavenVersionsDatasource(), new GradleVersionsDatasource())) {
                 toolsIndex = extender.extendToolsIndex(toolsIndex);
             }
 

@@ -1,148 +1,397 @@
 {
   "jdkVersions": {
     "graalvm_ce11": {
+      "19.3.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java11-darwin-amd64-19.3.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java11-windows-amd64-19.3.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java11-linux-amd64-19.3.0.tar.gz"
+      },
+      "19.3.0.2": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java11-darwin-amd64-19.3.0.2.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java11-windows-amd64-19.3.0.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java11-linux-amd64-19.3.0.2.tar.gz"
+      },
+      "19.3.1": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.1/graalvm-ce-java11-darwin-amd64-19.3.1.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.1/graalvm-ce-java11-windows-amd64-19.3.1.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.1/graalvm-ce-java11-linux-amd64-19.3.1.tar.gz"
+      },
+      "19.3.2": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.2/graalvm-ce-java11-darwin-amd64-19.3.2.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.2/graalvm-ce-java11-windows-amd64-19.3.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.2/graalvm-ce-java11-linux-amd64-19.3.2.tar.gz"
+      },
+      "19.3.3": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.3/graalvm-ce-java11-darwin-amd64-19.3.3.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.3/graalvm-ce-java11-windows-amd64-19.3.3.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.3/graalvm-ce-java11-linux-amd64-19.3.3.tar.gz"
+      },
+      "19.3.4": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.4/graalvm-ce-java11-darwin-amd64-19.3.4.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.4/graalvm-ce-java11-windows-amd64-19.3.4.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.4/graalvm-ce-java11-linux-amd64-19.3.4.tar.gz"
+      },
+      "19.3.5": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.5/graalvm-ce-java11-darwin-amd64-19.3.5.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.5/graalvm-ce-java11-windows-amd64-19.3.5.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.5/graalvm-ce-java11-linux-amd64-19.3.5.tar.gz"
+      },
+      "19.3.6": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.6/graalvm-ce-java11-darwin-amd64-19.3.6.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.6/graalvm-ce-java11-windows-amd64-19.3.6.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.6/graalvm-ce-java11-linux-amd64-19.3.6.tar.gz"
+      },
+      "20.0.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-darwin-amd64-20.0.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-windows-amd64-20.0.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-linux-amd64-20.0.0.tar.gz"
+      },
+      "20.1.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java11-darwin-amd64-20.1.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java11-windows-amd64-20.1.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java11-linux-amd64-20.1.0.tar.gz"
+      },
+      "20.2.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-darwin-amd64-20.2.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-windows-amd64-20.2.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java11-linux-amd64-20.2.0.tar.gz"
+      },
       "20.3.0": {
-        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-linux-amd64-20.3.0.tar.gz",
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-darwin-amd64-20.3.0.tar.gz",
-        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-windows-amd64-20.3.0.zip"
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-windows-amd64-20.3.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-linux-amd64-20.3.0.tar.gz"
+      },
+      "20.3.1": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1/graalvm-ce-java11-darwin-amd64-20.3.1.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1/graalvm-ce-java11-windows-amd64-20.3.1.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1/graalvm-ce-java11-linux-amd64-20.3.1.tar.gz"
+      },
+      "20.3.1.2": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1.2/graalvm-ce-java11-darwin-amd64-20.3.1.2.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1.2/graalvm-ce-java11-windows-amd64-20.3.1.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1.2/graalvm-ce-java11-linux-amd64-20.3.1.2.tar.gz"
+      },
+      "20.3.2": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.2/graalvm-ce-java11-darwin-amd64-20.3.2.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.2/graalvm-ce-java11-windows-amd64-20.3.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.2/graalvm-ce-java11-linux-amd64-20.3.2.tar.gz"
+      },
+      "20.3.3": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.3/graalvm-ce-java11-darwin-amd64-20.3.3.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.3/graalvm-ce-java11-windows-amd64-20.3.3.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.3/graalvm-ce-java11-linux-amd64-20.3.3.tar.gz"
+      },
+      "20.3.4": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.4/graalvm-ce-java11-darwin-amd64-20.3.4.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.4/graalvm-ce-java11-windows-amd64-20.3.4.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.4/graalvm-ce-java11-linux-amd64-20.3.4.tar.gz"
+      },
+      "20.3.5": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.5/graalvm-ce-java11-darwin-amd64-20.3.5.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.5/graalvm-ce-java11-windows-amd64-20.3.5.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.5/graalvm-ce-java11-linux-amd64-20.3.5.tar.gz"
+      },
+      "20.3.6": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.6/graalvm-ce-java11-darwin-amd64-20.3.6.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.6/graalvm-ce-java11-windows-amd64-20.3.6.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.6/graalvm-ce-java11-linux-amd64-20.3.6.tar.gz"
+      },
+      "21.0.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0/graalvm-ce-java11-darwin-amd64-21.0.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0/graalvm-ce-java11-windows-amd64-21.0.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0/graalvm-ce-java11-linux-amd64-21.0.0.tar.gz"
+      },
+      "21.0.0.2": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0.2/graalvm-ce-java11-darwin-amd64-21.0.0.2.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0.2/graalvm-ce-java11-windows-amd64-21.0.0.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0.2/graalvm-ce-java11-linux-amd64-21.0.0.2.tar.gz"
+      },
+      "21.1.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java11-darwin-amd64-21.1.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java11-windows-amd64-21.1.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java11-linux-amd64-21.1.0.tar.gz"
+      },
+      "21.2.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/graalvm-ce-java11-darwin-amd64-21.2.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/graalvm-ce-java11-windows-amd64-21.2.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/graalvm-ce-java11-linux-amd64-21.2.0.tar.gz"
       },
       "21.3.0": {
-        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java11-linux-amd64-21.3.0.tar.gz",
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java11-darwin-amd64-21.3.0.tar.gz",
-        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java11-windows-amd64-21.3.0.zip"
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java11-windows-amd64-21.3.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java11-linux-amd64-21.3.0.tar.gz"
+      },
+      "21.3.1": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.1/graalvm-ce-java11-darwin-amd64-21.3.1.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.1/graalvm-ce-java11-windows-amd64-21.3.1.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.1/graalvm-ce-java11-linux-amd64-21.3.1.tar.gz"
+      },
+      "21.3.2": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.2/graalvm-ce-java11-darwin-amd64-21.3.2.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.2/graalvm-ce-java11-windows-amd64-21.3.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.2/graalvm-ce-java11-linux-amd64-21.3.2.tar.gz"
       },
       "22.0.0.2": {
-        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java11-linux-amd64-22.0.0.2.tar.gz",
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java11-darwin-amd64-22.0.0.2.tar.gz",
-        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java11-windows-amd64-22.0.0.2.zip"
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java11-windows-amd64-22.0.0.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java11-linux-amd64-22.0.0.2.tar.gz"
       },
-      "22.1": {
-        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java11-linux-amd64-22.1.0.tar.gz",
+      "22.1.0": {
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java11-darwin-amd64-22.1.0.tar.gz",
-        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java11-windows-amd64-22.1.0.zip"
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java11-windows-amd64-22.1.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java11-linux-amd64-22.1.0.tar.gz"
+      }
+    },
+    "graalvm_ce16": {
+      "21.1.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java16-darwin-amd64-21.1.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java16-windows-amd64-21.1.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java16-linux-amd64-21.1.0.tar.gz"
+      },
+      "21.2.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/graalvm-ce-java16-darwin-amd64-21.2.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/graalvm-ce-java16-windows-amd64-21.2.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/graalvm-ce-java16-linux-amd64-21.2.0.tar.gz"
       }
     },
     "graalvm_ce17": {
       "21.3.0": {
-        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java17-linux-amd64-21.3.0.tar.gz",
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java17-darwin-amd64-21.3.0.tar.gz",
-        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java17-windows-amd64-21.3.0.zip"
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java17-windows-amd64-21.3.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java17-linux-amd64-21.3.0.tar.gz"
+      },
+      "21.3.1": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.1/graalvm-ce-java17-darwin-amd64-21.3.1.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.1/graalvm-ce-java17-windows-amd64-21.3.1.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.1/graalvm-ce-java17-linux-amd64-21.3.1.tar.gz"
+      },
+      "21.3.2": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.2/graalvm-ce-java17-darwin-amd64-21.3.2.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.2/graalvm-ce-java17-windows-amd64-21.3.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.2/graalvm-ce-java17-linux-amd64-21.3.2.tar.gz"
       },
       "22.0.0.2": {
-        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java17-linux-amd64-22.0.0.2.tar.gz",
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java17-darwin-amd64-22.0.0.2.tar.gz",
-        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java17-windows-amd64-22.0.0.2.zip"
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java17-windows-amd64-22.0.0.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java17-linux-amd64-22.0.0.2.tar.gz"
       },
-      "22.1": {
-        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java17-linux-amd64-22.1.0.tar.gz",
+      "22.1.0": {
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java17-darwin-amd64-22.1.0.tar.gz",
-        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java17-windows-amd64-22.1.0.zip"
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java17-windows-amd64-22.1.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java17-linux-amd64-22.1.0.tar.gz"
+      }
+    },
+    "graalvm_ce8": {
+      "19.3.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java8-darwin-amd64-19.3.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java8-windows-amd64-19.3.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java8-linux-amd64-19.3.0.tar.gz"
+      },
+      "19.3.0.2": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java8-darwin-amd64-19.3.0.2.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java8-windows-amd64-19.3.0.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0.2/graalvm-ce-java8-linux-amd64-19.3.0.2.tar.gz"
+      },
+      "19.3.1": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.1/graalvm-ce-java8-darwin-amd64-19.3.1.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.1/graalvm-ce-java8-windows-amd64-19.3.1.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.1/graalvm-ce-java8-linux-amd64-19.3.1.tar.gz"
+      },
+      "19.3.2": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.2/graalvm-ce-java8-darwin-amd64-19.3.2.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.2/graalvm-ce-java8-windows-amd64-19.3.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.2/graalvm-ce-java8-linux-amd64-19.3.2.tar.gz"
+      },
+      "19.3.3": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.3/graalvm-ce-java8-darwin-amd64-19.3.3.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.3/graalvm-ce-java8-windows-amd64-19.3.3.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.3/graalvm-ce-java8-linux-amd64-19.3.3.tar.gz"
+      },
+      "19.3.4": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.4/graalvm-ce-java8-darwin-amd64-19.3.4.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.4/graalvm-ce-java8-windows-amd64-19.3.4.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.4/graalvm-ce-java8-linux-amd64-19.3.4.tar.gz"
+      },
+      "19.3.5": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.5/graalvm-ce-java8-darwin-amd64-19.3.5.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.5/graalvm-ce-java8-windows-amd64-19.3.5.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.5/graalvm-ce-java8-linux-amd64-19.3.5.tar.gz"
+      },
+      "19.3.6": {
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.6/graalvm-ce-java8-windows-amd64-19.3.6.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.6/graalvm-ce-java8-linux-amd64-19.3.6.tar.gz"
+      },
+      "20.0.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java8-darwin-amd64-20.0.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java8-windows-amd64-20.0.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java8-linux-amd64-20.0.0.tar.gz"
+      },
+      "20.1.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java8-darwin-amd64-20.1.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java8-windows-amd64-20.1.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.1.0/graalvm-ce-java8-linux-amd64-20.1.0.tar.gz"
+      },
+      "20.2.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java8-darwin-amd64-20.2.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java8-windows-amd64-20.2.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.2.0/graalvm-ce-java8-linux-amd64-20.2.0.tar.gz"
+      },
+      "20.3.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java8-darwin-amd64-20.3.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java8-windows-amd64-20.3.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java8-linux-amd64-20.3.0.tar.gz"
+      },
+      "20.3.1": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1/graalvm-ce-java8-darwin-amd64-20.3.1.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1/graalvm-ce-java8-windows-amd64-20.3.1.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1/graalvm-ce-java8-linux-amd64-20.3.1.tar.gz"
+      },
+      "20.3.1.2": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1.2/graalvm-ce-java8-darwin-amd64-20.3.1.2.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1.2/graalvm-ce-java8-windows-amd64-20.3.1.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.1.2/graalvm-ce-java8-linux-amd64-20.3.1.2.tar.gz"
+      },
+      "20.3.2": {
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.2/graalvm-ce-java8-windows-amd64-20.3.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.2/graalvm-ce-java8-linux-amd64-20.3.2.tar.gz"
+      },
+      "20.3.3": {
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.3/graalvm-ce-java8-windows-amd64-20.3.3.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.3/graalvm-ce-java8-linux-amd64-20.3.3.tar.gz"
+      },
+      "21.0.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0/graalvm-ce-java8-darwin-amd64-21.0.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0/graalvm-ce-java8-windows-amd64-21.0.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0/graalvm-ce-java8-linux-amd64-21.0.0.tar.gz"
+      },
+      "21.0.0.2": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0.2/graalvm-ce-java8-darwin-amd64-21.0.0.2.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0.2/graalvm-ce-java8-windows-amd64-21.0.0.2.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.0.0.2/graalvm-ce-java8-linux-amd64-21.0.0.2.tar.gz"
+      },
+      "21.1.0": {
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java8-windows-amd64-21.1.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.1.0/graalvm-ce-java8-linux-amd64-21.1.0.tar.gz"
+      },
+      "21.2.0": {
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/graalvm-ce-java8-windows-amd64-21.2.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/graalvm-ce-java8-linux-amd64-21.2.0.tar.gz"
+      },
+      "21.3.1": {
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.1/graalvm-ce-java8-windows-amd64-21.3.1.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.1/graalvm-ce-java8-linux-amd64-21.3.1.tar.gz"
       }
     },
     "temurin": {
       "11.0.12+7": {
-        "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.12%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.12_7.tar.gz",
         "macos": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.12%2B7/OpenJDK11U-jdk_x64_mac_hotspot_11.0.12_7.tar.gz",
-        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.12%2B7/OpenJDK11U-jdk_x64_windows_hotspot_11.0.12_7.zip"
+        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.12%2B7/OpenJDK11U-jdk_x64_windows_hotspot_11.0.12_7.zip",
+        "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.12%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.12_7.tar.gz"
       },
       "11.0.13+8": {
-        "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.13%2B8/OpenJDK11U-jdk_x64_alpine-linux_hotspot_11.0.13_8.tar.gz",
         "macos": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.13%2B8/OpenJDK11U-jdk_x64_mac_hotspot_11.0.13_8.tar.gz",
-        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.13%2B8/OpenJDK11U-jdk_x64_windows_hotspot_11.0.13_8.zip"
-      },
-      "11.0.14+101": {
-        "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14.1%2B1/OpenJDK11U-jdk_x64_alpine-linux_hotspot_11.0.14.1_1.tar.gz",
-        "macos": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14.1%2B1/OpenJDK11U-jdk_x64_mac_hotspot_11.0.14.1_1.tar.gz",
-        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14.1%2B1/OpenJDK11U-jdk_x64_windows_hotspot_11.0.14.1_1.zip"
+        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.13%2B8/OpenJDK11U-jdk_x64_windows_hotspot_11.0.13_8.zip",
+        "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.13%2B8/OpenJDK11U-jdk_x64_linux_hotspot_11.0.13_8.tar.gz"
       },
       "11.0.14+9": {
-        "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14.1%2B1/OpenJDK11U-jdk_x64_alpine-linux_hotspot_11.0.14.1_1.tar.gz",
+        "macos": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14%2B9/OpenJDK11U-jdk_x64_mac_hotspot_11.0.14_9.tar.gz",
+        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14%2B9/OpenJDK11U-jdk_x64_windows_hotspot_11.0.14_9.zip",
+        "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14%2B9/OpenJDK11U-jdk_x64_linux_hotspot_11.0.14_9.tar.gz"
+      },
+      "11.0.14.1+1": {
         "macos": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14.1%2B1/OpenJDK11U-jdk_x64_mac_hotspot_11.0.14.1_1.tar.gz",
-        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14.1%2B1/OpenJDK11U-jdk_x64_windows_hotspot_11.0.14.1_1.zip"
+        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14.1%2B1/OpenJDK11U-jdk_x64_windows_hotspot_11.0.14.1_1.zip",
+        "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.14.1%2B1/OpenJDK11U-jdk_x64_linux_hotspot_11.0.14.1_1.tar.gz"
       },
       "11.0.15+10": {
-        "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.15%2B10/OpenJDK11U-jdk_x64_linux_hotspot_11.0.15_10.tar.gz",
         "macos": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.15%2B10/OpenJDK11U-jdk_x64_mac_hotspot_11.0.15_10.tar.gz",
-        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.15%2B10/OpenJDK11U-jdk_x64_windows_hotspot_11.0.15_10.zip"
+        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.15%2B10/OpenJDK11U-jdk_x64_windows_hotspot_11.0.15_10.zip",
+        "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.15%2B10/OpenJDK11U-jdk_x64_linux_hotspot_11.0.15_10.tar.gz"
       },
       "16.0.2+7": {
-        "linux": "https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_alpine-linux_hotspot_16.0.2_7.tar.gz",
         "macos": "https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_mac_hotspot_16.0.2_7.tar.gz",
-        "windows": "https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_windows_hotspot_16.0.2_7.zip"
-      },
-      "17+35": {
-        "linux": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17%2B35/OpenJDK17-jdk_x64_alpine-linux_hotspot_17_35.tar.gz",
-        "macos": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17%2B35/OpenJDK17-jdk_x64_mac_hotspot_17_35.tar.gz",
-        "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17%2B35/OpenJDK17-jdk_x64_windows_hotspot_17_35.zip"
+        "windows": "https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_windows_hotspot_16.0.2_7.zip",
+        "linux": "https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_linux_hotspot_16.0.2_7.tar.gz"
       },
       "17.0.1+12": {
-        "linux": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.1%2B12/OpenJDK17U-jdk_x64_linux_hotspot_17.0.1_12.tar.gz",
         "macos": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.1%2B12/OpenJDK17U-jdk_x64_mac_hotspot_17.0.1_12.tar.gz",
-        "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.1%2B12/OpenJDK17U-jdk_x64_windows_hotspot_17.0.1_12.zip"
+        "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.1%2B12/OpenJDK17U-jdk_x64_windows_hotspot_17.0.1_12.zip",
+        "linux": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.1%2B12/OpenJDK17U-jdk_x64_linux_hotspot_17.0.1_12.tar.gz"
       },
       "17.0.2+8": {
-        "linux": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.2%2B8/OpenJDK17U-jdk_x64_linux_hotspot_17.0.2_8.tar.gz",
         "macos": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.2%2B8/OpenJDK17U-jdk_x64_mac_hotspot_17.0.2_8.tar.gz",
-        "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.2%2B8/OpenJDK17U-jdk_x64_windows_hotspot_17.0.2_8.zip"
+        "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.2%2B8/OpenJDK17U-jdk_x64_windows_hotspot_17.0.2_8.zip",
+        "linux": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.2%2B8/OpenJDK17U-jdk_x64_linux_hotspot_17.0.2_8.tar.gz"
       },
       "17.0.3+7": {
-        "linux": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_x64_alpine-linux_hotspot_17.0.3_7.tar.gz",
         "macos": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_x64_mac_hotspot_17.0.3_7.tar.gz",
-        "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_x64_windows_hotspot_17.0.3_7.zip"
-      },
-      "18+36": {
-        "linux": "https://github.com/adoptium/temurin18-binaries/releases/download/jdk-18%2B36/OpenJDK18U-jdk_x64_linux_hotspot_18_36.tar.gz",
-        "macos": "https://github.com/adoptium/temurin18-binaries/releases/download/jdk-18%2B36/OpenJDK18U-jdk_x64_mac_hotspot_18_36.tar.gz",
-        "windows": "https://github.com/adoptium/temurin18-binaries/releases/download/jdk-18%2B36/OpenJDK18U-jdk_x64_windows_hotspot_18_36.zip"
+        "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_x64_windows_hotspot_17.0.3_7.zip",
+        "linux": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.3%2B7/OpenJDK17U-jdk_x64_linux_hotspot_17.0.3_7.tar.gz"
       },
       "18.0.1+10": {
-        "linux": "https://github.com/adoptium/temurin18-binaries/releases/download/jdk-18.0.1%2B10/OpenJDK18U-jdk_x64_alpine-linux_hotspot_18.0.1_10.tar.gz",
         "macos": "https://github.com/adoptium/temurin18-binaries/releases/download/jdk-18.0.1%2B10/OpenJDK18U-jdk_x64_mac_hotspot_18.0.1_10.tar.gz",
-        "windows": "https://github.com/adoptium/temurin18-binaries/releases/download/jdk-18.0.1%2B10/OpenJDK18U-jdk_x64_windows_hotspot_18.0.1_10.zip"
+        "windows": "https://github.com/adoptium/temurin18-binaries/releases/download/jdk-18.0.1%2B10/OpenJDK18U-jdk_x64_windows_hotspot_18.0.1_10.zip",
+        "linux": "https://github.com/adoptium/temurin18-binaries/releases/download/jdk-18.0.1%2B10/OpenJDK18U-jdk_x64_linux_hotspot_18.0.1_10.tar.gz"
       },
       "8.0.302+8": {
-        "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u302b08.tar.gz",
         "macos": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08/OpenJDK8U-jdk_x64_mac_hotspot_8u302b08.tar.gz",
-        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08.1/OpenJDK8U-jdk_x64_windows_hotspot_8u302b08.zip"
+        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08.1/OpenJDK8U-jdk_x64_windows_hotspot_8u302b08.zip",
+        "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u302-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u302b08.tar.gz"
       },
       "8.0.312+7": {
-        "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u312-b07/OpenJDK8U-jdk_x64_linux_hotspot_8u312b07.tar.gz",
         "macos": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u312-b07/OpenJDK8U-jdk_x64_mac_hotspot_8u312b07.tar.gz",
-        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u312-b07/OpenJDK8U-jdk_x64_windows_hotspot_8u312b07.zip"
+        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u312-b07/OpenJDK8U-jdk_x64_windows_hotspot_8u312b07.zip",
+        "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u312-b07/OpenJDK8U-jdk_x64_linux_hotspot_8u312b07.tar.gz"
       },
       "8.0.322+6": {
-        "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u322-b06/OpenJDK8U-jdk_x64_alpine-linux_hotspot_8u322b06.tar.gz",
         "macos": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u322-b06/OpenJDK8U-jdk_x64_mac_hotspot_8u322b06.tar.gz",
-        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u322-b06/OpenJDK8U-jdk_x64_windows_hotspot_8u322b06.zip"
+        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u322-b06/OpenJDK8U-jdk_x64_windows_hotspot_8u322b06.zip",
+        "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u322-b06/OpenJDK8U-jdk_x64_linux_hotspot_8u322b06.tar.gz"
       },
       "8.0.332+9": {
-        "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u332-b09/OpenJDK8U-jdk_x64_alpine-linux_hotspot_8u332b09.tar.gz",
         "macos": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u332-b09/OpenJDK8U-jdk_x64_mac_hotspot_8u332b09.tar.gz",
-        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u332-b09/OpenJDK8U-jdk_x64_windows_hotspot_8u332b09.zip"
+        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u332-b09/OpenJDK8U-jdk_x64_windows_hotspot_8u332b09.zip",
+        "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u332-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u332b09.tar.gz"
       }
     }
   },
   "jdkDistributionSynonyms": {
     "graalvm_ce11": [
-      "Graal VM CE 11",
       "graalvm_ce11",
+      "Graal VM CE 11",
       "graalvmce11",
       "GraalVM CE 11",
       "GraalVMCE11",
       "GraalVM_CE11"
     ],
+    "graalvm_ce16": [
+      "graalvm_ce16",
+      "Graal VM CE 16",
+      "GraalVM CE 16",
+      "GraalVM_CE16",
+      "graalvmce16",
+      "GraalVMCE16"
+    ],
     "graalvm_ce17": [
-      "Graal VM CE 17",
-      "graalvm_ce17",
-      "graalvmce17",
       "GraalVM CE 17",
       "GraalVMCE17",
+      "graalvmce17",
+      "graalvm_ce17",
+      "Graal VM CE 17",
       "GraalVM_CE17"
+    ],
+    "graalvm_ce8": [
+      "GraalVM_CE8",
+      "Graal VM CE 8",
+      "graalvm_ce8",
+      "GraalVM CE 8",
+      "graalvmce8",
+      "GraalVMCE8"
     ],
     "temurin": [
       "Temurin",
-      "temurin",
-      "TEMURIN"
+      "TEMURIN",
+      "temurin"
     ]
   },
   "gradleVersions": {
