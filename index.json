@@ -383,15 +383,15 @@
     "graalvm_ce8": [
       "GraalVM_CE8",
       "Graal VM CE 8",
-      "graalvm_ce8",
       "GraalVM CE 8",
+      "graalvm_ce8",
       "graalvmce8",
       "GraalVMCE8"
     ],
     "temurin": [
+      "TEMURIN",
       "temurin",
-      "Temurin",
-      "TEMURIN"
+      "Temurin"
     ]
   },
   "gradleVersions": {
