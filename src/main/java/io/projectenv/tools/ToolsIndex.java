@@ -4,23 +4,21 @@ import io.projectenv.core.commons.system.OperatingSystem;
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Gson.TypeAdapters
 @Value.Immutable
 @Value.Modifiable
 public interface ToolsIndex {
 
-    Map<String, Map<String, Map<OperatingSystem, String>>> getJdkVersions();
+    SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, String>>> getJdkVersions();
 
-    Map<String, Set<String>> getJdkDistributionSynonyms();
+    SortedMap<String, SortedSet<String>> getJdkDistributionSynonyms();
 
-    Map<String, String> getGradleVersions();
+    SortedMap<String, String> getGradleVersions();
 
-    Map<String, String> getMavenVersions();
+    SortedMap<String, String> getMavenVersions();
 
-    Map<String, Map<OperatingSystem, String>> getNodeVersions();
+    SortedMap<String, SortedMap<OperatingSystem, String>> getNodeVersions();
 
 }

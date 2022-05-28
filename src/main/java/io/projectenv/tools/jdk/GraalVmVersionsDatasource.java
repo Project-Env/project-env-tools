@@ -3,17 +3,17 @@ package io.projectenv.tools.jdk;
 import io.projectenv.core.commons.process.ProcessOutput;
 import io.projectenv.core.commons.system.OperatingSystem;
 import io.projectenv.tools.ImmutableToolsIndex;
+import io.projectenv.tools.SortedCollections;
 import io.projectenv.tools.ToolsIndex;
 import io.projectenv.tools.ToolsIndexExtender;
 import io.projectenv.tools.jdk.github.GithubClient;
 import io.projectenv.tools.jdk.github.Release;
 
 import java.util.Comparator;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
+import java.util.SortedMap;
+import java.util.SortedSet;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class GraalVmVersionsDatasource implements ToolsIndexExtender {
 
@@ -40,14 +40,14 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
 
     @Override
     public ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex) {
-        Map<String, Set<String>> jdkDistributionSynonyms = new TreeMap<>(currentToolsIndex.getJdkDistributionSynonyms());
-        Map<String, Map<String, Map<OperatingSystem, String>>> jdkVersions = new TreeMap<>(currentToolsIndex.getJdkVersions());
+        SortedMap<String, SortedSet<String>> jdkDistributionSynonyms = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkDistributionSynonyms());
+        SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, String>>> jdkVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkVersions());
 
         var releases = githubClient.getReleases("graalvm", "graalvm-ce-builds")
                 .stream()
                 .sorted(Comparator.comparing(Release::getTagName))
                 .toList();
-        
+
         for (var release : releases) {
             var releaseTagNameMatcher = RELEASE_TAG_PATTERN.matcher(release.getTagName());
             if (!releaseTagNameMatcher.find()) {
@@ -68,8 +68,8 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
 
                 var distributionName = DISTRIBUTION_ID_BASE_NAME + majorJavaVersion;
                 jdkVersions
-                        .computeIfAbsent(distributionName, (key) -> new TreeMap<>())
-                        .computeIfAbsent(version, (key) -> new TreeMap<>())
+                        .computeIfAbsent(distributionName, (key) -> SortedCollections.createSemverSortedMap())
+                        .computeIfAbsent(version, (key) -> SortedCollections.createNaturallySortedMap())
                         .put(mapToOperatingSystem(operatingSystem), releaseAsset.getBrowserDownloadUrl());
             }
         }
@@ -83,7 +83,7 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
             var majorJavaVersion = distributionIdMatcher.group(1);
             jdkDistributionSynonyms.put(distributionId, SYNONYMS_BASES.stream()
                     .map(synonymBaseName -> synonymBaseName + majorJavaVersion)
-                    .collect(Collectors.toSet()));
+                    .collect(SortedCollections.toNaturallySortedSet()));
         }
 
         return ImmutableToolsIndex.builder()
