@@ -1,6 +1,7 @@
 package io.projectenv.tools.gradle;
 
 import io.projectenv.tools.ImmutableToolsIndex;
+import io.projectenv.tools.SortedCollections;
 import io.projectenv.tools.ToolsIndex;
 import io.projectenv.tools.ToolsIndexExtender;
 import org.jsoup.Jsoup;
@@ -8,8 +9,7 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.SortedMap;
 import java.util.stream.Collectors;
 
 public class GradleVersionsDatasource implements ToolsIndexExtender {
@@ -18,7 +18,7 @@ public class GradleVersionsDatasource implements ToolsIndexExtender {
     public ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex) {
         try {
             Document doc = Jsoup.connect("https://gradle.org/releases/").get();
-            Map<String, String> downloadUrls = doc.getElementsByClass("resources-contents")
+            SortedMap<String, String> downloadUrls = doc.getElementsByClass("resources-contents")
                     .stream()
                     .flatMap(element -> element.children().stream())
                     .filter(element -> "a".equals(element.tagName()) && element.hasAttr("name"))
@@ -27,7 +27,7 @@ public class GradleVersionsDatasource implements ToolsIndexExtender {
                             version -> version,
                             version -> MessageFormat.format("https://downloads.gradle-dn.com/distributions/gradle-{0}-bin.zip", version),
                             (a, b) -> a,
-                            TreeMap::new));
+                            SortedCollections::createSemverSortedMap));
 
             return ImmutableToolsIndex.builder()
                     .from(currentToolsIndex)

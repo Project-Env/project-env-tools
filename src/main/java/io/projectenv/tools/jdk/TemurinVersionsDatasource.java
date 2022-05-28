@@ -3,6 +3,7 @@ package io.projectenv.tools.jdk;
 import io.projectenv.core.commons.process.ProcessOutput;
 import io.projectenv.core.commons.system.OperatingSystem;
 import io.projectenv.tools.ImmutableToolsIndex;
+import io.projectenv.tools.SortedCollections;
 import io.projectenv.tools.ToolsIndex;
 import io.projectenv.tools.ToolsIndexExtender;
 import io.projectenv.tools.jdk.github.GithubClient;
@@ -11,9 +12,8 @@ import io.projectenv.tools.jdk.github.Repository;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Comparator;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.SortedMap;
+import java.util.SortedSet;
 import java.util.regex.Pattern;
 
 public class TemurinVersionsDatasource implements ToolsIndexExtender {
@@ -25,7 +25,7 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
 
     private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("^OpenJDK\\d+U-jdk_x64_(\\w+)_hotspot_(.+).(tar\\.gz|zip)$");
 
-    private static final Set<String> SYNONYMS = Set.of(
+    private static final SortedSet<String> SYNONYMS = SortedCollections.createNaturallySortedSet(
             "Temurin",
             "temurin",
             "TEMURIN"
@@ -39,8 +39,8 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
 
     @Override
     public ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex) {
-        Map<String, Set<String>> jdkDistributionSynonyms = new TreeMap<>(currentToolsIndex.getJdkDistributionSynonyms());
-        Map<String, Map<String, Map<OperatingSystem, String>>> jdkVersions = new TreeMap<>(currentToolsIndex.getJdkVersions());
+        SortedMap<String, SortedSet<String>> jdkDistributionSynonyms = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkDistributionSynonyms());
+        SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, String>>> jdkVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkVersions());
 
         for (Repository repository : githubClient.getRepositories("adoptium")) {
             if (!RELEASES_REPOSITORY_PATTERN.matcher(repository.getName()).find()) {
@@ -77,8 +77,8 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
                     }
 
                     jdkVersions
-                            .computeIfAbsent(DISTRIBUTION_ID, (key) -> new TreeMap<>())
-                            .computeIfAbsent(version, (key) -> new TreeMap<>())
+                            .computeIfAbsent(DISTRIBUTION_ID, (key) -> SortedCollections.createSemverSortedMap())
+                            .computeIfAbsent(version, (key) -> SortedCollections.createNaturallySortedMap())
                             .put(operatingSystem, releaseAsset.getBrowserDownloadUrl());
                 }
             }
