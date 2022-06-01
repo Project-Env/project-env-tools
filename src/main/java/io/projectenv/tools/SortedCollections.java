@@ -21,7 +21,9 @@ public final class SortedCollections {
 
     public static <V extends Comparable<? extends V>> SortedSet<V> createNaturallySortedSet(Collection<V> initialEntries) {
         SortedSet<V> set = createNaturallySortedSet();
-        set.addAll(initialEntries);
+        if (initialEntries != null) {
+            set.addAll(initialEntries);
+        }
 
         return set;
     }
@@ -69,7 +71,9 @@ public final class SortedCollections {
 
     public static <K extends Comparable<? extends K>, V> SortedMap<K, V> createNaturallySortedMap(Map<K, V> initialEntries) {
         SortedMap<K, V> map = createNaturallySortedMap();
-        map.putAll(initialEntries);
+        if (initialEntries != null) {
+            map.putAll(initialEntries);
+        }
 
         return map;
     }
@@ -80,7 +84,9 @@ public final class SortedCollections {
 
     public static <V> SortedMap<String, V> createSemverSortedMap(Map<String, V> initialEntries) {
         SortedMap<String, V> map = createSemverSortedMap();
-        map.putAll(initialEntries);
+        if (initialEntries != null) {
+            map.putAll(initialEntries);
+        }
 
         return map;
     }
