@@ -131,6 +131,11 @@
         "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.2/graalvm-ce-java11-windows-amd64-21.3.2.zip",
         "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.2/graalvm-ce-java11-linux-amd64-21.3.2.tar.gz"
       },
+      "21.3.3": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.3/graalvm-ce-java11-darwin-amd64-21.3.3.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.3/graalvm-ce-java11-windows-amd64-21.3.3.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.3/graalvm-ce-java11-linux-amd64-21.3.3.tar.gz"
+      },
       "22.0.0.2": {
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java11-darwin-amd64-22.0.0.2.tar.gz",
         "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java11-windows-amd64-22.0.0.2.zip",
@@ -140,6 +145,11 @@
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java11-darwin-amd64-22.1.0.tar.gz",
         "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java11-windows-amd64-22.1.0.zip",
         "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java11-linux-amd64-22.1.0.tar.gz"
+      },
+      "22.2.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java11-darwin-amd64-22.2.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java11-windows-amd64-22.2.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java11-linux-amd64-22.2.0.tar.gz"
       }
     },
     "graalvm_ce16": {
@@ -170,6 +180,11 @@
         "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.2/graalvm-ce-java17-windows-amd64-21.3.2.zip",
         "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.2/graalvm-ce-java17-linux-amd64-21.3.2.tar.gz"
       },
+      "21.3.3": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.3/graalvm-ce-java17-darwin-amd64-21.3.3.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.3/graalvm-ce-java17-windows-amd64-21.3.3.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.3/graalvm-ce-java17-linux-amd64-21.3.3.tar.gz"
+      },
       "22.0.0.2": {
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java17-darwin-amd64-22.0.0.2.tar.gz",
         "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.0.0.2/graalvm-ce-java17-windows-amd64-22.0.0.2.zip",
@@ -179,6 +194,11 @@
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java17-darwin-amd64-22.1.0.tar.gz",
         "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java17-windows-amd64-22.1.0.zip",
         "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.1.0/graalvm-ce-java17-linux-amd64-22.1.0.tar.gz"
+      },
+      "22.2.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java17-darwin-amd64-22.2.0.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java17-windows-amd64-22.2.0.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.2.0/graalvm-ce-java17-linux-amd64-22.2.0.tar.gz"
       }
     },
     "graalvm_ce8": {
@@ -372,6 +392,7 @@
         "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u332-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u332b09.tar.gz"
       },
       "8.0.342+7": {
+        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u342-b07/OpenJDK8U-jdk_x64_windows_hotspot_8u342b07.zip",
         "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u342-b07/OpenJDK8U-jdk_x64_linux_hotspot_8u342b07.tar.gz"
       }
     }
@@ -3928,6 +3949,11 @@
       "macos": "https://nodejs.org/dist/v18.6.0/node-v18.6.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v18.6.0/node-v18.6.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v18.6.0/node-v18.6.0-linux-x64.tar.xz"
+    },
+    "18.7.0": {
+      "macos": "https://nodejs.org/dist/v18.7.0/node-v18.7.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v18.7.0/node-v18.7.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v18.7.0/node-v18.7.0-linux-x64.tar.xz"
     }
   }
 }
