@@ -395,6 +395,10 @@
       "8.0.342+7": {
         "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u342-b07.1/OpenJDK8U-jdk_x64_windows_hotspot_8u342b07.zip",
         "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u342-b07/OpenJDK8U-jdk_x64_linux_hotspot_8u342b07.tar.gz"
+      },
+      "8.0.345+1": {
+        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u345-b01/OpenJDK8U-jdk_x64_windows_hotspot_8u345b01.zip",
+        "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u345-b01/OpenJDK8U-jdk_x64_linux_hotspot_8u345b01.tar.gz"
       }
     }
   },
@@ -555,7 +559,8 @@
     "7.4": "https://downloads.gradle-dn.com/distributions/gradle-7.4-bin.zip",
     "7.4.1": "https://downloads.gradle-dn.com/distributions/gradle-7.4.1-bin.zip",
     "7.4.2": "https://downloads.gradle-dn.com/distributions/gradle-7.4.2-bin.zip",
-    "7.5": "https://downloads.gradle-dn.com/distributions/gradle-7.5-bin.zip"
+    "7.5": "https://downloads.gradle-dn.com/distributions/gradle-7.5-bin.zip",
+    "7.5.1": "https://downloads.gradle-dn.com/distributions/gradle-7.5.1-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
