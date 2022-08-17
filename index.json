@@ -3848,6 +3848,11 @@
       "windows": "https://nodejs.org/dist/v16.16.0/node-v16.16.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v16.16.0/node-v16.16.0-linux-x64.tar.xz"
     },
+    "16.17.0": {
+      "macos": "https://nodejs.org/dist/v16.17.0/node-v16.17.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v16.17.0/node-v16.17.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v16.17.0/node-v16.17.0-linux-x64.tar.xz"
+    },
     "17.0.0": {
       "macos": "https://nodejs.org/dist/v17.0.0/node-v17.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v17.0.0/node-v17.0.0-win-x64.zip",
