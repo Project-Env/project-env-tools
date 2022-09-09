@@ -3987,6 +3987,11 @@
       "macos": "https://nodejs.org/dist/v18.8.0/node-v18.8.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v18.8.0/node-v18.8.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v18.8.0/node-v18.8.0-linux-x64.tar.xz"
+    },
+    "18.9.0": {
+      "macos": "https://nodejs.org/dist/v18.9.0/node-v18.9.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v18.9.0/node-v18.9.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v18.9.0/node-v18.9.0-linux-x64.tar.xz"
     }
   }
 }
