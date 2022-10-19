@@ -4033,6 +4033,11 @@
       "macos": "https://nodejs.org/dist/v18.11.0/node-v18.11.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v18.11.0/node-v18.11.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v18.11.0/node-v18.11.0-linux-x64.tar.xz"
+    },
+    "19.0.0": {
+      "macos": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-linux-x64.tar.xz"
     }
   }
 }
