@@ -460,6 +460,8 @@
         "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u345-b01/OpenJDK8U-jdk_x64_linux_hotspot_8u345b01.tar.gz"
       },
       "8.0.352+8": {
+        "macos": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u352-b08/OpenJDK8U-jdk_x64_mac_hotspot_8u352b08.tar.gz",
+        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u352-b08/OpenJDK8U-jdk_x64_windows_hotspot_8u352b08.zip",
         "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u352-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u352b08.tar.gz"
       }
     }
@@ -3697,6 +3699,11 @@
       "windows": "https://nodejs.org/dist/v14.21.0/node-v14.21.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v14.21.0/node-v14.21.0-linux-x64.tar.xz"
     },
+    "14.21.1": {
+      "macos": "https://nodejs.org/dist/v14.21.1/node-v14.21.1-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v14.21.1/node-v14.21.1-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v14.21.1/node-v14.21.1-linux-x64.tar.xz"
+    },
     "15.0.0": {
       "macos": "https://nodejs.org/dist/v15.0.0/node-v15.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v15.0.0/node-v15.0.0-win-x64.zip",
@@ -3942,6 +3949,11 @@
       "windows": "https://nodejs.org/dist/v16.18.0/node-v16.18.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v16.18.0/node-v16.18.0-linux-x64.tar.xz"
     },
+    "16.18.1": {
+      "macos": "https://nodejs.org/dist/v16.18.1/node-v16.18.1-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v16.18.1/node-v16.18.1-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v16.18.1/node-v16.18.1-linux-x64.tar.xz"
+    },
     "17.0.0": {
       "macos": "https://nodejs.org/dist/v17.0.0/node-v17.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v17.0.0/node-v17.0.0-win-x64.zip",
@@ -4087,10 +4099,20 @@
       "windows": "https://nodejs.org/dist/v18.12.0/node-v18.12.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v18.12.0/node-v18.12.0-linux-x64.tar.xz"
     },
+    "18.12.1": {
+      "macos": "https://nodejs.org/dist/v18.12.1/node-v18.12.1-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v18.12.1/node-v18.12.1-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v18.12.1/node-v18.12.1-linux-x64.tar.xz"
+    },
     "19.0.0": {
       "macos": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-linux-x64.tar.xz"
+    },
+    "19.0.1": {
+      "macos": "https://nodejs.org/dist/v19.0.1/node-v19.0.1-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v19.0.1/node-v19.0.1-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v19.0.1/node-v19.0.1-linux-x64.tar.xz"
     }
   }
 }
