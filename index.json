@@ -3705,6 +3705,11 @@
       "windows": "https://nodejs.org/dist/v14.21.1/node-v14.21.1-win-x64.zip",
       "linux": "https://nodejs.org/dist/v14.21.1/node-v14.21.1-linux-x64.tar.xz"
     },
+    "14.21.2": {
+      "macos": "https://nodejs.org/dist/v14.21.2/node-v14.21.2-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v14.21.2/node-v14.21.2-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v14.21.2/node-v14.21.2-linux-x64.tar.xz"
+    },
     "15.0.0": {
       "macos": "https://nodejs.org/dist/v15.0.0/node-v15.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v15.0.0/node-v15.0.0-win-x64.zip",
@@ -3954,6 +3959,11 @@
       "macos": "https://nodejs.org/dist/v16.18.1/node-v16.18.1-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v16.18.1/node-v16.18.1-win-x64.zip",
       "linux": "https://nodejs.org/dist/v16.18.1/node-v16.18.1-linux-x64.tar.xz"
+    },
+    "16.19.0": {
+      "macos": "https://nodejs.org/dist/v16.19.0/node-v16.19.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v16.19.0/node-v16.19.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v16.19.0/node-v16.19.0-linux-x64.tar.xz"
     },
     "17.0.0": {
       "macos": "https://nodejs.org/dist/v17.0.0/node-v17.0.0-darwin-x64.tar.xz",
