@@ -160,6 +160,11 @@
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.0/graalvm-ce-java11-darwin-amd64-22.3.0.tar.gz",
         "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.0/graalvm-ce-java11-windows-amd64-22.3.0.zip",
         "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.0/graalvm-ce-java11-linux-amd64-22.3.0.tar.gz"
+      },
+      "22.3.1": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java11-darwin-amd64-22.3.1.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java11-windows-amd64-22.3.1.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java11-linux-amd64-22.3.1.tar.gz"
       }
     },
     "graalvm_ce16": {
@@ -219,6 +224,11 @@
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.0/graalvm-ce-java17-darwin-amd64-22.3.0.tar.gz",
         "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.0/graalvm-ce-java17-windows-amd64-22.3.0.zip",
         "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.0/graalvm-ce-java17-linux-amd64-22.3.0.tar.gz"
+      },
+      "22.3.1": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java17-darwin-amd64-22.3.1.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java17-windows-amd64-22.3.1.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java17-linux-amd64-22.3.1.tar.gz"
       }
     },
     "graalvm_ce19": {
@@ -226,6 +236,11 @@
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.0/graalvm-ce-java19-darwin-amd64-22.3.0.tar.gz",
         "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.0/graalvm-ce-java19-windows-amd64-22.3.0.zip",
         "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.0/graalvm-ce-java19-linux-amd64-22.3.0.tar.gz"
+      },
+      "22.3.1": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java19-darwin-amd64-22.3.1.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java19-windows-amd64-22.3.1.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java19-linux-amd64-22.3.1.tar.gz"
       }
     },
     "graalvm_ce8": {
@@ -4170,6 +4185,11 @@
       "macos": "https://nodejs.org/dist/v19.4.0/node-v19.4.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v19.4.0/node-v19.4.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v19.4.0/node-v19.4.0-linux-x64.tar.xz"
+    },
+    "19.5.0": {
+      "macos": "https://nodejs.org/dist/v19.5.0/node-v19.5.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v19.5.0/node-v19.5.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v19.5.0/node-v19.5.0-linux-x64.tar.xz"
     }
   }
 }
