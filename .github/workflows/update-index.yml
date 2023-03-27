@@ -16,6 +16,9 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('pom.xml') }}
     - uses: Project-Env/project-env-github-action@v1.3.1
     - run: mvn -B -s etc/m2/settings-ci.xml verify exec:exec -Dexec.executable="java" -Dexec.args="-classpath %classpath io.projectenv.tools.ToolsIndexProducer --index-file=index.json --github-access-token=${{ secrets.GITHUB_TOKEN }} --debug"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     - uses: peter-evans/create-pull-request@v4
       with:
         title: 'update tools index'
