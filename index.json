@@ -674,7 +674,8 @@
     "7.6.1": "https://downloads.gradle-dn.com/distributions/gradle-7.6.1-bin.zip",
     "8.0": "https://downloads.gradle-dn.com/distributions/gradle-8.0-bin.zip",
     "8.0.1": "https://downloads.gradle-dn.com/distributions/gradle-8.0.1-bin.zip",
-    "8.0.2": "https://downloads.gradle-dn.com/distributions/gradle-8.0.2-bin.zip"
+    "8.0.2": "https://downloads.gradle-dn.com/distributions/gradle-8.0.2-bin.zip",
+    "8.1": "https://downloads.gradle-dn.com/distributions/gradle-8.1-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
@@ -4198,6 +4199,11 @@
       "macos": "https://nodejs.org/dist/v18.15.0/node-v18.15.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v18.15.0/node-v18.15.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v18.15.0/node-v18.15.0-linux-x64.tar.xz"
+    },
+    "18.16.0": {
+      "macos": "https://nodejs.org/dist/v18.16.0/node-v18.16.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v18.16.0/node-v18.16.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz"
     },
     "19.0.0": {
       "macos": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-darwin-x64.tar.xz",
