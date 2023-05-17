@@ -4311,6 +4311,11 @@
       "macos": "https://nodejs.org/dist/v20.1.0/node-v20.1.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v20.1.0/node-v20.1.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v20.1.0/node-v20.1.0-linux-x64.tar.xz"
+    },
+    "20.2.0": {
+      "macos": "https://nodejs.org/dist/v20.2.0/node-v20.2.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v20.2.0/node-v20.2.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v20.2.0/node-v20.2.0-linux-x64.tar.xz"
     }
   }
 }
