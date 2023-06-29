@@ -25,7 +25,7 @@ public class GradleVersionsDatasource implements ToolsIndexExtender {
                     .map(element -> element.attr("name"))
                     .collect(Collectors.toMap(
                             version -> version,
-                            version -> MessageFormat.format("https://downloads.gradle-dn.com/distributions/gradle-{0}-bin.zip", version),
+                            version -> MessageFormat.format("https://downloads.gradle.org/distributions/gradle-{0}-bin.zip", version),
                             (a, b) -> a,
                             SortedCollections::createSemverSortedMap));
 
