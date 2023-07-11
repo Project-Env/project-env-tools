@@ -708,7 +708,8 @@
     "8.0.2": "https://downloads.gradle.org/distributions/gradle-8.0.2-bin.zip",
     "8.1": "https://downloads.gradle.org/distributions/gradle-8.1-bin.zip",
     "8.1.1": "https://downloads.gradle.org/distributions/gradle-8.1.1-bin.zip",
-    "8.2": "https://downloads.gradle.org/distributions/gradle-8.2-bin.zip"
+    "8.2": "https://downloads.gradle.org/distributions/gradle-8.2-bin.zip",
+    "8.2.1": "https://downloads.gradle.org/distributions/gradle-8.2.1-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
