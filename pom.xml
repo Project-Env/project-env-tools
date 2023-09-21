@@ -24,7 +24,7 @@
         <commons-io.version>2.13.0</commons-io.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <picocli.version>4.7.1</picocli.version>
-        <jsoup.version>1.15.4</jsoup.version>
+        <jsoup.version>1.16.1</jsoup.version>
 
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
