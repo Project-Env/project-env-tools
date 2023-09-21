@@ -249,6 +249,16 @@
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.3/graalvm-ce-java17-darwin-amd64-22.3.3.tar.gz",
         "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.3/graalvm-ce-java17-windows-amd64-22.3.3.zip",
         "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.3/graalvm-ce-java17-linux-amd64-22.3.3.tar.gz"
+      },
+      "23.0.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-17.0.7/graalvm-community-jdk-17.0.7_macos-x64_bin.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-17.0.7/graalvm-community-jdk-17.0.7_windows-x64_bin.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-17.0.7/graalvm-community-jdk-17.0.7_linux-x64_bin.tar.gz"
+      },
+      "23.0.1": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-17.0.8/graalvm-community-jdk-17.0.8_macos-x64_bin.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-17.0.8/graalvm-community-jdk-17.0.8_windows-x64_bin.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-17.0.8/graalvm-community-jdk-17.0.8_linux-x64_bin.tar.gz"
       }
     },
     "graalvm_ce19": {
@@ -261,6 +271,25 @@
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java19-darwin-amd64-22.3.1.tar.gz",
         "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java19-windows-amd64-22.3.1.zip",
         "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.1/graalvm-ce-java19-linux-amd64-22.3.1.tar.gz"
+      }
+    },
+    "graalvm_ce20": {
+      "23.0.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-20.0.1/graalvm-community-jdk-20.0.1_macos-x64_bin.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-20.0.1/graalvm-community-jdk-20.0.1_windows-x64_bin.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-20.0.1/graalvm-community-jdk-20.0.1_linux-x64_bin.tar.gz"
+      },
+      "23.0.1": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-20.0.2/graalvm-community-jdk-20.0.2_macos-x64_bin.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-20.0.2/graalvm-community-jdk-20.0.2_windows-x64_bin.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-20.0.2/graalvm-community-jdk-20.0.2_linux-x64_bin.tar.gz"
+      }
+    },
+    "graalvm_ce21": {
+      "23.1.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.0/graalvm-community-jdk-21.0.0_macos-x64_bin.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.0/graalvm-community-jdk-21.0.0_windows-x64_bin.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.0/graalvm-community-jdk-21.0.0_linux-x64_bin.tar.gz"
       }
     },
     "graalvm_ce8": {
@@ -603,6 +632,22 @@
       "GraalVM_CE19",
       "graalvm_ce19",
       "graalvmce19"
+    ],
+    "graalvm_ce20": [
+      "Graal VM CE 20",
+      "GraalVM CE 20",
+      "GraalVMCE20",
+      "GraalVM_CE20",
+      "graalvm_ce20",
+      "graalvmce20"
+    ],
+    "graalvm_ce21": [
+      "Graal VM CE 21",
+      "GraalVM CE 21",
+      "GraalVMCE21",
+      "GraalVM_CE21",
+      "graalvm_ce21",
+      "graalvmce21"
     ],
     "graalvm_ce8": [
       "Graal VM CE 8",
