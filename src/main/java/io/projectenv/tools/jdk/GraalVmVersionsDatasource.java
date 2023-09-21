@@ -9,19 +9,27 @@ import io.projectenv.tools.ToolsIndexExtender;
 import io.projectenv.tools.jdk.github.GithubClient;
 import io.projectenv.tools.jdk.github.Release;
 
-import java.util.Comparator;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.SortedSet;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class GraalVmVersionsDatasource implements ToolsIndexExtender {
 
     private static final String DISTRIBUTION_ID_BASE_NAME = "graalvm_ce";
     private static final Pattern DISTRIBUTION_ID_PATTERN = Pattern.compile("^" + DISTRIBUTION_ID_BASE_NAME + "(\\d+)$");
-    private static final Pattern RELEASE_TAG_PATTERN = Pattern.compile("^vm-([\\d.]+)$");
 
-    private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("^graalvm-ce-java(\\d+)-(\\w+)-amd64-[\\d.]+\\.(tar\\.gz|zip)$");
+    private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("graalvm-(?:ce|community)-(?:java|jdk-)(\\d+)[^-_]*[-_](\\w+)-(?:amd64|x64)[-_](?:[\\d.]+|bin)\\.(?:tar\\.gz|zip)$");
+
+    private static final Pattern GRAAL_VM_VERSION_PATTERN = Pattern.compile("GRAALVM_VERSION=\"?([\\d.]+)\"?");
+
+    private static final String GRAAL_VM_VERSION_FILE_PATH = "/release";
 
     private static final Set<String> SYNONYMS_BASES = Set.of(
             "Graal VM CE ",
@@ -49,29 +57,38 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
                 .toList();
 
         for (var release : releases) {
-            var releaseTagNameMatcher = RELEASE_TAG_PATTERN.matcher(release.getTagName());
-            if (!releaseTagNameMatcher.find()) {
-                ProcessOutput.writeInfoMessage("unexpected release tag name {0}", release.getTagName());
-                continue;
-            }
-
-            var version = releaseTagNameMatcher.group(1);
-
+            var downloadUrls = new HashMap<String, Map<OperatingSystem, String>>();
             for (var releaseAsset : release.getAssets()) {
                 var releaseAssetNameMatcher = RELEASE_ASSET_NAME_PATTERN.matcher(releaseAsset.getName());
                 if (!releaseAssetNameMatcher.find()) {
+                    ProcessOutput.writeInfoMessage("skipping unknown release asset name {0}", releaseAsset.getName());
                     continue;
                 }
 
-                var majorJavaVersion = releaseAssetNameMatcher.group(1);
-                var operatingSystem = releaseAssetNameMatcher.group(2);
+                var javaMajorVersion = releaseAssetNameMatcher.group(1);
+                var operatingSystem = mapToOperatingSystem(releaseAssetNameMatcher.group(2));
 
-                var distributionName = DISTRIBUTION_ID_BASE_NAME + majorJavaVersion;
-                jdkVersions
-                        .computeIfAbsent(distributionName, (key) -> SortedCollections.createSemverSortedMap())
-                        .computeIfAbsent(version, (key) -> SortedCollections.createNaturallySortedMap())
-                        .put(mapToOperatingSystem(operatingSystem), releaseAsset.getBrowserDownloadUrl());
+                downloadUrls
+                        .computeIfAbsent(javaMajorVersion, key -> new EnumMap<>(OperatingSystem.class))
+                        .put(operatingSystem, releaseAsset.getBrowserDownloadUrl());
             }
+
+            if (downloadUrls.isEmpty()) {
+                continue;
+            }
+
+            String firstWindowsDownloadUrl = downloadUrls.entrySet().stream().findFirst().map(entry -> entry.getValue().get(OperatingSystem.WINDOWS)).orElseThrow();
+            DistributionInfo distributionInfo = extractDistributionInfo(firstWindowsDownloadUrl);
+
+            for (Map.Entry<String, Map<OperatingSystem, String>> entry : downloadUrls.entrySet()) {
+                var distributionName = DISTRIBUTION_ID_BASE_NAME + entry.getKey();
+
+                jdkVersions
+                        .computeIfAbsent(distributionName, key -> SortedCollections.createSemverSortedMap())
+                        .computeIfAbsent(distributionInfo.graalVmVersion(), key -> SortedCollections.createNaturallySortedMap())
+                        .putAll(entry.getValue());
+            }
+
         }
 
         for (var distributionId : jdkVersions.keySet()) {
@@ -98,6 +115,55 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
             case "darwin" -> OperatingSystem.MACOS;
             default -> OperatingSystem.valueOf(operatingSystemName.toUpperCase());
         };
+    }
+
+    private DistributionInfo extractDistributionInfo(String windowsDistributionUrl) {
+        try {
+            URL zipUrl = new URL(windowsDistributionUrl);
+            try (InputStream in = zipUrl.openStream();
+                 ZipInputStream zipIn = new ZipInputStream(new BufferedInputStream(in))) {
+
+                ZipEntry entry;
+                while ((entry = zipIn.getNextEntry()) != null) {
+                    if (entry.getName().endsWith(GRAAL_VM_VERSION_FILE_PATH)) {
+
+                        byte[] buffer = new byte[1024];
+                        int bytesRead;
+                        ByteArrayOutputStream fos = new ByteArrayOutputStream();
+                        while ((bytesRead = zipIn.read(buffer)) != -1) {
+                            fos.write(buffer, 0, bytesRead);
+                        }
+                        fos.close();
+
+                        String versionFileContent = fos.toString(StandardCharsets.UTF_8);
+
+                        var graalVmVersionMatcher = GRAAL_VM_VERSION_PATTERN.matcher(versionFileContent);
+                        if (!graalVmVersionMatcher.find()) {
+                            throw new IllegalStateException("found release file, but could not extract GraalVM version");
+                        }
+                        String graalVmVersion = graalVmVersionMatcher.group(1);
+
+                        return new DistributionInfo(graalVmVersion);
+                    }
+                }
+            }
+
+            throw new IllegalStateException("could not find release file");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String extractJavaMajorVersionFromUrl(String windowsDistributionUrl) {
+        var releaseAssetNameMatcher = RELEASE_ASSET_NAME_PATTERN.matcher(windowsDistributionUrl);
+        if (!releaseAssetNameMatcher.find()) {
+            throw new IllegalStateException("could not extract Java major version from URL " + windowsDistributionUrl);
+        }
+
+        return releaseAssetNameMatcher.group(1);
+    }
+
+    record DistributionInfo(String graalVmVersion) {
     }
 
 }
