@@ -21,7 +21,8 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
     private static final String DISTRIBUTION_ID = "temurin";
     private static final Pattern RELEASES_REPOSITORY_PATTERN = Pattern.compile("^temurin(\\d+)-binaries$");
 
-    private static final Pattern RELEASE_TAG_PATTERN = Pattern.compile("^jdk-?(\\d+)(\\.0.|u)([\\d.]+)(\\+|-b)(\\d+)(\\.\\d*|)$");
+    private static final Pattern LEGACY_RELEASE_TAG_PATTERN = Pattern.compile("^jdk(\\d+)u([\\d.]+)-b(\\d+)$");
+    private static final Pattern RELEASE_TAG_PATTERN = Pattern.compile("^jdk-([\\d.+]+)$");
 
     private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("^OpenJDK\\d+U-jdk_x64_(\\w+)_hotspot_(.+).(tar\\.gz|zip)$");
 
@@ -53,17 +54,13 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
                     .toList();
 
             for (var release : releases) {
-                var releaseTagNameMatcher = RELEASE_TAG_PATTERN.matcher(release.getTagName());
-                if (!releaseTagNameMatcher.find()) {
+                var version = extractJavaVersion(release.getTagName());
+                if (version == null) {
                     ProcessOutput.writeInfoMessage("unexpected release tag name {0}", release.getTagName());
+
                     continue;
                 }
 
-                var majorJavaVersion = releaseTagNameMatcher.group(1);
-                var minorJavaVersion = releaseTagNameMatcher.group(3);
-                var buildVersion = releaseTagNameMatcher.group(5);
-
-                var version = majorJavaVersion + ".0." + minorJavaVersion + "+" + StringUtils.stripStart(buildVersion, "0");
                 for (var releaseAsset : release.getAssets()) {
                     var releaseAssetNameMatcher = RELEASE_ASSET_NAME_PATTERN.matcher(releaseAsset.getName());
                     if (!releaseAssetNameMatcher.find()) {
@@ -91,6 +88,24 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
                 .jdkVersions(jdkVersions)
                 .jdkDistributionSynonyms(jdkDistributionSynonyms)
                 .build();
+    }
+
+    private String extractJavaVersion(String releaseTagName) {
+        var releaseTagNameMatcher = LEGACY_RELEASE_TAG_PATTERN.matcher(releaseTagName);
+        if (releaseTagNameMatcher.find()) {
+            var majorJavaVersion = releaseTagNameMatcher.group(1);
+            var minorJavaVersion = releaseTagNameMatcher.group(2);
+            var buildVersion = releaseTagNameMatcher.group(3);
+
+            return majorJavaVersion + ".0." + minorJavaVersion + "+" + StringUtils.stripStart(buildVersion, "0");
+        }
+
+        releaseTagNameMatcher = RELEASE_TAG_PATTERN.matcher(releaseTagName);
+        if (releaseTagNameMatcher.find()) {
+            return releaseTagNameMatcher.group(1);
+        }
+
+        return null;
     }
 
     private OperatingSystem mapToOperatingSystem(String operatingSystemName) {
