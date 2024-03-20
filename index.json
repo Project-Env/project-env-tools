@@ -307,6 +307,13 @@
         "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-21.0.2/graalvm-community-jdk-21.0.2_linux-x64_bin.tar.gz"
       }
     },
+    "graalvm_ce22": {
+      "24.0.0": {
+        "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-22.0.0/graalvm-community-jdk-22.0.0_macos-x64_bin.tar.gz",
+        "windows": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-22.0.0/graalvm-community-jdk-22.0.0_windows-x64_bin.zip",
+        "linux": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-22.0.0/graalvm-community-jdk-22.0.0_linux-x64_bin.tar.gz"
+      }
+    },
     "graalvm_ce8": {
       "19.3.0": {
         "macos": "https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-19.3.0/graalvm-ce-java8-darwin-amd64-19.3.0.tar.gz",
@@ -728,6 +735,14 @@
       "GraalVM_CE21",
       "graalvm_ce21",
       "graalvmce21"
+    ],
+    "graalvm_ce22": [
+      "Graal VM CE 22",
+      "GraalVM CE 22",
+      "GraalVMCE22",
+      "GraalVM_CE22",
+      "graalvm_ce22",
+      "graalvmce22"
     ],
     "graalvm_ce8": [
       "Graal VM CE 8",
