@@ -4496,6 +4496,11 @@
       "windows": "https://nodejs.org/dist/v18.20.1/node-v18.20.1-win-x64.zip",
       "linux": "https://nodejs.org/dist/v18.20.1/node-v18.20.1-linux-x64.tar.xz"
     },
+    "18.20.2": {
+      "macos": "https://nodejs.org/dist/v18.20.2/node-v18.20.2-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v18.20.2/node-v18.20.2-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v18.20.2/node-v18.20.2-linux-x64.tar.xz"
+    },
     "19.0.0": {
       "macos": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-win-x64.zip",
@@ -4656,6 +4661,11 @@
       "windows": "https://nodejs.org/dist/v20.12.1/node-v20.12.1-win-x64.zip",
       "linux": "https://nodejs.org/dist/v20.12.1/node-v20.12.1-linux-x64.tar.xz"
     },
+    "20.12.2": {
+      "macos": "https://nodejs.org/dist/v20.12.2/node-v20.12.2-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v20.12.2/node-v20.12.2-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v20.12.2/node-v20.12.2-linux-x64.tar.xz"
+    },
     "21.0.0": {
       "macos": "https://nodejs.org/dist/v21.0.0/node-v21.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v21.0.0/node-v21.0.0-win-x64.zip",
@@ -4715,6 +4725,11 @@
       "macos": "https://nodejs.org/dist/v21.7.2/node-v21.7.2-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v21.7.2/node-v21.7.2-win-x64.zip",
       "linux": "https://nodejs.org/dist/v21.7.2/node-v21.7.2-linux-x64.tar.xz"
+    },
+    "21.7.3": {
+      "macos": "https://nodejs.org/dist/v21.7.3/node-v21.7.3-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v21.7.3/node-v21.7.3-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v21.7.3/node-v21.7.3-linux-x64.tar.xz"
     }
   }
 }
