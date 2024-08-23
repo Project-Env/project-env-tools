@@ -4772,6 +4772,11 @@
       "windows": "https://nodejs.org/dist/v20.16.0/node-v20.16.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v20.16.0/node-v20.16.0-linux-x64.tar.xz"
     },
+    "20.17.0": {
+      "macos": "https://nodejs.org/dist/v20.17.0/node-v20.17.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v20.17.0/node-v20.17.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v20.17.0/node-v20.17.0-linux-x64.tar.xz"
+    },
     "21.0.0": {
       "macos": "https://nodejs.org/dist/v21.0.0/node-v21.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v21.0.0/node-v21.0.0-win-x64.zip",
@@ -4881,6 +4886,11 @@
       "macos": "https://nodejs.org/dist/v22.6.0/node-v22.6.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v22.6.0/node-v22.6.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v22.6.0/node-v22.6.0-linux-x64.tar.xz"
+    },
+    "22.7.0": {
+      "macos": "https://nodejs.org/dist/v22.7.0/node-v22.7.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v22.7.0/node-v22.7.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v22.7.0/node-v22.7.0-linux-x64.tar.xz"
     }
   }
 }
