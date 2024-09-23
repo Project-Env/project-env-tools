@@ -25,6 +25,7 @@
         <commons-collections4.version>4.4</commons-collections4.version>
         <picocli.version>4.7.1</picocli.version>
         <jsoup.version>1.17.2</jsoup.version>
+        <semver4j.version>5.4.0</semver4j.version>
 
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
@@ -94,6 +95,11 @@
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>${jsoup.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.semver4j</groupId>
+            <artifactId>semver4j</artifactId>
+            <version>${semver4j.version}</version>
         </dependency>
     </dependencies>
 

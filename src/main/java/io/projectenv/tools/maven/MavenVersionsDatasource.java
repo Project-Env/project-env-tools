@@ -1,9 +1,9 @@
 package io.projectenv.tools.maven;
 
-import io.projectenv.tools.ImmutableToolsIndex;
+import io.projectenv.tools.ImmutableToolsIndexV2;
 import io.projectenv.tools.SortedCollections;
-import io.projectenv.tools.ToolsIndex;
 import io.projectenv.tools.ToolsIndexExtender;
+import io.projectenv.tools.ToolsIndexV2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -19,7 +19,7 @@ public class MavenVersionsDatasource implements ToolsIndexExtender {
     private static final Pattern VERSION_PATTERN = Pattern.compile("(\\d+\\.\\d+\\.\\d+)/");
 
     @Override
-    public ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex) {
+    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
         try {
             Document doc = Jsoup.connect("https://archive.apache.org/dist/maven/maven-3/").get();
             SortedMap<String, String> downloadUrls = doc.getElementsByTag("a")
@@ -34,7 +34,7 @@ public class MavenVersionsDatasource implements ToolsIndexExtender {
                             (a, b) -> a,
                             SortedCollections::createSemverSortedMap));
 
-            return ImmutableToolsIndex.builder()
+            return ImmutableToolsIndexV2.builder()
                     .from(currentToolsIndex)
                     .mavenVersions(downloadUrls)
                     .build();

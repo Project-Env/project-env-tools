@@ -2,6 +2,6 @@ package io.projectenv.tools;
 
 public interface ToolsIndexExtender {
 
-    ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex);
+    ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex);
 
 }

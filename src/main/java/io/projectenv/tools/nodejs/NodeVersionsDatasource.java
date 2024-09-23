@@ -1,14 +1,15 @@
 package io.projectenv.tools.nodejs;
 
 import io.projectenv.core.commons.system.OperatingSystem;
-import io.projectenv.tools.ImmutableToolsIndex;
-import io.projectenv.tools.SortedCollections;
-import io.projectenv.tools.ToolsIndex;
-import io.projectenv.tools.ToolsIndexExtender;
+import io.projectenv.tools.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.text.MessageFormat;
 import java.util.Map;
 import java.util.SortedMap;
@@ -21,11 +22,11 @@ public class NodeVersionsDatasource implements ToolsIndexExtender {
     private static final Pattern VERSION_PATTERN = Pattern.compile("v(\\d+\\.\\d+\\.\\d+)/");
 
     @Override
-    public ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex) {
+    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
         try {
             Document doc = Jsoup.connect("https://nodejs.org/download/release/").get();
 
-            SortedMap<String, SortedMap<OperatingSystem, String>> downloadUrls = doc.getElementsByTag("a")
+            SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> downloadUrls = doc.getElementsByTag("a")
                     .stream()
                     .map(element -> element.attr("href"))
                     .map(VERSION_PATTERN::matcher)
@@ -34,14 +35,21 @@ public class NodeVersionsDatasource implements ToolsIndexExtender {
                     .collect(Collectors.toMap(
                             version -> version,
                             version -> SortedCollections.createNaturallySortedMap(Map.of(
-                                    OperatingSystem.MACOS, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-darwin-x64.tar.xz", version),
-                                    OperatingSystem.LINUX, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-linux-x64.tar.xz", version),
-                                    OperatingSystem.WINDOWS, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-win-x64.zip", version)
+                                    OperatingSystem.MACOS, SortedCollections.createNaturallySortedMap(Map.of(
+                                            CpuArchitecture.AMD64, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-darwin-x64.tar.xz", version),
+                                            CpuArchitecture.AARCH64, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-darwin-arm64.tar.xz", version)
+                                    )),
+                                    OperatingSystem.LINUX, SortedCollections.createNaturallySortedMap(Map.of(
+                                            CpuArchitecture.AMD64, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-linux-x64.tar.xz", version)
+                                    )),
+                                    OperatingSystem.WINDOWS, SortedCollections.createNaturallySortedMap(Map.of(
+                                            CpuArchitecture.AMD64, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-win-x64.zip", version)
+                                    ))
                             )),
                             (a, b) -> a,
                             SortedCollections::createSemverSortedMap));
 
-            return ImmutableToolsIndex.builder()
+            return ImmutableToolsIndexV2.builder()
                     .from(currentToolsIndex)
                     .nodeVersions(downloadUrls)
                     .build();

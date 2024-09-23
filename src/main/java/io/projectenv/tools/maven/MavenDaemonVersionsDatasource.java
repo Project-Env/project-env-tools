@@ -2,14 +2,12 @@ package io.projectenv.tools.maven;
 
 import io.projectenv.core.commons.process.ProcessOutput;
 import io.projectenv.core.commons.system.OperatingSystem;
-import io.projectenv.tools.ImmutableToolsIndex;
-import io.projectenv.tools.SortedCollections;
-import io.projectenv.tools.ToolsIndex;
-import io.projectenv.tools.ToolsIndexExtender;
+import io.projectenv.tools.*;
 import io.projectenv.tools.jdk.github.GithubClient;
 import io.projectenv.tools.jdk.github.Release;
 
 import java.util.Comparator;
+import java.util.Map;
 import java.util.SortedMap;
 import java.util.regex.Pattern;
 
@@ -27,8 +25,8 @@ public class MavenDaemonVersionsDatasource implements ToolsIndexExtender {
     }
 
     @Override
-    public ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex) {
-        SortedMap<String, SortedMap<OperatingSystem, String>> mvndVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getMvndVersions());
+    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
+        SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> mvndVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getMvndVersions());
 
         var releases = githubClient.getReleases("apache", "maven-mvnd")
                 .stream()
@@ -54,11 +52,13 @@ public class MavenDaemonVersionsDatasource implements ToolsIndexExtender {
 
                 mvndVersions
                         .computeIfAbsent(version, (key) -> SortedCollections.createNaturallySortedMap())
-                        .put(mapToOperatingSystem(operatingSystem), releaseAsset.getBrowserDownloadUrl());
+                        .put(mapToOperatingSystem(operatingSystem), SortedCollections.createNaturallySortedMap(Map.of(
+                                CpuArchitecture.AMD64, releaseAsset.getBrowserDownloadUrl()
+                        )));
             }
         }
 
-        return ImmutableToolsIndex.builder()
+        return ImmutableToolsIndexV2.builder()
                 .from(currentToolsIndex)
                 .mvndVersions(mvndVersions)
                 .build();
