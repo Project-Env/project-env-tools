@@ -1,8 +1,8 @@
 package io.projectenv.tools;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import io.projectenv.commons.gson.GsonFactory;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -12,7 +12,7 @@ public final class ToolIndexParser {
     private static final Type TOOLS_INDEX_TYPE = new TypeToken<ToolsIndex>() {
     }.getType();
 
-    private static final Gson GSON = GsonFactory.createGsonBuilder()
+    private static final Gson GSON = new GsonBuilder()
             .enableComplexMapKeySerialization()
             .setPrettyPrinting()
             .create();

@@ -1,15 +1,10 @@
 package io.projectenv.tools.nodejs;
 
-import io.projectenv.core.commons.system.OperatingSystem;
 import io.projectenv.tools.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.text.MessageFormat;
 import java.util.Map;
 import java.util.SortedMap;

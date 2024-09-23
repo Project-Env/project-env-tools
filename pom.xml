@@ -37,21 +37,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.projectenv.commons</groupId>
-            <artifactId>system</artifactId>
-            <version>${project-env-commons.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.projectenv.commons</groupId>
-            <artifactId>gson</artifactId>
-            <version>${project-env-commons.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.projectenv.commons</groupId>
-            <artifactId>process</artifactId>
-            <version>${project-env-commons.version}</version>
-        </dependency>
-        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
@@ -164,12 +149,5 @@
             </plugins>
         </pluginManagement>
     </build>
-
-    <repositories>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/Project-Env/project-env-commons-java</url>
-        </repository>
-    </repositories>
 
 </project>

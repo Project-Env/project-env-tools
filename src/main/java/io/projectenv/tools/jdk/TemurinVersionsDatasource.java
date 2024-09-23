@@ -1,7 +1,5 @@
 package io.projectenv.tools.jdk;
 
-import io.projectenv.core.commons.process.ProcessOutput;
-import io.projectenv.core.commons.system.OperatingSystem;
 import io.projectenv.tools.*;
 import io.projectenv.tools.jdk.github.GithubClient;
 import io.projectenv.tools.jdk.github.Release;
