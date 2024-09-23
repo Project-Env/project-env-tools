@@ -7,9 +7,9 @@ import io.projectenv.commons.gson.GsonFactory;
 import java.io.*;
 import java.lang.reflect.Type;
 
-public final class ToolIndexParser {
+public final class ToolIndexV2Parser {
 
-    private static final Type TOOLS_INDEX_TYPE = new TypeToken<ToolsIndex>() {
+    private static final Type TOOLS_INDEX_TYPE = new TypeToken<ToolsIndexV2>() {
     }.getType();
 
     private static final Gson GSON = GsonFactory.createGsonBuilder()
@@ -17,11 +17,11 @@ public final class ToolIndexParser {
             .setPrettyPrinting()
             .create();
 
-    private ToolIndexParser() {
+    private ToolIndexV2Parser() {
         // noop
     }
 
-    public static ToolsIndex readFrom(File toolsIndexFile) {
+    public static ToolsIndexV2 readFrom(File toolsIndexFile) {
         try (Reader reader = new FileReader(toolsIndexFile)) {
             return GSON.fromJson(reader, TOOLS_INDEX_TYPE);
         } catch (IOException e) {
@@ -29,12 +29,13 @@ public final class ToolIndexParser {
         }
     }
 
-    public static void writeTo(ToolsIndex toolsIndex, File toolsIndexFile) {
+    public static void writeTo(ToolsIndexV2 toolsIndex, File toolsIndexFile) {
         try (Writer writer = new FileWriter(toolsIndexFile)) {
             GSON.toJson(toolsIndex, TOOLS_INDEX_TYPE, writer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
 
 }

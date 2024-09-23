@@ -2,10 +2,7 @@ package io.projectenv.tools.jdk;
 
 import io.projectenv.core.commons.process.ProcessOutput;
 import io.projectenv.core.commons.system.OperatingSystem;
-import io.projectenv.tools.ImmutableToolsIndex;
-import io.projectenv.tools.SortedCollections;
-import io.projectenv.tools.ToolsIndex;
-import io.projectenv.tools.ToolsIndexExtender;
+import io.projectenv.tools.*;
 import io.projectenv.tools.jdk.github.GithubClient;
 import io.projectenv.tools.jdk.github.Release;
 
@@ -25,7 +22,7 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
     private static final String DISTRIBUTION_ID_BASE_NAME = "graalvm_ce";
     private static final Pattern DISTRIBUTION_ID_PATTERN = Pattern.compile("^" + DISTRIBUTION_ID_BASE_NAME + "(\\d+)$");
 
-    private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("graalvm-(?:ce|community)-(?:java|jdk-)(\\d+)[^-_]*[-_](\\w+)-(?:amd64|x64)[-_](?:[\\d.]+|bin)\\.(?:tar\\.gz|zip)$");
+    private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("graalvm-(?:ce|community)-(?:java|jdk-)(\\d+)[^-_]*[-_](\\w+)-(amd64|x64|aarch64)[-_](?:[\\d.]+|bin)\\.(?:tar\\.gz|zip)$");
 
     private static final Pattern GRAAL_VM_VERSION_PATTERN = Pattern.compile("GRAALVM_VERSION=\"?([\\d.]+)\"?");
 
@@ -47,9 +44,9 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
     }
 
     @Override
-    public ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex) {
+    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
         SortedMap<String, SortedSet<String>> jdkDistributionSynonyms = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkDistributionSynonyms());
-        SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, String>>> jdkVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkVersions());
+        SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> jdkVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkVersions());
 
         var releases = githubClient.getReleases("graalvm", "graalvm-ce-builds")
                 .stream()
@@ -57,7 +54,7 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
                 .toList();
 
         for (var release : releases) {
-            var downloadUrls = new HashMap<String, Map<OperatingSystem, String>>();
+            var downloadUrls = new HashMap<String, Map<OperatingSystem, Map<CpuArchitecture, String>>>();
             for (var releaseAsset : release.getAssets()) {
                 var releaseAssetNameMatcher = RELEASE_ASSET_NAME_PATTERN.matcher(releaseAsset.getName());
                 if (!releaseAssetNameMatcher.find()) {
@@ -67,26 +64,31 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
 
                 var javaMajorVersion = releaseAssetNameMatcher.group(1);
                 var operatingSystem = mapToOperatingSystem(releaseAssetNameMatcher.group(2));
+                var cpuArchitecture = mapToCpuArchitecture(releaseAssetNameMatcher.group(3));
 
                 downloadUrls
                         .computeIfAbsent(javaMajorVersion, key -> new EnumMap<>(OperatingSystem.class))
-                        .put(operatingSystem, releaseAsset.getBrowserDownloadUrl());
+                        .computeIfAbsent(operatingSystem, key -> new EnumMap<>(CpuArchitecture.class))
+                        .put(cpuArchitecture, releaseAsset.getBrowserDownloadUrl());
             }
 
             if (downloadUrls.isEmpty()) {
                 continue;
             }
 
-            String firstWindowsDownloadUrl = downloadUrls.entrySet().stream().findFirst().map(entry -> entry.getValue().get(OperatingSystem.WINDOWS)).orElseThrow();
+            String firstWindowsDownloadUrl = downloadUrls.entrySet().stream().findFirst().map(entry -> entry.getValue().get(OperatingSystem.WINDOWS).get(CpuArchitecture.AMD64)).orElseThrow();
             DistributionInfo distributionInfo = extractDistributionInfo(firstWindowsDownloadUrl);
 
-            for (Map.Entry<String, Map<OperatingSystem, String>> entry : downloadUrls.entrySet()) {
+            for (Map.Entry<String, Map<OperatingSystem, Map<CpuArchitecture, String>>> entry : downloadUrls.entrySet()) {
                 var distributionName = DISTRIBUTION_ID_BASE_NAME + entry.getKey();
 
-                jdkVersions
-                        .computeIfAbsent(distributionName, key -> SortedCollections.createSemverSortedMap())
-                        .computeIfAbsent(distributionInfo.graalVmVersion(), key -> SortedCollections.createNaturallySortedMap())
-                        .putAll(entry.getValue());
+                for (Map.Entry<OperatingSystem, Map<CpuArchitecture, String>> osEntry : entry.getValue().entrySet()) {
+                    jdkVersions
+                            .computeIfAbsent(distributionName, key -> SortedCollections.createSemverSortedMap())
+                            .computeIfAbsent(distributionInfo.graalVmVersion(), key -> SortedCollections.createNaturallySortedMap())
+                            .computeIfAbsent(osEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
+                            .putAll(osEntry.getValue());
+                }
             }
 
         }
@@ -103,7 +105,7 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
                     .collect(SortedCollections.toNaturallySortedSet()));
         }
 
-        return ImmutableToolsIndex.builder()
+        return ImmutableToolsIndexV2.builder()
                 .from(currentToolsIndex)
                 .jdkVersions(jdkVersions)
                 .jdkDistributionSynonyms(jdkDistributionSynonyms)
@@ -114,6 +116,13 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
         return switch (operatingSystemName) {
             case "darwin" -> OperatingSystem.MACOS;
             default -> OperatingSystem.valueOf(operatingSystemName.toUpperCase());
+        };
+    }
+
+    private CpuArchitecture mapToCpuArchitecture(String cpuArchitectureName) {
+        return switch (cpuArchitectureName) {
+            case "aarch64" -> CpuArchitecture.AARCH64;
+            default -> CpuArchitecture.AMD64;
         };
     }
 

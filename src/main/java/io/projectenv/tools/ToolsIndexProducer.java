@@ -26,6 +26,9 @@ public class ToolsIndexProducer implements Callable<Integer> {
     @Option(names = {"--index-file"}, required = true)
     private File indexFile;
 
+    @Option(names = {"--legacy-index-file"}, required = true)
+    private File legacyIndexFile;
+
     @Option(names = {"--github-access-token"}, required = true)
     private String githubAccessToken;
 
@@ -39,7 +42,7 @@ public class ToolsIndexProducer implements Callable<Integer> {
                 ProcessOutput.activateDebugMode();
             }
 
-            var toolsIndex = readOrCreateToolsIndex();
+            var toolsIndex = readOrCreateToolsIndexV2();
 
             GithubClient githubClient = SimpleGithubClient.withAccessToken(githubAccessToken);
             for (ToolsIndexExtender extender : List.of(
@@ -48,12 +51,14 @@ public class ToolsIndexProducer implements Callable<Integer> {
                     new NodeVersionsDatasource(),
                     new MavenVersionsDatasource(),
                     new MavenDaemonVersionsDatasource(githubClient),
-                    new GradleVersionsDatasource())) {
+                    new GradleVersionsDatasource(),
+                    new DownloadUrlValidator())) {
 
                 toolsIndex = extender.extendToolsIndex(toolsIndex);
             }
 
-            ToolIndexParser.writeTo(toolsIndex, indexFile);
+            ToolIndexV2Parser.writeTo(toolsIndex, indexFile);
+            ToolIndexParser.writeTo(toolsIndex.toLegacyToolsIndex(), legacyIndexFile);
 
             return ExitCode.OK;
         } catch (Exception e) {
@@ -74,11 +79,11 @@ public class ToolsIndexProducer implements Callable<Integer> {
         return new CommandLine(new ToolsIndexProducer()).execute(args);
     }
 
-    private ToolsIndex readOrCreateToolsIndex() {
+    private ToolsIndexV2 readOrCreateToolsIndexV2() {
         if (indexFile.exists()) {
-            return ToolIndexParser.readFrom(indexFile);
+            return ToolIndexV2Parser.readFrom(indexFile);
         } else {
-            return ImmutableToolsIndex.builder().build();
+            return ImmutableToolsIndexV2.builder().build();
         }
     }
 

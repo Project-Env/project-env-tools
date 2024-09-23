@@ -2,10 +2,7 @@ package io.projectenv.tools.jdk;
 
 import io.projectenv.core.commons.process.ProcessOutput;
 import io.projectenv.core.commons.system.OperatingSystem;
-import io.projectenv.tools.ImmutableToolsIndex;
-import io.projectenv.tools.SortedCollections;
-import io.projectenv.tools.ToolsIndex;
-import io.projectenv.tools.ToolsIndexExtender;
+import io.projectenv.tools.*;
 import io.projectenv.tools.jdk.github.GithubClient;
 import io.projectenv.tools.jdk.github.Release;
 import io.projectenv.tools.jdk.github.Repository;
@@ -24,7 +21,7 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
     private static final Pattern LEGACY_RELEASE_TAG_PATTERN = Pattern.compile("^jdk(\\d+)u([\\d.]+)-b(\\d+)$");
     private static final Pattern RELEASE_TAG_PATTERN = Pattern.compile("^jdk-([\\d.+]+)$");
 
-    private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("^OpenJDK\\d+U-jdk_x64_(\\w+)_hotspot_(.+).(tar\\.gz|zip)$");
+    private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("^OpenJDK\\d+U-jdk_(x64|aarch64)_(\\w+)_hotspot_(.+).(tar\\.gz|zip)$");
 
     private static final SortedSet<String> SYNONYMS = SortedCollections.createNaturallySortedSet(
             "Temurin",
@@ -39,9 +36,9 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
     }
 
     @Override
-    public ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex) {
+    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
         SortedMap<String, SortedSet<String>> jdkDistributionSynonyms = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkDistributionSynonyms());
-        SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, String>>> jdkVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkVersions());
+        SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> jdkVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkVersions());
 
         for (Repository repository : githubClient.getRepositories("adoptium")) {
             if (!RELEASES_REPOSITORY_PATTERN.matcher(repository.getName()).find()) {
@@ -67,7 +64,10 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
                         continue;
                     }
 
-                    var operatingSystemName = releaseAssetNameMatcher.group(1);
+                    var cpuArchitectureName = releaseAssetNameMatcher.group(1);
+                    var cpuArchitecture = mapToCpuArchitecture(cpuArchitectureName);
+
+                    var operatingSystemName = releaseAssetNameMatcher.group(2);
                     var operatingSystem = mapToOperatingSystem(operatingSystemName);
                     if (operatingSystem == null) {
                         continue;
@@ -76,14 +76,15 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
                     jdkVersions
                             .computeIfAbsent(DISTRIBUTION_ID, (key) -> SortedCollections.createSemverSortedMap())
                             .computeIfAbsent(version, (key) -> SortedCollections.createNaturallySortedMap())
-                            .put(operatingSystem, releaseAsset.getBrowserDownloadUrl());
+                            .computeIfAbsent(operatingSystem, (key) -> SortedCollections.createNaturallySortedMap())
+                            .put(cpuArchitecture, releaseAsset.getBrowserDownloadUrl());
                 }
             }
         }
 
         jdkDistributionSynonyms.put(DISTRIBUTION_ID, SYNONYMS);
 
-        return ImmutableToolsIndex.builder()
+        return ImmutableToolsIndexV2.builder()
                 .from(currentToolsIndex)
                 .jdkVersions(jdkVersions)
                 .jdkDistributionSynonyms(jdkDistributionSynonyms)
@@ -114,6 +115,13 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
             case "linux" -> OperatingSystem.LINUX;
             case "windows" -> OperatingSystem.WINDOWS;
             default -> null;
+        };
+    }
+
+    private CpuArchitecture mapToCpuArchitecture(String cpuArchitectureName) {
+        return switch (cpuArchitectureName) {
+            case "aarch64" -> CpuArchitecture.AARCH64;
+            default -> CpuArchitecture.AMD64;
         };
     }
 

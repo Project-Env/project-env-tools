@@ -1,9 +1,9 @@
 package io.projectenv.tools.gradle;
 
-import io.projectenv.tools.ImmutableToolsIndex;
+import io.projectenv.tools.ImmutableToolsIndexV2;
 import io.projectenv.tools.SortedCollections;
-import io.projectenv.tools.ToolsIndex;
 import io.projectenv.tools.ToolsIndexExtender;
+import io.projectenv.tools.ToolsIndexV2;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class GradleVersionsDatasource implements ToolsIndexExtender {
 
     @Override
-    public ToolsIndex extendToolsIndex(ToolsIndex currentToolsIndex) {
+    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
         try {
             Document doc = Jsoup.connect("https://gradle.org/releases/").get();
             SortedMap<String, String> downloadUrls = doc.getElementsByClass("resources-contents")
@@ -29,7 +29,7 @@ public class GradleVersionsDatasource implements ToolsIndexExtender {
                             (a, b) -> a,
                             SortedCollections::createSemverSortedMap));
 
-            return ImmutableToolsIndex.builder()
+            return ImmutableToolsIndexV2.builder()
                     .from(currentToolsIndex)
                     .gradleVersions(downloadUrls)
                     .build();
