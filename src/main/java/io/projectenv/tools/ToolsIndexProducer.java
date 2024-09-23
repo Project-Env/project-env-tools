@@ -1,6 +1,5 @@
 package io.projectenv.tools;
 
-import io.projectenv.core.commons.process.ProcessOutput;
 import io.projectenv.tools.gradle.GradleVersionsDatasource;
 import io.projectenv.tools.jdk.GraalVmVersionsDatasource;
 import io.projectenv.tools.jdk.TemurinVersionsDatasource;

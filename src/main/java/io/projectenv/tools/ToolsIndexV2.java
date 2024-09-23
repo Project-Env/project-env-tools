@@ -1,6 +1,5 @@
 package io.projectenv.tools;
 
-import io.projectenv.core.commons.system.OperatingSystem;
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
 import org.immutables.value.Value.Style.ValidationMethod;

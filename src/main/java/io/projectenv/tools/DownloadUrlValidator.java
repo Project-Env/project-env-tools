@@ -1,8 +1,5 @@
 package io.projectenv.tools;
 
-import io.projectenv.core.commons.process.ProcessOutput;
-import io.projectenv.core.commons.system.OperatingSystem;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
