@@ -13,6 +13,7 @@ public final class ToolIndexParser {
     }.getType();
 
     private static final Gson GSON = new GsonBuilder()
+            .registerTypeAdapterFactory(new GsonAdaptersToolsIndex())
             .enableComplexMapKeySerialization()
             .setPrettyPrinting()
             .create();
