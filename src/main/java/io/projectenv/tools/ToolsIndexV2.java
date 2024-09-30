@@ -31,29 +31,36 @@ public interface ToolsIndexV2 {
         for (Entry<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> distributionEntry : getJdkVersions().entrySet()) {
             for (Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : distributionEntry.getValue().entrySet()) {
                 for (Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> operatingSystemEntry : versionEntry.getValue().entrySet()) {
-                    simplifiedJdkVersions
-                            .computeIfAbsent(distributionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
-                            .computeIfAbsent(versionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
-                            .put(operatingSystemEntry.getKey(), operatingSystemEntry.getValue().get(CpuArchitecture.AMD64));
+                    if (operatingSystemEntry.getValue().containsKey(CpuArchitecture.AMD64)) {
+                        simplifiedJdkVersions
+                                .computeIfAbsent(distributionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
+                                .computeIfAbsent(versionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
+                                .put(operatingSystemEntry.getKey(), operatingSystemEntry.getValue().get(CpuArchitecture.AMD64));
+                    }
                 }
+
             }
         }
 
         SortedMap<String, SortedMap<OperatingSystem, String>> simplifiedMvndVersions = SortedCollections.createNaturallySortedMap();
         for (Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : getMvndVersions().entrySet()) {
             for (Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> operatingSystemEntry : versionEntry.getValue().entrySet()) {
-                simplifiedMvndVersions
-                        .computeIfAbsent(versionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
-                        .put(operatingSystemEntry.getKey(), operatingSystemEntry.getValue().get(CpuArchitecture.AMD64));
+                if (operatingSystemEntry.getValue().containsKey(CpuArchitecture.AMD64)) {
+                    simplifiedMvndVersions
+                            .computeIfAbsent(versionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
+                            .put(operatingSystemEntry.getKey(), operatingSystemEntry.getValue().get(CpuArchitecture.AMD64));
+                }
             }
         }
 
         SortedMap<String, SortedMap<OperatingSystem, String>> simplifiedNodeVersions = SortedCollections.createNaturallySortedMap();
         for (Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : getNodeVersions().entrySet()) {
             for (Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> operatingSystemEntry : versionEntry.getValue().entrySet()) {
-                simplifiedNodeVersions
-                        .computeIfAbsent(versionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
-                        .put(operatingSystemEntry.getKey(), operatingSystemEntry.getValue().get(CpuArchitecture.AMD64));
+                if (operatingSystemEntry.getValue().containsKey(CpuArchitecture.AMD64)) {
+                    simplifiedNodeVersions
+                            .computeIfAbsent(versionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
+                            .put(operatingSystemEntry.getKey(), operatingSystemEntry.getValue().get(CpuArchitecture.AMD64));
+                }
             }
         }
 
