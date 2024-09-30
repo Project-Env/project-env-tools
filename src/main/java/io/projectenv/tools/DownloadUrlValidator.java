@@ -23,7 +23,7 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
                     for (Map.Entry<CpuArchitecture, String> cpuArchitectureEntry : operatingSystemEntry.getValue().entrySet()) {
                         if (urlReturns2XX(cpuArchitectureEntry.getValue())) {
                             validatedJdkVersions
-                                    .computeIfAbsent(distributionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
+                                    .computeIfAbsent(distributionEntry.getKey(), key -> SortedCollections.createSemverSortedMap())
                                     .computeIfAbsent(versionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
                                     .computeIfAbsent(operatingSystemEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
                                     .put(cpuArchitectureEntry.getKey(), cpuArchitectureEntry.getValue());
@@ -33,21 +33,21 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
             }
         }
 
-        SortedMap<String, String> validatedGradleVersions = SortedCollections.createNaturallySortedMap();
+        SortedMap<String, String> validatedGradleVersions = SortedCollections.createSemverSortedMap();
         for (Map.Entry<String, String> versionEntry : currentToolsIndex.getGradleVersions().entrySet()) {
             if (urlReturns2XX(versionEntry.getValue())) {
                 validatedGradleVersions.put(versionEntry.getKey(), versionEntry.getValue());
             }
         }
 
-        SortedMap<String, String> validatedMavenVersions = SortedCollections.createNaturallySortedMap();
+        SortedMap<String, String> validatedMavenVersions = SortedCollections.createSemverSortedMap();
         for (Map.Entry<String, String> versionEntry : currentToolsIndex.getMavenVersions().entrySet()) {
             if (urlReturns2XX(versionEntry.getValue())) {
                 validatedMavenVersions.put(versionEntry.getKey(), versionEntry.getValue());
             }
         }
 
-        SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> validatedMvndVersions = SortedCollections.createNaturallySortedMap();
+        SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> validatedMvndVersions = SortedCollections.createSemverSortedMap();
         for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : currentToolsIndex.getMvndVersions().entrySet()) {
             for (Map.Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> operatingSystemEntry : versionEntry.getValue().entrySet()) {
                 for (Map.Entry<CpuArchitecture, String> cpuArchitectureEntry : operatingSystemEntry.getValue().entrySet()) {
@@ -61,7 +61,7 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
             }
         }
 
-        SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> validatedNodeVersions = SortedCollections.createNaturallySortedMap();
+        SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> validatedNodeVersions = SortedCollections.createSemverSortedMap();
         for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : currentToolsIndex.getNodeVersions().entrySet()) {
             for (Map.Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> operatingSystemEntry : versionEntry.getValue().entrySet()) {
                 for (Map.Entry<CpuArchitecture, String> cpuArchitectureEntry : operatingSystemEntry.getValue().entrySet()) {
