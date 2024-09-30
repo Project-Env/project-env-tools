@@ -26,6 +26,8 @@
         <picocli.version>4.7.6</picocli.version>
         <jsoup.version>1.18.1</jsoup.version>
         <semver4j.version>5.4.0</semver4j.version>
+        <junit.version>5.11.1</junit.version>
+        <assertj.version>3.26.3</assertj.version>
 
         <flatten-maven-plugin.version>1.6.0</flatten-maven-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
@@ -82,9 +84,16 @@
             <version>${jsoup.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.semver4j</groupId>
-            <artifactId>semver4j</artifactId>
-            <version>${semver4j.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
