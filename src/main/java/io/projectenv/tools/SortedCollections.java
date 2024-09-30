@@ -98,8 +98,8 @@ public final class SortedCollections {
     private static int compareVersions(String version1, String version2) {
         int comparisonResult = 0;
 
-        String[] version1Splits = version1.split("[.+]");
-        String[] version2Splits = version2.split("[.+]");
+        String[] version1Splits = version1.split("\\+")[0].split("\\.");
+        String[] version2Splits = version2.split("\\+")[0].split("\\.");
         int maxLengthOfVersionSplits = Math.max(version1Splits.length, version2Splits.length);
 
         for (int i = 0; i < maxLengthOfVersionSplits; i++) {
@@ -111,6 +111,11 @@ public final class SortedCollections {
                 break;
             }
         }
+
+        if (comparisonResult == 0) {
+            return Integer.compare(version1.length(), version2.length());
+        }
+
         return comparisonResult;
     }
 
