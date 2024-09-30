@@ -24,7 +24,7 @@ public class MavenDaemonVersionsDatasource implements ToolsIndexExtender {
 
     @Override
     public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
-        SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> mvndVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getMvndVersions());
+        SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> mvndVersions = SortedCollections.createSemverSortedMap(currentToolsIndex.getMvndVersions());
 
         var releases = githubClient.getReleases("apache", "maven-mvnd")
                 .stream()

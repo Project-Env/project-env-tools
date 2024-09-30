@@ -33,7 +33,7 @@ public interface ToolsIndexV2 {
                 for (Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> operatingSystemEntry : versionEntry.getValue().entrySet()) {
                     if (operatingSystemEntry.getValue().containsKey(CpuArchitecture.AMD64)) {
                         simplifiedJdkVersions
-                                .computeIfAbsent(distributionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
+                                .computeIfAbsent(distributionEntry.getKey(), key -> SortedCollections.createSemverSortedMap())
                                 .computeIfAbsent(versionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
                                 .put(operatingSystemEntry.getKey(), operatingSystemEntry.getValue().get(CpuArchitecture.AMD64));
                     }
@@ -42,7 +42,7 @@ public interface ToolsIndexV2 {
             }
         }
 
-        SortedMap<String, SortedMap<OperatingSystem, String>> simplifiedMvndVersions = SortedCollections.createNaturallySortedMap();
+        SortedMap<String, SortedMap<OperatingSystem, String>> simplifiedMvndVersions = SortedCollections.createSemverSortedMap();
         for (Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : getMvndVersions().entrySet()) {
             for (Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> operatingSystemEntry : versionEntry.getValue().entrySet()) {
                 if (operatingSystemEntry.getValue().containsKey(CpuArchitecture.AMD64)) {
@@ -53,7 +53,7 @@ public interface ToolsIndexV2 {
             }
         }
 
-        SortedMap<String, SortedMap<OperatingSystem, String>> simplifiedNodeVersions = SortedCollections.createNaturallySortedMap();
+        SortedMap<String, SortedMap<OperatingSystem, String>> simplifiedNodeVersions = SortedCollections.createSemverSortedMap();
         for (Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : getNodeVersions().entrySet()) {
             for (Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> operatingSystemEntry : versionEntry.getValue().entrySet()) {
                 if (operatingSystemEntry.getValue().containsKey(CpuArchitecture.AMD64)) {
