@@ -1895,7 +1895,8 @@
           "aarch64": "https://github.com/adoptium/temurin23-binaries/releases/download/jdk-23.0.1%2B11/OpenJDK23U-jdk_aarch64_mac_hotspot_23.0.1_11.tar.gz"
         },
         "windows": {
-          "amd64": "https://github.com/adoptium/temurin23-binaries/releases/download/jdk-23.0.1%2B11/OpenJDK23U-jdk_x64_windows_hotspot_23.0.1_11.zip"
+          "amd64": "https://github.com/adoptium/temurin23-binaries/releases/download/jdk-23.0.1%2B11/OpenJDK23U-jdk_x64_windows_hotspot_23.0.1_11.zip",
+          "aarch64": "https://github.com/adoptium/temurin23-binaries/releases/download/jdk-23.0.1%2B11/OpenJDK23U-jdk_aarch64_windows_hotspot_23.0.1_11.zip"
         },
         "linux": {
           "amd64": "https://github.com/adoptium/temurin23-binaries/releases/download/jdk-23.0.1%2B11/OpenJDK23U-jdk_x64_linux_hotspot_23.0.1_11.tar.gz",
@@ -8310,6 +8311,18 @@
       },
       "linux": {
         "amd64": "https://nodejs.org/dist/v23.0.0/node-v23.0.0-linux-x64.tar.xz"
+      }
+    },
+    "23.1.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/dist/v23.1.0/node-v23.1.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/dist/v23.1.0/node-v23.1.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/dist/v23.1.0/node-v23.1.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/dist/v23.1.0/node-v23.1.0-linux-x64.tar.xz"
       }
     }
   }
