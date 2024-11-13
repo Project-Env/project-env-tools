@@ -7498,6 +7498,18 @@
         "amd64": "https://nodejs.org/dist/v18.20.4/node-v18.20.4-linux-x64.tar.xz"
       }
     },
+    "18.20.5": {
+      "macos": {
+        "amd64": "https://nodejs.org/dist/v18.20.5/node-v18.20.5-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/dist/v18.20.5/node-v18.20.5-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/dist/v18.20.5/node-v18.20.5-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/dist/v18.20.5/node-v18.20.5-linux-x64.tar.xz"
+      }
+    },
     "19.0.0": {
       "macos": {
         "amd64": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-darwin-x64.tar.xz",
