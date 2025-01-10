@@ -22,7 +22,7 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
 
     private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("graalvm-(?:ce|community)-(?:java|jdk-)(\\d+)[^-_]*[-_](\\w+)-(amd64|x64|aarch64)[-_](?:[\\d.]+|bin)\\.(?:tar\\.gz|zip)$");
 
-    private static final Pattern GRAAL_VM_VERSION_PATTERN = Pattern.compile("GRAALVM_VERSION=\"?([\\d.]+)\"?");
+    private static final Pattern GRAAL_VM_VERSION_PATTERN = Pattern.compile("JAVA_VERSION=\"?([\\d.]+)\"?");
 
     private static final String GRAAL_VM_VERSION_FILE_PATH = "/release";
 
