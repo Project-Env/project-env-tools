@@ -3501,6 +3501,11 @@
       "windows": "https://nodejs.org/dist/v18.20.6/node-v18.20.6-win-x64.zip",
       "linux": "https://nodejs.org/dist/v18.20.6/node-v18.20.6-linux-x64.tar.xz"
     },
+    "18.20.7": {
+      "macos": "https://nodejs.org/dist/v18.20.7/node-v18.20.7-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v18.20.7/node-v18.20.7-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v18.20.7/node-v18.20.7-linux-x64.tar.xz"
+    },
     "19.0.0": {
       "macos": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v19.0.0/node-v19.0.0-win-x64.zip",
