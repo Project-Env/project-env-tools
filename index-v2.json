@@ -814,6 +814,21 @@
         }
       }
     },
+    "graalvm_ce24": {
+      "24.2.0": {
+        "macos": {
+          "amd64": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-24.0.0/graalvm-community-jdk-24.0.0_macos-x64_bin.tar.gz",
+          "aarch64": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-24.0.0/graalvm-community-jdk-24.0.0_macos-aarch64_bin.tar.gz"
+        },
+        "windows": {
+          "amd64": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-24.0.0/graalvm-community-jdk-24.0.0_windows-x64_bin.zip"
+        },
+        "linux": {
+          "amd64": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-24.0.0/graalvm-community-jdk-24.0.0_linux-x64_bin.tar.gz",
+          "aarch64": "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-24.0.0/graalvm-community-jdk-24.0.0_linux-aarch64_bin.tar.gz"
+        }
+      }
+    },
     "graalvm_ce8": {
       "19.3.0": {
         "macos": {
@@ -2048,6 +2063,14 @@
       "GraalVM_CE23",
       "graalvm_ce23",
       "graalvmce23"
+    ],
+    "graalvm_ce24": [
+      "Graal VM CE 24",
+      "GraalVM CE 24",
+      "GraalVMCE24",
+      "GraalVM_CE24",
+      "graalvm_ce24",
+      "graalvmce24"
     ],
     "graalvm_ce8": [
       "Graal VM CE 8",
