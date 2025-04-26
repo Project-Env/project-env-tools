@@ -1974,7 +1974,8 @@
           "aarch64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.7%2B6/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.7_6.tar.gz"
         },
         "windows": {
-          "amd64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.7%2B6/OpenJDK21U-jdk_x64_windows_hotspot_21.0.7_6.zip"
+          "amd64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.7%2B6/OpenJDK21U-jdk_x64_windows_hotspot_21.0.7_6.zip",
+          "aarch64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.7%2B6/OpenJDK21U-jdk_aarch64_windows_hotspot_21.0.7_6.zip"
         },
         "linux": {
           "amd64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.7%2B6/OpenJDK21U-jdk_x64_linux_hotspot_21.0.7_6.tar.gz",
@@ -2324,7 +2325,8 @@
     "8.11.1": "https://downloads.gradle.org/distributions/gradle-8.11.1-bin.zip",
     "8.12": "https://downloads.gradle.org/distributions/gradle-8.12-bin.zip",
     "8.12.1": "https://downloads.gradle.org/distributions/gradle-8.12.1-bin.zip",
-    "8.13": "https://downloads.gradle.org/distributions/gradle-8.13-bin.zip"
+    "8.13": "https://downloads.gradle.org/distributions/gradle-8.13-bin.zip",
+    "8.14": "https://downloads.gradle.org/distributions/gradle-8.14-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
