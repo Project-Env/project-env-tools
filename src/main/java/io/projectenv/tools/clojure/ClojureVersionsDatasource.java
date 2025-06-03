@@ -12,7 +12,7 @@ public class ClojureVersionsDatasource implements ToolsIndexExtender {
 
     private static final String REPO_OWNER = "clojure";
     private static final String REPO_NAME = "brew-install";
-    private static final Pattern VERSION_PATTERN = Pattern.compile("^v?(\\d+\\.\\d+\\.\\d+)");
+    private static final Pattern VERSION_PATTERN = Pattern.compile("^(\\d+\\.\\d+\\.\\d+.\\d+)$");
 
     private final GithubClient githubClient;
 
