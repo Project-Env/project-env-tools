@@ -26,6 +26,8 @@ public interface ToolsIndexV2 {
 
     SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> getNodeVersions();
 
+    SortedMap<String, SortedMap<OperatingSystem, String>> getClojureVersions();
+
     default ToolsIndex toLegacyToolsIndex() {
         SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, String>>> simplifiedJdkVersions = SortedCollections.createNaturallySortedMap();
         for (Entry<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> distributionEntry : getJdkVersions().entrySet()) {

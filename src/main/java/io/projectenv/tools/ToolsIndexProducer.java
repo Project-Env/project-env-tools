@@ -8,6 +8,7 @@ import io.projectenv.tools.jdk.github.impl.SimpleGithubClient;
 import io.projectenv.tools.maven.MavenDaemonVersionsDatasource;
 import io.projectenv.tools.maven.MavenVersionsDatasource;
 import io.projectenv.tools.nodejs.NodeVersionsDatasource;
+import io.projectenv.tools.clojure.ClojureVersionsDatasource;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -51,6 +52,7 @@ public class ToolsIndexProducer implements Callable<Integer> {
                     new MavenVersionsDatasource(),
                     new MavenDaemonVersionsDatasource(githubClient),
                     new GradleVersionsDatasource(),
+                    new ClojureVersionsDatasource(githubClient),
                     new DownloadUrlValidator())) {
 
                 toolsIndex = extender.extendToolsIndex(toolsIndex);
