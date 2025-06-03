@@ -28,6 +28,7 @@ public class ClojureVersionsDatasource implements ToolsIndexExtender {
             String tag = release.getTagName();
             Matcher matcher = VERSION_PATTERN.matcher(tag);
             if (!matcher.find()) {
+                ProcessOutput.writeInfoMessage("unexpected release tag name {0}", tag);
                 continue;
             }
 
@@ -47,12 +48,16 @@ public class ClojureVersionsDatasource implements ToolsIndexExtender {
                     clojureVersions
                             .computeIfAbsent(version, v -> SortedCollections.createNaturallySortedMap())
                             .put(OperatingSystem.MACOS, downloadUrl);
+                } else {
+                    ProcessOutput.writeInfoMessage("skipping unknown asset {0} for release {1}", assetName, tag);
                 }
             }
         }
 
-        return ImmutableToolsIndexV2.copyOf(currentToolsIndex)
-                .withClojureVersions(clojureVersions);
+        return ImmutableToolsIndexV2.builder()
+                .from(currentToolsIndex)
+                .clojureVersions(clojureVersions)
+                .build();
     }
 }
 
