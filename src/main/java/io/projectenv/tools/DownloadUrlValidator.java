@@ -75,6 +75,17 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
             }
         }
 
+        SortedMap<String, SortedMap<OperatingSystem, String>> validatedClojureVersions = SortedCollections.createSemverSortedMap();
+        for (Map.Entry<String, SortedMap<OperatingSystem, String>> versionEntry : currentToolsIndex.getClojureVersions().entrySet()) {
+            for (Map.Entry<OperatingSystem, String> operatingSystemEntry : versionEntry.getValue().entrySet()) {
+                if (urlReturns2XX(operatingSystemEntry.getValue())) {
+                    validatedClojureVersions
+                            .computeIfAbsent(versionEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
+                            .put(operatingSystemEntry.getKey(), operatingSystemEntry.getValue());
+                }
+            }
+        }
+
         return ImmutableToolsIndexV2.builder()
                 .jdkVersions(validatedJdkVersions)
                 .jdkDistributionSynonyms(currentToolsIndex.getJdkDistributionSynonyms())
@@ -82,6 +93,7 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
                 .mavenVersions(validatedMavenVersions)
                 .mvndVersions(validatedMvndVersions)
                 .nodeVersions(validatedNodeVersions)
+                .clojureVersions(validatedClojureVersions)
                 .build();
     }
 
