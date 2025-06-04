@@ -41,7 +41,7 @@ public class ClojureVersionsDatasource implements ToolsIndexExtender {
                     clojureVersions
                             .computeIfAbsent(version, v -> SortedCollections.createNaturallySortedMap())
                             .put(OperatingSystem.WINDOWS, downloadUrl);
-                } else if (assetName.matches("clojure-tools-" + version + ".tar.gz")) {
+                } else if (assetName.equals("clojure-tools-" + version + ".tar.gz")) {
                     clojureVersions
                             .computeIfAbsent(version, v -> SortedCollections.createNaturallySortedMap())
                             .put(OperatingSystem.LINUX, downloadUrl);
