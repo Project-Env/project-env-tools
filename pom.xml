@@ -27,7 +27,7 @@
         <jsoup.version>1.20.1</jsoup.version>
         <semver4j.version>5.4.0</semver4j.version>
         <junit.version>5.12.2</junit.version>
-        <assertj.version>3.27.2</assertj.version>
+        <assertj.version>3.27.3</assertj.version>
 
         <flatten-maven-plugin.version>1.7.0</flatten-maven-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
