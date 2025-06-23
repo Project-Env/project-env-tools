@@ -29,7 +29,7 @@
         <junit.version>5.13.1</junit.version>
         <assertj.version>3.27.3</assertj.version>
 
-        <flatten-maven-plugin.version>1.7.0</flatten-maven-plugin.version>
+        <flatten-maven-plugin.version>1.7.1</flatten-maven-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
