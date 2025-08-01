@@ -2409,7 +2409,8 @@
     "8.14": "https://downloads.gradle.org/distributions/gradle-8.14-bin.zip",
     "8.14.1": "https://downloads.gradle.org/distributions/gradle-8.14.1-bin.zip",
     "8.14.2": "https://downloads.gradle.org/distributions/gradle-8.14.2-bin.zip",
-    "8.14.3": "https://downloads.gradle.org/distributions/gradle-8.14.3-bin.zip"
+    "8.14.3": "https://downloads.gradle.org/distributions/gradle-8.14.3-bin.zip",
+    "9.0.0": "https://downloads.gradle.org/distributions/gradle-9.0.0-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
@@ -8850,6 +8851,18 @@
         "amd64": "https://nodejs.org/dist/v22.17.1/node-v22.17.1-linux-x64.tar.xz"
       }
     },
+    "22.18.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/dist/v22.18.0/node-v22.18.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/dist/v22.18.0/node-v22.18.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/dist/v22.18.0/node-v22.18.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/dist/v22.18.0/node-v22.18.0-linux-x64.tar.xz"
+      }
+    },
     "23.0.0": {
       "macos": {
         "amd64": "https://nodejs.org/dist/v23.0.0/node-v23.0.0-darwin-x64.tar.xz",
@@ -9112,6 +9125,18 @@
       },
       "linux": {
         "amd64": "https://nodejs.org/dist/v24.4.1/node-v24.4.1-linux-x64.tar.xz"
+      }
+    },
+    "24.5.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/dist/v24.5.0/node-v24.5.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/dist/v24.5.0/node-v24.5.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/dist/v24.5.0/node-v24.5.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/dist/v24.5.0/node-v24.5.0-linux-x64.tar.xz"
       }
     }
   },
