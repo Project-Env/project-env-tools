@@ -9138,6 +9138,18 @@
       "linux": {
         "amd64": "https://nodejs.org/dist/v24.5.0/node-v24.5.0-linux-x64.tar.xz"
       }
+    },
+    "24.6.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/dist/v24.6.0/node-v24.6.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/dist/v24.6.0/node-v24.6.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/dist/v24.6.0/node-v24.6.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/dist/v24.6.0/node-v24.6.0-linux-x64.tar.xz"
+      }
     }
   },
   "clojureVersions": {
@@ -9350,6 +9362,16 @@
       "macos": "https://github.com/clojure/brew-install/releases/download/1.12.1.1550/clojure-tools-1.12.1.1550.tar.gz",
       "windows": "https://github.com/clojure/brew-install/releases/download/1.12.1.1550/clojure-tools.zip",
       "linux": "https://github.com/clojure/brew-install/releases/download/1.12.1.1550/clojure-tools-1.12.1.1550.tar.gz"
+    },
+    "1.12.1.1558": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.1.1558/clojure-tools-1.12.1.1558.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.1.1558/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.1.1558/clojure-tools-1.12.1.1558.tar.gz"
+    },
+    "1.12.1.1561": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.1.1561/clojure-tools-1.12.1.1561.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.1.1561/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.1.1561/clojure-tools-1.12.1.1561.tar.gz"
     }
   }
 }
