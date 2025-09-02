@@ -95,28 +95,52 @@ public final class SortedCollections {
         return new TreeMap<>(SortedCollections::compareVersions);
     }
 
-    private static int compareVersions(String version1, String version2) {
-        int comparisonResult = 0;
+    public static int compareVersions(String version1, String version2) {
+        // Remove build metadata (+...) for both versions
+        String v1 = version1.split("\\+")[0];
+        String v2 = version2.split("\\+")[0];
 
-        String[] version1Splits = version1.split("\\+")[0].split("\\.");
-        String[] version2Splits = version2.split("\\+")[0].split("\\.");
-        int maxLengthOfVersionSplits = Math.max(version1Splits.length, version2Splits.length);
+        // Extract rc suffix if present
+        String[] v1Parts = v1.split("-rc-");
+        String[] v2Parts = v2.split("-rc-");
+        String v1Main = v1Parts[0];
+        String v2Main = v2Parts[0];
+        Integer v1Rc = v1Parts.length > 1 ? parseIntSafe(v1Parts[1]) : null;
+        Integer v2Rc = v2Parts.length > 1 ? parseIntSafe(v2Parts[1]) : null;
 
-        for (int i = 0; i < maxLengthOfVersionSplits; i++) {
-            Integer v1 = i < version1Splits.length ? Integer.parseInt(version1Splits[i]) : 0;
-            Integer v2 = i < version2Splits.length ? Integer.parseInt(version2Splits[i]) : 0;
-            int compare = v1.compareTo(v2);
-            if (compare != 0) {
-                comparisonResult = compare;
-                break;
+        // Compare main version numbers
+        String[] v1Splits = v1Main.split("\\.");
+        String[] v2Splits = v2Main.split("\\.");
+        int maxLength = Math.max(v1Splits.length, v2Splits.length);
+        for (int i = 0; i < maxLength; i++) {
+            int n1 = i < v1Splits.length ? parseIntSafe(v1Splits[i]) : 0;
+            int n2 = i < v2Splits.length ? parseIntSafe(v2Splits[i]) : 0;
+            int cmp = Integer.compare(n1, n2);
+            if (cmp != 0) {
+                return cmp;
             }
         }
 
-        if (comparisonResult == 0) {
-            return Integer.compare(version1.length(), version2.length());
+        // If main versions are equal, handle rc suffix
+        if (v1Rc != null && v2Rc != null) {
+            return Integer.compare(v1Rc, v2Rc);
+        } else if (v1Rc != null) {
+            // rc is lower precedence than final
+            return -1;
+        } else if (v2Rc != null) {
+            return 1;
         }
 
-        return comparisonResult;
+        // If still equal, consider versions equal
+        return 0;
+    }
+
+    private static int parseIntSafe(String s) {
+        try {
+            return Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
 }

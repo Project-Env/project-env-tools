@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class MavenVersionsDatasource implements ToolsIndexExtender {
 
-    private static final Pattern VERSION_PATTERN = Pattern.compile("(\\d+\\.\\d+\\.\\d+)/");
+    private static final Pattern VERSION_PATTERN = Pattern.compile("(\\d+\\.\\d+\\.\\d+(?:-rc-\\d+|))/");
     private static final String ARCHIVE_BASE_URL = "https://archive.apache.org/dist/maven/maven-3/";
     private static final String DOWNLOADS_BASE_URL = "https://downloads.apache.org/maven/maven-3/";
     private static final String DOWNLOADS_BASE_URL_4 = "https://downloads.apache.org/maven/maven-4/";
