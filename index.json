@@ -709,9 +709,6 @@
         "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jdk_x64_windows_hotspot_17.0.9_9.zip",
         "linux": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9/OpenJDK17U-jdk_x64_linux_hotspot_17.0.9_9.tar.gz"
       },
-      "17.0.9+9.1": {
-        "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9%2B9.1/OpenJDK17U-jdk_x64_windows_hotspot_17.0.9_9.zip"
-      },
       "17.0.10+7": {
         "macos": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.10%2B7/OpenJDK17U-jdk_x64_mac_hotspot_17.0.10_7.tar.gz",
         "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.10%2B7/OpenJDK17U-jdk_x64_windows_hotspot_17.0.10_7.zip",
@@ -1173,7 +1170,11 @@
     "3.9.8": "https://archive.apache.org/dist/maven/maven-3/3.9.8/binaries/apache-maven-3.9.8-bin.zip",
     "3.9.9": "https://archive.apache.org/dist/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.zip",
     "3.9.10": "https://archive.apache.org/dist/maven/maven-3/3.9.10/binaries/apache-maven-3.9.10-bin.zip",
-    "3.9.11": "https://downloads.apache.org/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.zip"
+    "3.9.11": "https://downloads.apache.org/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.zip",
+    "4.0.0-rc-1": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-1/binaries/apache-maven-4.0.0-rc-1-bin.zip",
+    "4.0.0-rc-2": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-2/binaries/apache-maven-4.0.0-rc-2-bin.zip",
+    "4.0.0-rc-3": "https://downloads.apache.org/maven/maven-4/4.0.0-rc-3/binaries/apache-maven-4.0.0-rc-3-bin.zip",
+    "4.0.0-rc-4": "https://downloads.apache.org/maven/maven-4/4.0.0-rc-4/binaries/apache-maven-4.0.0-rc-4-bin.zip"
   },
   "mvndVersions": {
     "0.0.2": {
