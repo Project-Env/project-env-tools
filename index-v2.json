@@ -2180,7 +2180,8 @@
           "amd64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25%2B36/OpenJDK25U-jdk_x64_windows_hotspot_25_36.zip"
         },
         "linux": {
-          "amd64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25%2B36/OpenJDK25U-jdk_x64_linux_hotspot_25_36.tar.gz"
+          "amd64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25%2B36/OpenJDK25U-jdk_x64_linux_hotspot_25_36.tar.gz",
+          "aarch64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25%2B36/OpenJDK25U-jdk_aarch64_linux_hotspot_25_36.tar.gz"
         }
       }
     }
@@ -9240,6 +9241,18 @@
       "linux": {
         "amd64": "https://nodejs.org/dist/v24.8.0/node-v24.8.0-linux-x64.tar.xz"
       }
+    },
+    "24.9.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/dist/v24.9.0/node-v24.9.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/dist/v24.9.0/node-v24.9.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/dist/v24.9.0/node-v24.9.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/dist/v24.9.0/node-v24.9.0-linux-x64.tar.xz"
+      }
     }
   },
   "clojureVersions": {
@@ -9472,6 +9485,11 @@
       "macos": "https://github.com/clojure/brew-install/releases/download/1.12.2.1571/clojure-tools-1.12.2.1571.tar.gz",
       "windows": "https://github.com/clojure/brew-install/releases/download/1.12.2.1571/clojure-tools.zip",
       "linux": "https://github.com/clojure/brew-install/releases/download/1.12.2.1571/clojure-tools-1.12.2.1571.tar.gz"
+    },
+    "1.12.3.1577": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.3.1577/clojure-tools-1.12.3.1577.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.3.1577/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.3.1577/clojure-tools-1.12.3.1577.tar.gz"
     }
   }
 }
