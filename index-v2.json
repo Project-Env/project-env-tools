@@ -9253,6 +9253,18 @@
       "linux": {
         "amd64": "https://nodejs.org/dist/v24.9.0/node-v24.9.0-linux-x64.tar.xz"
       }
+    },
+    "24.10.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/dist/v24.10.0/node-v24.10.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/dist/v24.10.0/node-v24.10.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/dist/v24.10.0/node-v24.10.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/dist/v24.10.0/node-v24.10.0-linux-x64.tar.xz"
+      }
     }
   },
   "clojureVersions": {
