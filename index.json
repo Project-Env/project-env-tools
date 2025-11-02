@@ -561,6 +561,10 @@
         "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u462-b08/OpenJDK8U-jdk_x64_windows_hotspot_8u462b08.zip",
         "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u462-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u462b08.tar.gz"
       },
+      "8.0.472+8": {
+        "windows": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u472-b08/OpenJDK8U-jdk_x64_windows_hotspot_8u472b08.zip",
+        "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u472-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u472b08.tar.gz"
+      },
       "11.0.12+7": {
         "macos": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.12%2B7/OpenJDK11U-jdk_x64_mac_hotspot_11.0.12_7.tar.gz",
         "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.12%2B7/OpenJDK11U-jdk_x64_windows_hotspot_11.0.12_7.zip",
@@ -661,6 +665,10 @@
         "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.28%2B6/OpenJDK11U-jdk_x64_windows_hotspot_11.0.28_6.zip",
         "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.28%2B6/OpenJDK11U-jdk_x64_linux_hotspot_11.0.28_6.tar.gz"
       },
+      "11.0.29+7": {
+        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.29%2B7/OpenJDK11U-jdk_x64_windows_hotspot_11.0.29_7.zip",
+        "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.29%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.29_7.tar.gz"
+      },
       "16.0.2+7": {
         "macos": "https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_mac_hotspot_16.0.2_7.tar.gz",
         "windows": "https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_windows_hotspot_16.0.2_7.zip",
@@ -755,6 +763,10 @@
         "macos": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.16%2B8/OpenJDK17U-jdk_x64_mac_hotspot_17.0.16_8.tar.gz",
         "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.16%2B8/OpenJDK17U-jdk_x64_windows_hotspot_17.0.16_8.zip",
         "linux": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.16%2B8/OpenJDK17U-jdk_x64_linux_hotspot_17.0.16_8.tar.gz"
+      },
+      "17.0.17+10": {
+        "windows": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.17%2B10/OpenJDK17U-jdk_x64_windows_hotspot_17.0.17_10.zip",
+        "linux": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.17%2B10/OpenJDK17U-jdk_x64_linux_hotspot_17.0.17_10.tar.gz"
       },
       "18+36": {
         "macos": "https://github.com/adoptium/temurin18-binaries/releases/download/jdk-18%2B36/OpenJDK18U-jdk_x64_mac_hotspot_18_36.tar.gz",
@@ -851,6 +863,10 @@
         "windows": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.8%2B9/OpenJDK21U-jdk_x64_windows_hotspot_21.0.8_9.zip",
         "linux": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.8%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.8_9.tar.gz"
       },
+      "21.0.9+10": {
+        "windows": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.9%2B10/OpenJDK21U-jdk_x64_windows_hotspot_21.0.9_10.zip",
+        "linux": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.9%2B10/OpenJDK21U-jdk_x64_linux_hotspot_21.0.9_10.tar.gz"
+      },
       "22+36": {
         "macos": "https://github.com/adoptium/temurin22-binaries/releases/download/jdk-22%2B36/OpenJDK22U-jdk_x64_mac_hotspot_22_36.tar.gz",
         "windows": "https://github.com/adoptium/temurin22-binaries/releases/download/jdk-22%2B36/OpenJDK22U-jdk_x64_windows_hotspot_22_36.zip",
@@ -900,6 +916,11 @@
         "macos": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25%2B36/OpenJDK25U-jdk_x64_mac_hotspot_25_36.tar.gz",
         "windows": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25%2B36/OpenJDK25U-jdk_x64_windows_hotspot_25_36.zip",
         "linux": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25%2B36/OpenJDK25U-jdk_x64_linux_hotspot_25_36.tar.gz"
+      },
+      "25.0.1+8": {
+        "macos": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.1%2B8/OpenJDK25U-jdk_x64_mac_hotspot_25.0.1_8.tar.gz",
+        "windows": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.1%2B8/OpenJDK25U-jdk_x64_windows_hotspot_25.0.1_8.zip",
+        "linux": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.1%2B8/OpenJDK25U-jdk_x64_linux_hotspot_25.0.1_8.tar.gz"
       }
     }
   },
@@ -1154,7 +1175,8 @@
     "8.14.2": "https://downloads.gradle.org/distributions/gradle-8.14.2-bin.zip",
     "8.14.3": "https://downloads.gradle.org/distributions/gradle-8.14.3-bin.zip",
     "9.0.0": "https://downloads.gradle.org/distributions/gradle-9.0.0-bin.zip",
-    "9.1.0": "https://downloads.gradle.org/distributions/gradle-9.1.0-bin.zip"
+    "9.1.0": "https://downloads.gradle.org/distributions/gradle-9.1.0-bin.zip",
+    "9.2.0": "https://downloads.gradle.org/distributions/gradle-9.2.0-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
@@ -4079,6 +4101,11 @@
       "windows": "https://nodejs.org/dist/v22.21.0/node-v22.21.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v22.21.0/node-v22.21.0-linux-x64.tar.xz"
     },
+    "22.21.1": {
+      "macos": "https://nodejs.org/dist/v22.21.1/node-v22.21.1-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v22.21.1/node-v22.21.1-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v22.21.1/node-v22.21.1-linux-x64.tar.xz"
+    },
     "23.0.0": {
       "macos": "https://nodejs.org/dist/v23.0.0/node-v23.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v23.0.0/node-v23.0.0-win-x64.zip",
@@ -4219,10 +4246,20 @@
       "windows": "https://nodejs.org/dist/v24.10.0/node-v24.10.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v24.10.0/node-v24.10.0-linux-x64.tar.xz"
     },
+    "24.11.0": {
+      "macos": "https://nodejs.org/dist/v24.11.0/node-v24.11.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v24.11.0/node-v24.11.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v24.11.0/node-v24.11.0-linux-x64.tar.xz"
+    },
     "25.0.0": {
       "macos": "https://nodejs.org/dist/v25.0.0/node-v25.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v25.0.0/node-v25.0.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v25.0.0/node-v25.0.0-linux-x64.tar.xz"
+    },
+    "25.1.0": {
+      "macos": "https://nodejs.org/dist/v25.1.0/node-v25.1.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v25.1.0/node-v25.1.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v25.1.0/node-v25.1.0-linux-x64.tar.xz"
     }
   }
 }
