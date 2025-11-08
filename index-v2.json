@@ -2561,8 +2561,9 @@
     "3.9.11": "https://downloads.apache.org/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.zip",
     "4.0.0-rc-1": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-1/binaries/apache-maven-4.0.0-rc-1-bin.zip",
     "4.0.0-rc-2": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-2/binaries/apache-maven-4.0.0-rc-2-bin.zip",
-    "4.0.0-rc-3": "https://downloads.apache.org/maven/maven-4/4.0.0-rc-3/binaries/apache-maven-4.0.0-rc-3-bin.zip",
-    "4.0.0-rc-4": "https://downloads.apache.org/maven/maven-4/4.0.0-rc-4/binaries/apache-maven-4.0.0-rc-4-bin.zip"
+    "4.0.0-rc-3": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-3/binaries/apache-maven-4.0.0-rc-3-bin.zip",
+    "4.0.0-rc-4": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-4/binaries/apache-maven-4.0.0-rc-4-bin.zip",
+    "4.0.0-rc-5": "https://downloads.apache.org/maven/maven-4/4.0.0-rc-5/binaries/apache-maven-4.0.0-rc-5-bin.zip"
   },
   "mvndVersions": {
     "0.0.2": {
