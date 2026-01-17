@@ -1181,7 +1181,8 @@
     "9.0.0": "https://downloads.gradle.org/distributions/gradle-9.0.0-bin.zip",
     "9.1.0": "https://downloads.gradle.org/distributions/gradle-9.1.0-bin.zip",
     "9.2.0": "https://downloads.gradle.org/distributions/gradle-9.2.0-bin.zip",
-    "9.2.1": "https://downloads.gradle.org/distributions/gradle-9.2.1-bin.zip"
+    "9.2.1": "https://downloads.gradle.org/distributions/gradle-9.2.1-bin.zip",
+    "9.3.0": "https://downloads.gradle.org/distributions/gradle-9.3.0-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
