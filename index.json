@@ -4313,6 +4313,11 @@
       "macos": "https://nodejs.org/dist/v25.3.0/node-v25.3.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/dist/v25.3.0/node-v25.3.0-win-x64.zip",
       "linux": "https://nodejs.org/dist/v25.3.0/node-v25.3.0-linux-x64.tar.xz"
+    },
+    "25.4.0": {
+      "macos": "https://nodejs.org/dist/v25.4.0/node-v25.4.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/dist/v25.4.0/node-v25.4.0-win-x64.zip",
+      "linux": "https://nodejs.org/dist/v25.4.0/node-v25.4.0-linux-x64.tar.xz"
     }
   }
 }
