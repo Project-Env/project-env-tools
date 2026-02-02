@@ -51,7 +51,7 @@ public class ToolsIndexProducer implements Callable<Integer> {
                     new NodeVersionsDatasource(),
                     new MavenVersionsDatasource(),
                     new MavenDaemonVersionsDatasource(githubClient),
-                    new GradleVersionsDatasource(),
+                    new GradleVersionsDatasource(githubClient),
                     new ClojureVersionsDatasource(githubClient),
                     new DownloadUrlValidator())) {
 

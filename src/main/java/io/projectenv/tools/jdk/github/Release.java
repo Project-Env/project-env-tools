@@ -11,6 +11,8 @@ public interface Release {
 
     String getTagName();
 
+    boolean isPrerelease();
+
     List<ReleaseAsset> getAssets();
 
 }

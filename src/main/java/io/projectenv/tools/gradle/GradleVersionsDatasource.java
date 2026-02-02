@@ -1,40 +1,69 @@
 package io.projectenv.tools.gradle;
 
 import io.projectenv.tools.ImmutableToolsIndexV2;
+import io.projectenv.tools.ProcessOutput;
 import io.projectenv.tools.SortedCollections;
 import io.projectenv.tools.ToolsIndexExtender;
 import io.projectenv.tools.ToolsIndexV2;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import io.projectenv.tools.jdk.github.GithubClient;
+import io.projectenv.tools.jdk.github.Release;
 
-import java.io.IOException;
-import java.text.MessageFormat;
+import java.util.Comparator;
 import java.util.SortedMap;
-import java.util.stream.Collectors;
+import java.util.regex.Pattern;
 
 public class GradleVersionsDatasource implements ToolsIndexExtender {
 
+    private static final String GITHUB_OWNER = "gradle";
+    private static final String GITHUB_REPO = "gradle-distributions";
+
+    private static final Pattern RELEASE_TAG_PATTERN = Pattern.compile("^v(.+)$");
+    private static final Pattern BIN_ASSET_PATTERN = Pattern.compile("^gradle-.+-bin\\.zip$");
+
+    private final GithubClient githubClient;
+
+    public GradleVersionsDatasource(GithubClient githubClient) {
+        this.githubClient = githubClient;
+    }
+
     @Override
     public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
-        try {
-            Document doc = Jsoup.connect("https://gradle.org/releases/").get();
-            SortedMap<String, String> downloadUrls = doc.getElementsByClass("resources-contents")
-                    .stream()
-                    .flatMap(element -> element.children().stream())
-                    .filter(element -> "a".equals(element.tagName()) && element.hasAttr("name"))
-                    .map(element -> element.attr("name"))
-                    .collect(Collectors.toMap(
-                            version -> version,
-                            version -> MessageFormat.format("https://downloads.gradle.org/distributions/gradle-{0}-bin.zip", version),
-                            (a, b) -> a,
-                            SortedCollections::createSemverSortedMap));
+        SortedMap<String, String> gradleVersions = SortedCollections.createSemverSortedMap(currentToolsIndex.getGradleVersions());
 
-            return ImmutableToolsIndexV2.builder()
-                    .from(currentToolsIndex)
-                    .gradleVersions(downloadUrls)
-                    .build();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        var releases = githubClient.getReleases(GITHUB_OWNER, GITHUB_REPO)
+                .stream()
+                .filter(release -> !release.isPrerelease())
+                .sorted(Comparator.comparing(Release::getTagName))
+                .toList();
+
+        for (var release : releases) {
+            var version = extractGradleVersion(release.getTagName());
+            if (version == null) {
+                ProcessOutput.writeInfoMessage("unexpected release tag name {0}", release.getTagName());
+                continue;
+            }
+
+            for (var releaseAsset : release.getAssets()) {
+                if (!BIN_ASSET_PATTERN.matcher(releaseAsset.getName()).matches()) {
+                    continue;
+                }
+
+                gradleVersions.put(version, releaseAsset.getBrowserDownloadUrl());
+                break;
+            }
         }
+
+        return ImmutableToolsIndexV2.builder()
+                .from(currentToolsIndex)
+                .gradleVersions(gradleVersions)
+                .build();
+    }
+
+    private String extractGradleVersion(String releaseTagName) {
+        var matcher = RELEASE_TAG_PATTERN.matcher(releaseTagName);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return null;
     }
 }
