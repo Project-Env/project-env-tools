@@ -19,6 +19,7 @@ public class GradleVersionsDatasource implements ToolsIndexExtender {
 
     private static final Pattern RELEASE_TAG_PATTERN = Pattern.compile("^v(.+)$");
     private static final Pattern BIN_ASSET_PATTERN = Pattern.compile("^gradle-.+-bin\\.zip$");
+    private static final Pattern RC_OR_MILESTONE_PATTERN = Pattern.compile("(?i)(-RC|-M|milestone|rc)\\d*$");
 
     private final GithubClient githubClient;
 
@@ -62,7 +63,12 @@ public class GradleVersionsDatasource implements ToolsIndexExtender {
     private String extractGradleVersion(String releaseTagName) {
         var matcher = RELEASE_TAG_PATTERN.matcher(releaseTagName);
         if (matcher.find()) {
-            return matcher.group(1);
+            var version = matcher.group(1);
+            // Exclude RC and Milestone releases
+            if (RC_OR_MILESTONE_PATTERN.matcher(version).find()) {
+                return null;
+            }
+            return version;
         }
         return null;
     }
