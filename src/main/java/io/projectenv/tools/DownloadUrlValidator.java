@@ -1,8 +1,9 @@
 package io.projectenv.tools;
 
+import io.projectenv.tools.http.ResilientHttpClient;
+
 import java.io.IOException;
 import java.net.URI;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Map;
@@ -10,9 +11,7 @@ import java.util.SortedMap;
 
 public class DownloadUrlValidator implements ToolsIndexExtender {
 
-    private final HttpClient HTTP_CLIENT = HttpClient.newBuilder()
-            .followRedirects(HttpClient.Redirect.NORMAL)
-            .build();
+    private final ResilientHttpClient httpClient = ResilientHttpClient.create();
 
     @Override
     public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
@@ -106,7 +105,7 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
                     .method("HEAD", HttpRequest.BodyPublishers.noBody())
                     .build();
 
-            int statusCode = HTTP_CLIENT.send(httpRequest, HttpResponse.BodyHandlers.discarding()).statusCode();
+            int statusCode = httpClient.send(httpRequest, HttpResponse.BodyHandlers.discarding()).statusCode();
 
             if (statusCode >= 200 && statusCode < 300) {
                 ProcessOutput.writeInfoMessage("Got {0} for URL {1} - keeping URL", statusCode, url);

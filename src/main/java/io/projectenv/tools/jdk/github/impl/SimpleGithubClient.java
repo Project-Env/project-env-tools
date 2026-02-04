@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import io.projectenv.tools.ProcessOutput;
+import io.projectenv.tools.http.ResilientHttpClient;
 import io.projectenv.tools.jdk.github.*;
 
 import java.io.IOException;
@@ -26,9 +27,16 @@ public class SimpleGithubClient implements GithubClient {
 
     private static final Duration FIVE_MINUTES = Duration.ofMinutes(5);
     private final String authorizationHeader;
+    private final ResilientHttpClient httpClient;
 
     private SimpleGithubClient(String authorizationHeader) {
         this.authorizationHeader = authorizationHeader;
+        this.httpClient = ResilientHttpClient.create(
+                HttpClient.newBuilder()
+                        .followRedirects(HttpClient.Redirect.NORMAL)
+                        .connectTimeout(FIVE_MINUTES)
+                        .build()
+        );
     }
 
     public static SimpleGithubClient withAccessToken(String accessToken) {
@@ -98,7 +106,7 @@ public class SimpleGithubClient implements GithubClient {
                     .GET()
                     .build();
 
-            HttpResponse<InputStream> response = createHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofInputStream());
+            HttpResponse<InputStream> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofInputStream());
             if (response.statusCode() != 200) {
                 throw new RuntimeException("Received a non expected status code " + response.statusCode() + " from Github API with URL " + uri);
             }
@@ -111,13 +119,6 @@ public class SimpleGithubClient implements GithubClient {
 
             throw new RuntimeException(e);
         }
-    }
-
-    private HttpClient createHttpClient() {
-        return HttpClient.newBuilder()
-                .followRedirects(HttpClient.Redirect.NORMAL)
-                .connectTimeout(FIVE_MINUTES)
-                .build();
     }
 
     private static Gson createGson() {

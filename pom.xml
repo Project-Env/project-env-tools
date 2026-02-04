@@ -26,6 +26,7 @@
         <picocli.version>4.7.7</picocli.version>
         <jsoup.version>1.21.2</jsoup.version>
         <semver4j.version>5.4.0</semver4j.version>
+        <resilience4j.version>2.2.0</resilience4j.version>
         <junit.version>5.13.4</junit.version>
         <assertj.version>3.27.6</assertj.version>
 
@@ -82,6 +83,16 @@
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>${jsoup.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-retry</artifactId>
+            <version>${resilience4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-ratelimiter</artifactId>
+            <version>${resilience4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
