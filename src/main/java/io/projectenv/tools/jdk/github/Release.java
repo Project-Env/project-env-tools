@@ -11,7 +11,10 @@ public interface Release {
 
     String getTagName();
 
-    boolean isPrerelease();
+    @Value.Default
+    default boolean isPrerelease() {
+        return false;
+    }
 
     List<ReleaseAsset> getAssets();
 
