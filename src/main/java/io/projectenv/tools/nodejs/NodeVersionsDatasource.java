@@ -101,9 +101,14 @@ public class NodeVersionsDatasource implements ToolsIndexDatasource {
 
                 Document doc = Jsoup.connect(versionUrl).get();
 
-                Set<String> availableFiles = new HashSet<>();
+                // Build a map from filename to absolute download URL using the actual href
+                Map<String, String> fileToUrl = new HashMap<>();
                 for (var element : doc.getElementsByTag("a")) {
-                    availableFiles.add(element.attr("href"));
+                    String url = element.absUrl("href");
+                    String filename = element.text().trim();
+                    if (!url.isEmpty() && !filename.isEmpty()) {
+                        fileToUrl.put(filename, url);
+                    }
                 }
 
                 String filePrefix = "node-v" + version;
@@ -115,16 +120,14 @@ public class NodeVersionsDatasource implements ToolsIndexDatasource {
                     String preferredFile = filePrefix + mapping.preferredSuffix();
                     String fallbackFile = mapping.fallbackSuffix() != null ? filePrefix + mapping.fallbackSuffix() : null;
 
-                    String matchedFile = null;
-                    if (availableFiles.contains(preferredFile)) {
-                        matchedFile = preferredFile;
-                    } else if (fallbackFile != null && availableFiles.contains(fallbackFile)) {
-                        matchedFile = fallbackFile;
+                    String downloadUrl = fileToUrl.get(preferredFile);
+                    if (downloadUrl == null && fallbackFile != null) {
+                        downloadUrl = fileToUrl.get(fallbackFile);
                     }
 
-                    if (matchedFile != null) {
+                    if (downloadUrl != null) {
                         osMap.computeIfAbsent(mapping.os(), k -> SortedCollections.createNaturallySortedMap())
-                                .put(mapping.arch(), versionUrl + matchedFile);
+                                .put(mapping.arch(), downloadUrl);
                     }
                 }
 
