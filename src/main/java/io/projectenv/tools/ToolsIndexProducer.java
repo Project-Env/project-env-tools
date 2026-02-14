@@ -1,6 +1,7 @@
 package io.projectenv.tools;
 
 import io.projectenv.tools.gradle.GradleVersionsDatasource;
+import io.projectenv.tools.http.ResilientHttpClient;
 import io.projectenv.tools.jdk.GraalVmVersionsDatasource;
 import io.projectenv.tools.jdk.TemurinVersionsDatasource;
 import io.projectenv.tools.jdk.github.GithubClient;
@@ -14,8 +15,14 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.SortedSet;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import static picocli.CommandLine.ExitCode;
 import static picocli.CommandLine.Option;
@@ -45,18 +52,18 @@ public class ToolsIndexProducer implements Callable<Integer> {
             var toolsIndex = readOrCreateToolsIndexV2();
 
             GithubClient githubClient = SimpleGithubClient.withAccessToken(githubAccessToken);
-            for (ToolsIndexExtender extender : List.of(
+            List<ToolsIndexExtender> datasources = List.of(
                     new TemurinVersionsDatasource(githubClient),
-                    new GraalVmVersionsDatasource(githubClient),
+                    new GraalVmVersionsDatasource(githubClient, ResilientHttpClient.create()),
                     new NodeVersionsDatasource(),
                     new MavenVersionsDatasource(),
                     new MavenDaemonVersionsDatasource(githubClient),
                     new GradleVersionsDatasource(githubClient),
-                    new ClojureVersionsDatasource(githubClient),
-                    new DownloadUrlValidator())) {
+                    new ClojureVersionsDatasource(githubClient));
 
-                toolsIndex = extender.extendToolsIndex(toolsIndex);
-            }
+            toolsIndex = fetchDatasourcesInParallel(datasources, toolsIndex);
+
+            toolsIndex = new DownloadUrlValidator().extendToolsIndex(toolsIndex);
 
             ToolIndexV2Parser.writeTo(toolsIndex, indexFile);
             ToolIndexParser.writeTo(toolsIndex.toLegacyToolsIndex(), legacyIndexFile);
@@ -70,6 +77,55 @@ public class ToolsIndexProducer implements Callable<Integer> {
 
             return ExitCode.SOFTWARE;
         }
+    }
+
+    private ToolsIndexV2 fetchDatasourcesInParallel(List<ToolsIndexExtender> datasources, ToolsIndexV2 initialIndex) throws Exception {
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            List<Future<ToolsIndexV2>> futures = new ArrayList<>();
+            for (ToolsIndexExtender datasource : datasources) {
+                futures.add(executor.submit(() -> datasource.extendToolsIndex(initialIndex)));
+            }
+
+            return mergeResults(initialIndex, futures);
+        }
+    }
+
+    private ToolsIndexV2 mergeResults(ToolsIndexV2 initialIndex, List<Future<ToolsIndexV2>> futures) throws Exception {
+        SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> mergedJdkVersions =
+                SortedCollections.createNaturallySortedMap(initialIndex.getJdkVersions());
+        SortedMap<String, SortedSet<String>> mergedJdkDistributionSynonyms =
+                SortedCollections.createNaturallySortedMap(initialIndex.getJdkDistributionSynonyms());
+        SortedMap<String, String> mergedGradleVersions =
+                SortedCollections.createSemverSortedMap(initialIndex.getGradleVersions());
+        SortedMap<String, String> mergedMavenVersions =
+                SortedCollections.createSemverSortedMap(initialIndex.getMavenVersions());
+        SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> mergedMvndVersions =
+                SortedCollections.createSemverSortedMap(initialIndex.getMvndVersions());
+        SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> mergedNodeVersions =
+                SortedCollections.createSemverSortedMap(initialIndex.getNodeVersions());
+        SortedMap<String, SortedMap<OperatingSystem, String>> mergedClojureVersions =
+                SortedCollections.createSemverSortedMap(initialIndex.getClojureVersions());
+
+        for (Future<ToolsIndexV2> future : futures) {
+            ToolsIndexV2 result = future.get();
+            mergedJdkVersions.putAll(result.getJdkVersions());
+            mergedJdkDistributionSynonyms.putAll(result.getJdkDistributionSynonyms());
+            mergedGradleVersions.putAll(result.getGradleVersions());
+            mergedMavenVersions.putAll(result.getMavenVersions());
+            mergedMvndVersions.putAll(result.getMvndVersions());
+            mergedNodeVersions.putAll(result.getNodeVersions());
+            mergedClojureVersions.putAll(result.getClojureVersions());
+        }
+
+        return ImmutableToolsIndexV2.builder()
+                .jdkVersions(mergedJdkVersions)
+                .jdkDistributionSynonyms(mergedJdkDistributionSynonyms)
+                .gradleVersions(mergedGradleVersions)
+                .mavenVersions(mergedMavenVersions)
+                .mvndVersions(mergedMvndVersions)
+                .nodeVersions(mergedNodeVersions)
+                .clojureVersions(mergedClojureVersions)
+                .build();
     }
 
     public static void main(String[] args) {

@@ -11,27 +11,31 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 /**
- * A resilient HTTP client wrapper that provides retry and rate limiting capabilities
- * using Resilience4j.
+ * A resilient HTTP client wrapper that provides retry and per-host rate limiting
+ * capabilities using Resilience4j. Each target host gets its own independent rate
+ * limiter so that requests to different hosts don't throttle each other.
  */
 public class ResilientHttpClient {
 
     private static final int MAX_RETRIES = 3;
     private static final Duration WAIT_DURATION = Duration.ofSeconds(2);
     private static final Duration RATE_LIMIT_REFRESH_PERIOD = Duration.ofSeconds(1);
-    private static final int RATE_LIMIT_PERMISSIONS_PER_PERIOD = 10;
+    private static final int RATE_LIMIT_PERMISSIONS_PER_PERIOD = 50;
 
     private final HttpClient httpClient;
     private final Retry retry;
-    private final RateLimiter rateLimiter;
+    private final RateLimiterConfig rateLimiterConfig;
+    private final ConcurrentMap<String, RateLimiter> hostRateLimiters = new ConcurrentHashMap<>();
 
-    private ResilientHttpClient(HttpClient httpClient, Retry retry, RateLimiter rateLimiter) {
+    private ResilientHttpClient(HttpClient httpClient, Retry retry, RateLimiterConfig rateLimiterConfig) {
         this.httpClient = httpClient;
         this.retry = retry;
-        this.rateLimiter = rateLimiter;
+        this.rateLimiterConfig = rateLimiterConfig;
     }
 
     public static ResilientHttpClient create() {
@@ -56,7 +60,6 @@ public class ResilientHttpClient {
                 .build();
 
         Retry retry = Retry.of("httpRetry", retryConfig);
-        RateLimiter rateLimiter = RateLimiter.of("httpRateLimiter", rateLimiterConfig);
 
         retry.getEventPublisher()
                 .onRetry(event -> ProcessOutput.writeInfoMessage(
@@ -64,11 +67,15 @@ public class ResilientHttpClient {
                         event.getNumberOfRetryAttempts(),
                         event.getLastThrowable() != null ? event.getLastThrowable().getMessage() : "server error"));
 
-        return new ResilientHttpClient(httpClient, retry, rateLimiter);
+        return new ResilientHttpClient(httpClient, retry, rateLimiterConfig);
     }
 
     public <T> HttpResponse<T> send(HttpRequest request, HttpResponse.BodyHandler<T> bodyHandler)
             throws IOException, InterruptedException {
+        String host = request.uri().getHost();
+        RateLimiter rateLimiter = hostRateLimiters.computeIfAbsent(host,
+                h -> RateLimiter.of("rateLimiter-" + h, rateLimiterConfig));
+
         Supplier<HttpResponse<T>> supplier = RateLimiter.decorateSupplier(rateLimiter,
                 Retry.decorateSupplier(retry, () -> {
                     try {

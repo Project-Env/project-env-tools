@@ -6,9 +6,14 @@ import io.projectenv.tools.jdk.github.Release;
 import io.projectenv.tools.jdk.github.Repository;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.SortedMap;
 import java.util.SortedSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.regex.Pattern;
 
 public class TemurinVersionsDatasource implements ToolsIndexExtender {
@@ -38,46 +43,27 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
         SortedMap<String, SortedSet<String>> jdkDistributionSynonyms = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkDistributionSynonyms());
         SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> jdkVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkVersions());
 
-        for (Repository repository : githubClient.getRepositories("adoptium")) {
-            if (!RELEASES_REPOSITORY_PATTERN.matcher(repository.getName()).find()) {
-                continue;
+        List<Repository> matchingRepos = githubClient.getRepositories("adoptium")
+                .stream()
+                .filter(repo -> RELEASES_REPOSITORY_PATTERN.matcher(repo.getName()).find())
+                .toList();
+
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            List<Future<List<Release>>> futures = new ArrayList<>();
+
+            for (Repository repository : matchingRepos) {
+                futures.add(executor.submit(() ->
+                        githubClient.getReleases("adoptium", repository.getName())
+                                .stream()
+                                .sorted(Comparator.comparing(Release::getTagName))
+                                .toList()));
             }
 
-            var releases = githubClient.getReleases("adoptium", repository.getName())
-                    .stream()
-                    .sorted(Comparator.comparing(Release::getTagName))
-                    .toList();
-
-            for (var release : releases) {
-                var version = extractJavaVersion(release.getTagName());
-                if (version == null) {
-                    ProcessOutput.writeInfoMessage("unexpected release tag name {0}", release.getTagName());
-
-                    continue;
-                }
-
-                for (var releaseAsset : release.getAssets()) {
-                    var releaseAssetNameMatcher = RELEASE_ASSET_NAME_PATTERN.matcher(releaseAsset.getName());
-                    if (!releaseAssetNameMatcher.find()) {
-                        continue;
-                    }
-
-                    var cpuArchitectureName = releaseAssetNameMatcher.group(1);
-                    var cpuArchitecture = mapToCpuArchitecture(cpuArchitectureName);
-
-                    var operatingSystemName = releaseAssetNameMatcher.group(2);
-                    var operatingSystem = mapToOperatingSystem(operatingSystemName);
-                    if (operatingSystem == null) {
-                        continue;
-                    }
-
-                    jdkVersions
-                            .computeIfAbsent(DISTRIBUTION_ID, (key) -> SortedCollections.createSemverSortedMap())
-                            .computeIfAbsent(version, (key) -> SortedCollections.createNaturallySortedMap())
-                            .computeIfAbsent(operatingSystem, (key) -> SortedCollections.createNaturallySortedMap())
-                            .put(cpuArchitecture, releaseAsset.getBrowserDownloadUrl());
-                }
+            for (Future<List<Release>> future : futures) {
+                processReleases(future.get(), jdkVersions);
             }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to fetch Temurin releases in parallel", e);
         }
 
         jdkDistributionSynonyms.put(DISTRIBUTION_ID, SYNONYMS);
@@ -87,6 +73,39 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
                 .jdkVersions(jdkVersions)
                 .jdkDistributionSynonyms(jdkDistributionSynonyms)
                 .build();
+    }
+
+    private void processReleases(List<Release> releases,
+                                 SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> jdkVersions) {
+        for (var release : releases) {
+            var version = extractJavaVersion(release.getTagName());
+            if (version == null) {
+                ProcessOutput.writeInfoMessage("unexpected release tag name {0}", release.getTagName());
+                continue;
+            }
+
+            for (var releaseAsset : release.getAssets()) {
+                var releaseAssetNameMatcher = RELEASE_ASSET_NAME_PATTERN.matcher(releaseAsset.getName());
+                if (!releaseAssetNameMatcher.find()) {
+                    continue;
+                }
+
+                var cpuArchitectureName = releaseAssetNameMatcher.group(1);
+                var cpuArchitecture = mapToCpuArchitecture(cpuArchitectureName);
+
+                var operatingSystemName = releaseAssetNameMatcher.group(2);
+                var operatingSystem = mapToOperatingSystem(operatingSystemName);
+                if (operatingSystem == null) {
+                    continue;
+                }
+
+                jdkVersions
+                        .computeIfAbsent(DISTRIBUTION_ID, (key) -> SortedCollections.createSemverSortedMap())
+                        .computeIfAbsent(version, (key) -> SortedCollections.createNaturallySortedMap())
+                        .computeIfAbsent(operatingSystem, (key) -> SortedCollections.createNaturallySortedMap())
+                        .put(cpuArchitecture, releaseAsset.getBrowserDownloadUrl());
+            }
+        }
     }
 
     private String extractJavaVersion(String releaseTagName) {
