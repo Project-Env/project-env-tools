@@ -3,3 +3,8 @@ target
 .project-env
 .tools
 .flattened-pom.xml
+.classpath
+.factorypath
+.project
+.settings/
+*.iml
