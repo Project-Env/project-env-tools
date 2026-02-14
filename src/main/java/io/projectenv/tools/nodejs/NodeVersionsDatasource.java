@@ -44,7 +44,7 @@ public class NodeVersionsDatasource implements ToolsIndexDatasource {
     @Override
     public ToolsIndexV2 fetchToolVersions() {
         List<String> versions = fetchVersions();
-        log.info("Found " + versions.size() + " Node.js versions, fetching release assets...");
+        log.debug("Found " + versions.size() + " Node.js versions, fetching release assets...");
 
         SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> downloadUrls =
                 SortedCollections.createSemverSortedMap();

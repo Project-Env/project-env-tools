@@ -60,10 +60,12 @@ public class GenerateToolsIndexMojo extends AbstractMojo {
             GithubClient githubClient = SimpleGithubClient.withAccessToken(githubAccessToken, getLog());
             Map<String, ToolsIndexDatasource> allDatasources = createDatasources(githubClient);
 
-            List<ToolsIndexDatasource> datasources = selectDatasources(allDatasources);
+            Map<String, ToolsIndexDatasource> datasources = selectDatasources(allDatasources);
 
+            getLog().info("Fetching versions from " + datasources.size() + " datasources: " + datasources.keySet());
             toolsIndex = fetchInParallel(datasources, toolsIndex);
 
+            getLog().info("Validating download URLs...");
             toolsIndex = new DownloadUrlValidator(getLog()).validateUrls(toolsIndex);
 
             ToolIndexV2Parser.writeTo(toolsIndex, indexFile);
@@ -87,13 +89,13 @@ public class GenerateToolsIndexMojo extends AbstractMojo {
         return datasources;
     }
 
-    private List<ToolsIndexDatasource> selectDatasources(Map<String, ToolsIndexDatasource> allDatasources)
+    private Map<String, ToolsIndexDatasource> selectDatasources(Map<String, ToolsIndexDatasource> allDatasources)
             throws MojoFailureException {
         if (tools == null || tools.isBlank()) {
-            return new ArrayList<>(allDatasources.values());
+            return allDatasources;
         }
 
-        List<ToolsIndexDatasource> selected = new ArrayList<>();
+        Map<String, ToolsIndexDatasource> selected = new LinkedHashMap<>();
         for (String tool : tools.split(",")) {
             String trimmed = tool.trim();
             ToolsIndexDatasource datasource = allDatasources.get(trimmed);
@@ -101,17 +103,24 @@ public class GenerateToolsIndexMojo extends AbstractMojo {
                 throw new MojoFailureException("Unknown tool: " + trimmed
                         + ". Available tools: " + allDatasources.keySet());
             }
-            selected.add(datasource);
+            selected.put(trimmed, datasource);
         }
         return selected;
     }
 
-    private ToolsIndexV2 fetchInParallel(List<ToolsIndexDatasource> datasources, ToolsIndexV2 initialIndex)
+    private ToolsIndexV2 fetchInParallel(Map<String, ToolsIndexDatasource> datasources, ToolsIndexV2 initialIndex)
             throws Exception {
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
             List<Future<ToolsIndexV2>> futures = new ArrayList<>();
-            for (ToolsIndexDatasource datasource : datasources) {
-                futures.add(executor.submit(datasource::fetchToolVersions));
+            for (var entry : datasources.entrySet()) {
+                String name = entry.getKey();
+                ToolsIndexDatasource datasource = entry.getValue();
+                futures.add(executor.submit(() -> {
+                    getLog().info("Fetching " + name + " versions...");
+                    ToolsIndexV2 result = datasource.fetchToolVersions();
+                    getLog().info("Fetched " + name + " versions");
+                    return result;
+                }));
             }
 
             return mergeResults(initialIndex, futures);
