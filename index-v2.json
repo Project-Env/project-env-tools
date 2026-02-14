@@ -2919,6 +2919,100 @@
       "linux": {
         "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.7.1/mvnd-0.7.1-linux-amd64.zip"
       }
+    },
+    "0.8.0": {
+      "macos": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.8.0/maven-mvnd-0.8.0-darwin-amd64.zip"
+      },
+      "windows": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.8.0/maven-mvnd-0.8.0-windows-amd64.zip"
+      },
+      "linux": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.8.0/maven-mvnd-0.8.0-linux-amd64.zip"
+      }
+    },
+    "0.8.1": {
+      "macos": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.8.1/maven-mvnd-0.8.1-darwin-amd64.zip"
+      },
+      "windows": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.8.1/maven-mvnd-0.8.1-windows-amd64.zip"
+      },
+      "linux": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.8.1/maven-mvnd-0.8.1-linux-amd64.zip"
+      }
+    },
+    "0.8.2": {
+      "macos": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.8.2/maven-mvnd-0.8.2-darwin-amd64.zip",
+        "aarch64": "https://github.com/apache/maven-mvnd/releases/download/0.8.2/maven-mvnd-0.8.2-darwin-aarch64.zip"
+      },
+      "windows": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.8.2/maven-mvnd-0.8.2-windows-amd64.zip"
+      },
+      "linux": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.8.2/maven-mvnd-0.8.2-linux-amd64.zip"
+      }
+    },
+    "0.9.0": {
+      "macos": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.9.0/maven-mvnd-0.9.0-darwin-amd64.zip",
+        "aarch64": "https://github.com/apache/maven-mvnd/releases/download/0.9.0/maven-mvnd-0.9.0-darwin-aarch64.zip"
+      },
+      "windows": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.9.0/maven-mvnd-0.9.0-windows-amd64.zip"
+      },
+      "linux": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/0.9.0/maven-mvnd-0.9.0-linux-amd64.zip"
+      }
+    },
+    "1.0.0": {
+      "macos": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.0/maven-mvnd-1.0.0-darwin-amd64.zip",
+        "aarch64": "https://github.com/apache/maven-mvnd/releases/download/1.0.0/maven-mvnd-1.0.0-darwin-aarch64.zip"
+      },
+      "windows": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.0/maven-mvnd-1.0.0-windows-amd64.zip"
+      },
+      "linux": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.0/maven-mvnd-1.0.0-linux-amd64.zip"
+      }
+    },
+    "1.0.1": {
+      "macos": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.1/maven-mvnd-1.0.1-darwin-amd64.zip",
+        "aarch64": "https://github.com/apache/maven-mvnd/releases/download/1.0.1/maven-mvnd-1.0.1-darwin-aarch64.zip"
+      },
+      "windows": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.1/maven-mvnd-1.0.1-windows-amd64.zip"
+      },
+      "linux": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.1/maven-mvnd-1.0.1-linux-amd64.zip"
+      }
+    },
+    "1.0.2": {
+      "macos": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.2/maven-mvnd-1.0.2-darwin-amd64.zip",
+        "aarch64": "https://github.com/apache/maven-mvnd/releases/download/1.0.2/maven-mvnd-1.0.2-darwin-aarch64.zip"
+      },
+      "windows": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.2/maven-mvnd-1.0.2-windows-amd64.zip"
+      },
+      "linux": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.2/maven-mvnd-1.0.2-linux-amd64.zip"
+      }
+    },
+    "1.0.3": {
+      "macos": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.3/maven-mvnd-1.0.3-darwin-amd64.zip",
+        "aarch64": "https://github.com/apache/maven-mvnd/releases/download/1.0.3/maven-mvnd-1.0.3-darwin-aarch64.zip"
+      },
+      "windows": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.3/maven-mvnd-1.0.3-windows-amd64.zip"
+      },
+      "linux": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.3/maven-mvnd-1.0.3-linux-amd64.zip"
+      }
     }
   },
   "nodeVersions": {
