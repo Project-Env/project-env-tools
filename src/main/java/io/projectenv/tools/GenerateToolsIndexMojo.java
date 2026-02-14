@@ -79,7 +79,7 @@ public class GenerateToolsIndexMojo extends AbstractMojo {
         Map<String, ToolsIndexDatasource> datasources = new LinkedHashMap<>();
         datasources.put("temurin", new TemurinVersionsDatasource(githubClient, getLog()));
         datasources.put("graalvm", new GraalVmVersionsDatasource(githubClient, ResilientHttpClient.create(getLog()), getLog()));
-        datasources.put("nodejs", new NodeVersionsDatasource());
+        datasources.put("nodejs", new NodeVersionsDatasource(getLog()));
         datasources.put("maven", new MavenVersionsDatasource());
         datasources.put("mvnd", new MavenDaemonVersionsDatasource(githubClient, getLog()));
         datasources.put("gradle", new GradleVersionsDatasource(githubClient, getLog()));
