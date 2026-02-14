@@ -35,7 +35,8 @@ public class NodeVersionsDatasource implements ToolsIndexExtender {
                                             CpuArchitecture.AARCH64, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-darwin-arm64.tar.xz", version)
                                     )),
                                     OperatingSystem.LINUX, SortedCollections.createNaturallySortedMap(Map.of(
-                                            CpuArchitecture.AMD64, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-linux-x64.tar.xz", version)
+                                            CpuArchitecture.AMD64, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-linux-x64.tar.xz", version),
+                                            CpuArchitecture.AARCH64, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-linux-arm64.tar.xz", version)
                                     )),
                                     OperatingSystem.WINDOWS, SortedCollections.createNaturallySortedMap(Map.of(
                                             CpuArchitecture.AMD64, MessageFormat.format("https://nodejs.org/dist/v{0}/node-v{0}-win-x64.zip", version)

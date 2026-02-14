@@ -5,7 +5,6 @@ import io.projectenv.tools.jdk.github.GithubClient;
 import io.projectenv.tools.jdk.github.Release;
 
 import java.util.Comparator;
-import java.util.Map;
 import java.util.SortedMap;
 import java.util.regex.Pattern;
 
@@ -13,8 +12,8 @@ public class MavenDaemonVersionsDatasource implements ToolsIndexExtender {
 
     private static final Pattern RELEASE_TAG_PATTERN = Pattern.compile("^([\\d.]+)$");
 
-    // mvnd-0.7.1-darwin-amd64.zip
-    private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("^mvnd-[\\d.]+-(\\w+)-amd64\\.zip$");
+    // mvnd-0.7.1-darwin-amd64.zip or maven-mvnd-1.0.3-linux-amd64.zip
+    private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("^(?:maven-)?mvnd-[\\d.]+-(\\w+)-(amd64|aarch64)\\.zip$");
 
     private final GithubClient githubClient;
 
@@ -47,12 +46,12 @@ public class MavenDaemonVersionsDatasource implements ToolsIndexExtender {
                 }
 
                 var operatingSystem = releaseAssetNameMatcher.group(1);
+                var cpuArchitecture = mapToCpuArchitecture(releaseAssetNameMatcher.group(2));
 
                 mvndVersions
                         .computeIfAbsent(version, (key) -> SortedCollections.createNaturallySortedMap())
-                        .put(mapToOperatingSystem(operatingSystem), SortedCollections.createNaturallySortedMap(Map.of(
-                                CpuArchitecture.AMD64, releaseAsset.getBrowserDownloadUrl()
-                        )));
+                        .computeIfAbsent(mapToOperatingSystem(operatingSystem), (key) -> SortedCollections.createNaturallySortedMap())
+                        .put(cpuArchitecture, releaseAsset.getBrowserDownloadUrl());
             }
         }
 
@@ -66,6 +65,13 @@ public class MavenDaemonVersionsDatasource implements ToolsIndexExtender {
         return switch (operatingSystemName) {
             case "darwin" -> OperatingSystem.MACOS;
             default -> OperatingSystem.valueOf(operatingSystemName.toUpperCase());
+        };
+    }
+
+    private CpuArchitecture mapToCpuArchitecture(String cpuArchitectureName) {
+        return switch (cpuArchitectureName) {
+            case "aarch64" -> CpuArchitecture.AARCH64;
+            default -> CpuArchitecture.AMD64;
         };
     }
 
