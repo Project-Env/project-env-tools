@@ -175,7 +175,7 @@ public class DownloadUrlValidator {
         try {
             semaphore.acquire();
             try {
-                log.info("Checking URL " + url);
+                log.debug("Checking URL " + url);
 
                 var httpRequest = HttpRequest.newBuilder()
                         .uri(URI.create(url))
@@ -186,10 +186,10 @@ public class DownloadUrlValidator {
                 int statusCode = httpClient.send(httpRequest, HttpResponse.BodyHandlers.discarding()).statusCode();
 
                 if (statusCode >= 200 && statusCode < 300) {
-                    log.info("Got " + statusCode + " for " + url + " - keeping");
+                    log.debug("Got " + statusCode + " for " + url + " - keeping");
                     return true;
                 } else {
-                    log.info("Got " + statusCode + " for " + url + " - removing");
+                    log.warn("Got " + statusCode + " for " + url + " - removing");
                     return false;
                 }
             } finally {

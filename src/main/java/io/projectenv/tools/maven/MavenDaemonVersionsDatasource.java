@@ -35,7 +35,7 @@ public class MavenDaemonVersionsDatasource implements ToolsIndexDatasource {
         for (var release : releases) {
             var releaseTagNameMatcher = RELEASE_TAG_PATTERN.matcher(release.getTagName());
             if (!releaseTagNameMatcher.find()) {
-                log.info("Unexpected release tag name: " + release.getTagName());
+                log.debug("Unexpected release tag name: " + release.getTagName());
                 continue;
             }
 

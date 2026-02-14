@@ -40,7 +40,7 @@ public class GradleVersionsDatasource implements ToolsIndexDatasource {
         for (var release : releases) {
             var version = extractGradleVersion(release.getTagName());
             if (version == null) {
-                log.info("Unexpected release tag name: " + release.getTagName());
+                log.debug("Unexpected release tag name: " + release.getTagName());
                 continue;
             }
 

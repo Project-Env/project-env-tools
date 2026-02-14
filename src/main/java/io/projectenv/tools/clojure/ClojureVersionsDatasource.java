@@ -30,7 +30,7 @@ public class ClojureVersionsDatasource implements ToolsIndexDatasource {
             String tag = release.getTagName();
             Matcher matcher = VERSION_PATTERN.matcher(tag);
             if (!matcher.find()) {
-                log.info("Unexpected release tag name: " + tag);
+                log.debug("Unexpected release tag name: " + tag);
                 continue;
             }
 

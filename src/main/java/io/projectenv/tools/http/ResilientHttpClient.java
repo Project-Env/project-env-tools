@@ -60,7 +60,7 @@ public class ResilientHttpClient {
         Retry retry = Retry.of("httpRetry", retryConfig);
 
         retry.getEventPublisher()
-                .onRetry(event -> log.info("Retry attempt " + event.getNumberOfRetryAttempts()
+                .onRetry(event -> log.debug("Retry attempt " + event.getNumberOfRetryAttempts()
                         + " due to: " + (event.getLastThrowable() != null
                                 ? event.getLastThrowable().getMessage()
                                 : "server error")));
