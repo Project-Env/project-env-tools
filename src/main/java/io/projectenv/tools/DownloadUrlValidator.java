@@ -182,6 +182,7 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
                 var httpRequest = HttpRequest.newBuilder()
                         .uri(URI.create(url))
                         .method("HEAD", HttpRequest.BodyPublishers.noBody())
+                        .header("User-Agent", "project-env-tools/1.0")
                         .build();
 
                 int statusCode = httpClient.send(httpRequest, HttpResponse.BodyHandlers.discarding()).statusCode();

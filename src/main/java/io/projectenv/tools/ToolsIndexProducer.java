@@ -16,7 +16,9 @@ import picocli.CommandLine.Command;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.concurrent.Callable;
@@ -42,6 +44,9 @@ public class ToolsIndexProducer implements Callable<Integer> {
     @Option(names = {"--debug"})
     private boolean debug;
 
+    @Option(names = {"--tools"}, split = ",", description = "Comma-separated list of tools to index (e.g. nodejs,maven). If not specified, all tools are indexed.")
+    private List<String> tools;
+
     @Override
     public Integer call() {
         try {
@@ -52,14 +57,29 @@ public class ToolsIndexProducer implements Callable<Integer> {
             var toolsIndex = readOrCreateToolsIndexV2();
 
             GithubClient githubClient = SimpleGithubClient.withAccessToken(githubAccessToken);
-            List<ToolsIndexExtender> datasources = List.of(
-                    new TemurinVersionsDatasource(githubClient),
-                    new GraalVmVersionsDatasource(githubClient, ResilientHttpClient.create()),
-                    new NodeVersionsDatasource(),
-                    new MavenVersionsDatasource(),
-                    new MavenDaemonVersionsDatasource(githubClient),
-                    new GradleVersionsDatasource(githubClient),
-                    new ClojureVersionsDatasource(githubClient));
+            Map<String, ToolsIndexExtender> allDatasources = new LinkedHashMap<>();
+            allDatasources.put("temurin", new TemurinVersionsDatasource(githubClient));
+            allDatasources.put("graalvm", new GraalVmVersionsDatasource(githubClient, ResilientHttpClient.create()));
+            allDatasources.put("nodejs", new NodeVersionsDatasource());
+            allDatasources.put("maven", new MavenVersionsDatasource());
+            allDatasources.put("mvnd", new MavenDaemonVersionsDatasource(githubClient));
+            allDatasources.put("gradle", new GradleVersionsDatasource(githubClient));
+            allDatasources.put("clojure", new ClojureVersionsDatasource(githubClient));
+
+            List<ToolsIndexExtender> datasources;
+            if (tools != null && !tools.isEmpty()) {
+                datasources = new ArrayList<>();
+                for (String tool : tools) {
+                    ToolsIndexExtender extender = allDatasources.get(tool);
+                    if (extender == null) {
+                        ProcessOutput.writeInfoMessage("Unknown tool: {0}. Available tools: {1}", tool, allDatasources.keySet());
+                        return ExitCode.USAGE;
+                    }
+                    datasources.add(extender);
+                }
+            } else {
+                datasources = new ArrayList<>(allDatasources.values());
+            }
 
             toolsIndex = fetchDatasourcesInParallel(datasources, toolsIndex);
 
@@ -108,13 +128,13 @@ public class ToolsIndexProducer implements Callable<Integer> {
 
         for (Future<ToolsIndexV2> future : futures) {
             ToolsIndexV2 result = future.get();
-            mergedJdkVersions.putAll(result.getJdkVersions());
-            mergedJdkDistributionSynonyms.putAll(result.getJdkDistributionSynonyms());
-            mergedGradleVersions.putAll(result.getGradleVersions());
-            mergedMavenVersions.putAll(result.getMavenVersions());
-            mergedMvndVersions.putAll(result.getMvndVersions());
-            mergedNodeVersions.putAll(result.getNodeVersions());
-            mergedClojureVersions.putAll(result.getClojureVersions());
+            putAllIfNotNull(mergedJdkVersions, result.getJdkVersions());
+            putAllIfNotNull(mergedJdkDistributionSynonyms, result.getJdkDistributionSynonyms());
+            putAllIfNotNull(mergedGradleVersions, result.getGradleVersions());
+            putAllIfNotNull(mergedMavenVersions, result.getMavenVersions());
+            putAllIfNotNull(mergedMvndVersions, result.getMvndVersions());
+            putAllIfNotNull(mergedNodeVersions, result.getNodeVersions());
+            putAllIfNotNull(mergedClojureVersions, result.getClojureVersions());
         }
 
         return ImmutableToolsIndexV2.builder()
@@ -141,6 +161,12 @@ public class ToolsIndexProducer implements Callable<Integer> {
             return ToolIndexV2Parser.readFrom(indexFile);
         } else {
             return ImmutableToolsIndexV2.builder().build();
+        }
+    }
+
+    private static <K, V> void putAllIfNotNull(Map<K, V> target, Map<K, V> source) {
+        if (source != null) {
+            target.putAll(source);
         }
     }
 
