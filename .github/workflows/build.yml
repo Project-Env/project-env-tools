@@ -4,16 +4,27 @@ on:
   push:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
-    - uses: actions/cache@v4
+    - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+      with:
+        persist-credentials: false
+    - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
       with:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('pom.xml') }}
-    - uses: Project-Env/project-env-github-action@v1.5.0
+        restore-keys: |
+          ${{ runner.os }}-m2-
+    - uses: Project-Env/project-env-github-action@8958dac5824fd73ced04459e76f49654b95044a6 # v1.5.0
     - run: mvn -B verify
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
