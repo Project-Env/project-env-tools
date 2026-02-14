@@ -27,10 +27,12 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-m2-
     - uses: Project-Env/project-env-github-action@8958dac5824fd73ced04459e76f49654b95044a6 # v1.5.0
-    - run: mvn -B verify exec:exec -Dexec.executable="java" -Dexec.args="-classpath %classpath io.projectenv.tools.ToolsIndexProducer --index-file=index-v2.json --legacy-index-file=index.json --github-access-token=${GITHUB_TOKEN} --debug"
+    - run: mvn -B install -DskipTests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - run: mvn -B io.projectenv.tools:index-producer-maven-plugin:generate-index -DindexFile=index-v2.json -DlegacyIndexFile=index.json -DgithubAccessToken=${GITHUB_TOKEN}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8
       with:
         title: 'update tools index'

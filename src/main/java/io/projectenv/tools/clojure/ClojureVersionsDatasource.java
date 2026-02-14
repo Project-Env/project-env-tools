@@ -1,34 +1,36 @@
 package io.projectenv.tools.clojure;
 
 import io.projectenv.tools.*;
-import io.projectenv.tools.jdk.github.GithubClient;
-import io.projectenv.tools.jdk.github.Release;
+import io.projectenv.tools.github.GithubClient;
+import io.projectenv.tools.github.Release;
 
 import java.util.SortedMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ClojureVersionsDatasource implements ToolsIndexExtender {
+import org.apache.maven.plugin.logging.Log;
 
-    private static final String REPO_OWNER = "clojure";
-    private static final String REPO_NAME = "brew-install";
+public class ClojureVersionsDatasource implements ToolsIndexDatasource {
+
     private static final Pattern VERSION_PATTERN = Pattern.compile("^(\\d+\\.\\d+\\.\\d+.\\d+)$");
 
     private final GithubClient githubClient;
+    private final Log log;
 
-    public ClojureVersionsDatasource(GithubClient githubClient) {
+    public ClojureVersionsDatasource(GithubClient githubClient, Log log) {
         this.githubClient = githubClient;
+        this.log = log;
     }
 
     @Override
-    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
-        SortedMap<String, SortedMap<OperatingSystem, String>> clojureVersions = SortedCollections.createSemverSortedMap(currentToolsIndex.getClojureVersions());
+    public ToolsIndexV2 fetchToolVersions() {
+        SortedMap<String, SortedMap<OperatingSystem, String>> clojureVersions = SortedCollections.createSemverSortedMap();
 
-        for (Release release : githubClient.getReleases(REPO_OWNER, REPO_NAME)) {
+        for (Release release : githubClient.getReleases("clojure", "brew-install")) {
             String tag = release.getTagName();
             Matcher matcher = VERSION_PATTERN.matcher(tag);
             if (!matcher.find()) {
-                ProcessOutput.writeInfoMessage("unexpected release tag name {0}", tag);
+                log.info("Unexpected release tag name: " + tag);
                 continue;
             }
 
@@ -49,15 +51,13 @@ public class ClojureVersionsDatasource implements ToolsIndexExtender {
                             .computeIfAbsent(version, v -> SortedCollections.createNaturallySortedMap())
                             .put(OperatingSystem.MACOS, downloadUrl);
                 } else {
-                    ProcessOutput.writeInfoMessage("skipping unknown asset {0} for release {1}", assetName, tag);
+                    log.debug("Skipping unknown asset " + assetName + " for release " + tag);
                 }
             }
         }
 
         return ImmutableToolsIndexV2.builder()
-                .from(currentToolsIndex)
                 .clojureVersions(clojureVersions)
                 .build();
     }
 }
-

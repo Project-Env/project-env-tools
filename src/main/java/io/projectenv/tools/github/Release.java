@@ -1,4 +1,4 @@
-package io.projectenv.tools.jdk.github;
+package io.projectenv.tools.github;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;

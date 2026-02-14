@@ -12,12 +12,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class NodeVersionsDatasource implements ToolsIndexExtender {
+public class NodeVersionsDatasource implements ToolsIndexDatasource {
 
     private static final Pattern VERSION_PATTERN = Pattern.compile("v(\\d+\\.\\d+\\.\\d+)/");
 
     @Override
-    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
+    public ToolsIndexV2 fetchToolVersions() {
         try {
             Document doc = Jsoup.connect("https://nodejs.org/download/release/").get();
 
@@ -46,7 +46,6 @@ public class NodeVersionsDatasource implements ToolsIndexExtender {
                             SortedCollections::createSemverSortedMap));
 
             return ImmutableToolsIndexV2.builder()
-                    .from(currentToolsIndex)
                     .nodeVersions(downloadUrls)
                     .build();
         } catch (IOException e) {

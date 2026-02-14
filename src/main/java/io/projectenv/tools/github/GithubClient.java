@@ -1,4 +1,4 @@
-package io.projectenv.tools.jdk.github;
+package io.projectenv.tools.github;
 
 import java.util.List;
 

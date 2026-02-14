@@ -1,29 +1,31 @@
 package io.projectenv.tools.maven;
 
 import io.projectenv.tools.*;
-import io.projectenv.tools.jdk.github.GithubClient;
-import io.projectenv.tools.jdk.github.Release;
+import io.projectenv.tools.github.GithubClient;
+import io.projectenv.tools.github.Release;
 
 import java.util.Comparator;
 import java.util.SortedMap;
 import java.util.regex.Pattern;
 
-public class MavenDaemonVersionsDatasource implements ToolsIndexExtender {
+import org.apache.maven.plugin.logging.Log;
+
+public class MavenDaemonVersionsDatasource implements ToolsIndexDatasource {
 
     private static final Pattern RELEASE_TAG_PATTERN = Pattern.compile("^([\\d.]+)$");
-
-    // mvnd-0.7.1-darwin-amd64.zip or maven-mvnd-1.0.3-linux-amd64.zip
     private static final Pattern RELEASE_ASSET_NAME_PATTERN = Pattern.compile("^(?:maven-)?mvnd-[\\d.]+-(\\w+)-(amd64|aarch64)\\.zip$");
 
     private final GithubClient githubClient;
+    private final Log log;
 
-    public MavenDaemonVersionsDatasource(GithubClient githubClient) {
+    public MavenDaemonVersionsDatasource(GithubClient githubClient, Log log) {
         this.githubClient = githubClient;
+        this.log = log;
     }
 
     @Override
-    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
-        SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> mvndVersions = SortedCollections.createSemverSortedMap(currentToolsIndex.getMvndVersions());
+    public ToolsIndexV2 fetchToolVersions() {
+        SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> mvndVersions = SortedCollections.createSemverSortedMap();
 
         var releases = githubClient.getReleases("apache", "maven-mvnd")
                 .stream()
@@ -33,7 +35,7 @@ public class MavenDaemonVersionsDatasource implements ToolsIndexExtender {
         for (var release : releases) {
             var releaseTagNameMatcher = RELEASE_TAG_PATTERN.matcher(release.getTagName());
             if (!releaseTagNameMatcher.find()) {
-                ProcessOutput.writeInfoMessage("unexpected release tag name {0}", release.getTagName());
+                log.info("Unexpected release tag name: " + release.getTagName());
                 continue;
             }
 
@@ -45,31 +47,30 @@ public class MavenDaemonVersionsDatasource implements ToolsIndexExtender {
                     continue;
                 }
 
-                var operatingSystem = releaseAssetNameMatcher.group(1);
+                var operatingSystem = mapToOperatingSystem(releaseAssetNameMatcher.group(1));
                 var cpuArchitecture = mapToCpuArchitecture(releaseAssetNameMatcher.group(2));
 
                 mvndVersions
-                        .computeIfAbsent(version, (key) -> SortedCollections.createNaturallySortedMap())
-                        .computeIfAbsent(mapToOperatingSystem(operatingSystem), (key) -> SortedCollections.createNaturallySortedMap())
+                        .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
+                        .computeIfAbsent(operatingSystem, k -> SortedCollections.createNaturallySortedMap())
                         .put(cpuArchitecture, releaseAsset.getBrowserDownloadUrl());
             }
         }
 
         return ImmutableToolsIndexV2.builder()
-                .from(currentToolsIndex)
                 .mvndVersions(mvndVersions)
                 .build();
     }
 
-    private OperatingSystem mapToOperatingSystem(String operatingSystemName) {
-        return switch (operatingSystemName) {
+    private OperatingSystem mapToOperatingSystem(String name) {
+        return switch (name) {
             case "darwin" -> OperatingSystem.MACOS;
-            default -> OperatingSystem.valueOf(operatingSystemName.toUpperCase());
+            default -> OperatingSystem.valueOf(name.toUpperCase());
         };
     }
 
-    private CpuArchitecture mapToCpuArchitecture(String cpuArchitectureName) {
-        return switch (cpuArchitectureName) {
+    private CpuArchitecture mapToCpuArchitecture(String name) {
+        return switch (name) {
             case "aarch64" -> CpuArchitecture.AARCH64;
             default -> CpuArchitecture.AMD64;
         };

@@ -1,37 +1,37 @@
 package io.projectenv.tools.gradle;
 
 import io.projectenv.tools.ImmutableToolsIndexV2;
-import io.projectenv.tools.ProcessOutput;
 import io.projectenv.tools.SortedCollections;
-import io.projectenv.tools.ToolsIndexExtender;
+import io.projectenv.tools.ToolsIndexDatasource;
 import io.projectenv.tools.ToolsIndexV2;
-import io.projectenv.tools.jdk.github.GithubClient;
-import io.projectenv.tools.jdk.github.Release;
+import io.projectenv.tools.github.GithubClient;
+import io.projectenv.tools.github.Release;
 
 import java.util.Comparator;
 import java.util.SortedMap;
 import java.util.regex.Pattern;
 
-public class GradleVersionsDatasource implements ToolsIndexExtender {
+import org.apache.maven.plugin.logging.Log;
 
-    private static final String GITHUB_OWNER = "gradle";
-    private static final String GITHUB_REPO = "gradle-distributions";
+public class GradleVersionsDatasource implements ToolsIndexDatasource {
 
     private static final Pattern RELEASE_TAG_PATTERN = Pattern.compile("^v(.+)$");
     private static final Pattern BIN_ASSET_PATTERN = Pattern.compile("^gradle-.+-bin\\.zip$");
     private static final Pattern RC_OR_MILESTONE_PATTERN = Pattern.compile("(?i)(-RC|-M|milestone|rc)\\d*$");
 
     private final GithubClient githubClient;
+    private final Log log;
 
-    public GradleVersionsDatasource(GithubClient githubClient) {
+    public GradleVersionsDatasource(GithubClient githubClient, Log log) {
         this.githubClient = githubClient;
+        this.log = log;
     }
 
     @Override
-    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
-        SortedMap<String, String> gradleVersions = SortedCollections.createSemverSortedMap(currentToolsIndex.getGradleVersions());
+    public ToolsIndexV2 fetchToolVersions() {
+        SortedMap<String, String> gradleVersions = SortedCollections.createSemverSortedMap();
 
-        var releases = githubClient.getReleases(GITHUB_OWNER, GITHUB_REPO)
+        var releases = githubClient.getReleases("gradle", "gradle-distributions")
                 .stream()
                 .filter(release -> !release.isPrerelease())
                 .sorted(Comparator.comparing(Release::getTagName))
@@ -40,7 +40,7 @@ public class GradleVersionsDatasource implements ToolsIndexExtender {
         for (var release : releases) {
             var version = extractGradleVersion(release.getTagName());
             if (version == null) {
-                ProcessOutput.writeInfoMessage("unexpected release tag name {0}", release.getTagName());
+                log.info("Unexpected release tag name: " + release.getTagName());
                 continue;
             }
 
@@ -55,7 +55,6 @@ public class GradleVersionsDatasource implements ToolsIndexExtender {
         }
 
         return ImmutableToolsIndexV2.builder()
-                .from(currentToolsIndex)
                 .gradleVersions(gradleVersions)
                 .build();
     }
@@ -64,7 +63,6 @@ public class GradleVersionsDatasource implements ToolsIndexExtender {
         var matcher = RELEASE_TAG_PATTERN.matcher(releaseTagName);
         if (matcher.find()) {
             var version = matcher.group(1);
-            // Exclude RC and Milestone releases
             if (RC_OR_MILESTONE_PATTERN.matcher(version).find()) {
                 return null;
             }

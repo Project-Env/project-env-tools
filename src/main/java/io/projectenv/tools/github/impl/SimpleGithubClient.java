@@ -1,12 +1,11 @@
-package io.projectenv.tools.jdk.github.impl;
+package io.projectenv.tools.github.impl;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import io.projectenv.tools.ProcessOutput;
 import io.projectenv.tools.http.ResilientHttpClient;
-import io.projectenv.tools.jdk.github.*;
+import io.projectenv.tools.github.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +14,6 @@ import java.io.Reader;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URLEncoder;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
@@ -23,32 +21,24 @@ import java.text.MessageFormat;
 import java.time.Duration;
 import java.util.*;
 
+import org.apache.maven.plugin.logging.Log;
+
 public class SimpleGithubClient implements GithubClient {
 
     private static final Duration FIVE_MINUTES = Duration.ofMinutes(5);
     private final String authorizationHeader;
     private final ResilientHttpClient httpClient;
+    private final Log log;
 
-    private SimpleGithubClient(String authorizationHeader) {
+    private SimpleGithubClient(String authorizationHeader, Log log) {
         this.authorizationHeader = authorizationHeader;
-        this.httpClient = ResilientHttpClient.create(
-                HttpClient.newBuilder()
-                        .followRedirects(HttpClient.Redirect.NORMAL)
-                        .connectTimeout(FIVE_MINUTES)
-                        .build()
-        );
+        this.log = log;
+        this.httpClient = ResilientHttpClient.create(log);
     }
 
-    public static SimpleGithubClient withAccessToken(String accessToken) {
+    public static SimpleGithubClient withAccessToken(String accessToken, Log log) {
         var authorizationHeader = "Bearer " + accessToken;
-
-        return new SimpleGithubClient(authorizationHeader);
-    }
-
-    public static SimpleGithubClient withUsernamePassword(String username, String password) {
-        var authorizationHeader = "Basic " + Base64.getEncoder().encodeToString(String.join(":", username, password).getBytes(StandardCharsets.UTF_8));
-
-        return new SimpleGithubClient(authorizationHeader);
+        return new SimpleGithubClient(authorizationHeader, log);
     }
 
     @Override
@@ -96,7 +86,7 @@ public class SimpleGithubClient implements GithubClient {
 
     private <T> T callApi(String uri, Type responseType) {
         try {
-            ProcessOutput.writeDebugMessage("calling Github API with URL {0}", uri);
+            log.debug("Calling Github API: " + uri);
 
             var httpRequest = HttpRequest.newBuilder()
                     .uri(URI.create(uri))
@@ -108,7 +98,7 @@ public class SimpleGithubClient implements GithubClient {
 
             HttpResponse<InputStream> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofInputStream());
             if (response.statusCode() != 200) {
-                throw new RuntimeException("Received a non expected status code " + response.statusCode() + " from Github API with URL " + uri);
+                throw new RuntimeException("Received status code " + response.statusCode() + " from Github API: " + uri);
             }
 
             try (Reader reader = new InputStreamReader(response.body())) {
@@ -116,7 +106,6 @@ public class SimpleGithubClient implements GithubClient {
             }
         } catch (InterruptedException | IOException e) {
             Thread.currentThread().interrupt();
-
             throw new RuntimeException(e);
         }
     }

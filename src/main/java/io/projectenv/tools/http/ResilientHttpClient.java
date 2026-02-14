@@ -4,7 +4,6 @@ import io.github.resilience4j.ratelimiter.RateLimiter;
 import io.github.resilience4j.ratelimiter.RateLimiterConfig;
 import io.github.resilience4j.retry.Retry;
 import io.github.resilience4j.retry.RetryConfig;
-import io.projectenv.tools.ProcessOutput;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
@@ -15,10 +14,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
+import org.apache.maven.plugin.logging.Log;
+
 /**
- * A resilient HTTP client wrapper that provides retry and per-host rate limiting
- * capabilities using Resilience4j. Each target host gets its own independent rate
- * limiter so that requests to different hosts don't throttle each other.
+ * HTTP client with retry and per-host rate limiting via Resilience4j.
+ * Each target host gets its own independent rate limiter.
  */
 public class ResilientHttpClient {
 
@@ -38,14 +38,12 @@ public class ResilientHttpClient {
         this.rateLimiterConfig = rateLimiterConfig;
     }
 
-    public static ResilientHttpClient create() {
-        return create(HttpClient.newBuilder()
+    public static ResilientHttpClient create(Log log) {
+        HttpClient httpClient = HttpClient.newBuilder()
                 .followRedirects(HttpClient.Redirect.NORMAL)
                 .connectTimeout(Duration.ofMinutes(5))
-                .build());
-    }
+                .build();
 
-    public static ResilientHttpClient create(HttpClient httpClient) {
         RetryConfig retryConfig = RetryConfig.custom()
                 .maxAttempts(MAX_RETRIES)
                 .waitDuration(WAIT_DURATION)
@@ -62,10 +60,10 @@ public class ResilientHttpClient {
         Retry retry = Retry.of("httpRetry", retryConfig);
 
         retry.getEventPublisher()
-                .onRetry(event -> ProcessOutput.writeInfoMessage(
-                        "Retry attempt {0} for HTTP request due to: {1}",
-                        event.getNumberOfRetryAttempts(),
-                        event.getLastThrowable() != null ? event.getLastThrowable().getMessage() : "server error"));
+                .onRetry(event -> log.info("Retry attempt " + event.getNumberOfRetryAttempts()
+                        + " due to: " + (event.getLastThrowable() != null
+                                ? event.getLastThrowable().getMessage()
+                                : "server error")));
 
         return new ResilientHttpClient(httpClient, retry, rateLimiterConfig);
     }

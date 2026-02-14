@@ -1,18 +1,21 @@
 package io.projectenv.tools;
 
+import io.projectenv.tools.clojure.ClojureVersionsDatasource;
 import io.projectenv.tools.gradle.GradleVersionsDatasource;
 import io.projectenv.tools.http.ResilientHttpClient;
 import io.projectenv.tools.jdk.GraalVmVersionsDatasource;
 import io.projectenv.tools.jdk.TemurinVersionsDatasource;
-import io.projectenv.tools.jdk.github.GithubClient;
-import io.projectenv.tools.jdk.github.impl.SimpleGithubClient;
+import io.projectenv.tools.github.GithubClient;
+import io.projectenv.tools.github.impl.SimpleGithubClient;
 import io.projectenv.tools.maven.MavenDaemonVersionsDatasource;
 import io.projectenv.tools.maven.MavenVersionsDatasource;
 import io.projectenv.tools.nodejs.NodeVersionsDatasource;
-import io.projectenv.tools.clojure.ClojureVersionsDatasource;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import picocli.CommandLine;
-import picocli.CommandLine.Command;
+
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -21,89 +24,94 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import static picocli.CommandLine.ExitCode;
-import static picocli.CommandLine.Option;
+/**
+ * Generates the project-env tools index by fetching version information
+ * from upstream sources and validating all download URLs.
+ */
+@Mojo(name = "generate-index", requiresProject = false)
+public class GenerateToolsIndexMojo extends AbstractMojo {
 
-@Command(name = "project-env-tools-index-producer")
-public class ToolsIndexProducer implements Callable<Integer> {
-
-    @Option(names = {"--index-file"}, required = true)
+    @Parameter(property = "indexFile", required = true)
     private File indexFile;
 
-    @Option(names = {"--legacy-index-file"}, required = true)
+    @Parameter(property = "legacyIndexFile", required = true)
     private File legacyIndexFile;
 
-    @Option(names = {"--github-access-token"}, required = true)
+    @Parameter(property = "githubAccessToken", required = true)
     private String githubAccessToken;
 
-    @Option(names = {"--debug"})
-    private boolean debug;
-
-    @Option(names = {"--tools"}, split = ",", description = "Comma-separated list of tools to index (e.g. nodejs,maven). If not specified, all tools are indexed.")
-    private List<String> tools;
+    /**
+     * Comma-separated list of tools to index (e.g. "nodejs,maven").
+     * Available: temurin, graalvm, nodejs, maven, mvnd, gradle, clojure.
+     * If not specified, all tools are indexed.
+     */
+    @Parameter(property = "tools")
+    private String tools;
 
     @Override
-    public Integer call() {
+    public void execute() throws MojoExecutionException, MojoFailureException {
         try {
-            if (debug) {
-                ProcessOutput.activateDebugMode();
-            }
+            var toolsIndex = readOrCreateToolsIndex();
 
-            var toolsIndex = readOrCreateToolsIndexV2();
+            GithubClient githubClient = SimpleGithubClient.withAccessToken(githubAccessToken, getLog());
+            Map<String, ToolsIndexDatasource> allDatasources = createDatasources(githubClient);
 
-            GithubClient githubClient = SimpleGithubClient.withAccessToken(githubAccessToken);
-            Map<String, ToolsIndexExtender> allDatasources = new LinkedHashMap<>();
-            allDatasources.put("temurin", new TemurinVersionsDatasource(githubClient));
-            allDatasources.put("graalvm", new GraalVmVersionsDatasource(githubClient, ResilientHttpClient.create()));
-            allDatasources.put("nodejs", new NodeVersionsDatasource());
-            allDatasources.put("maven", new MavenVersionsDatasource());
-            allDatasources.put("mvnd", new MavenDaemonVersionsDatasource(githubClient));
-            allDatasources.put("gradle", new GradleVersionsDatasource(githubClient));
-            allDatasources.put("clojure", new ClojureVersionsDatasource(githubClient));
+            List<ToolsIndexDatasource> datasources = selectDatasources(allDatasources);
 
-            List<ToolsIndexExtender> datasources;
-            if (tools != null && !tools.isEmpty()) {
-                datasources = new ArrayList<>();
-                for (String tool : tools) {
-                    ToolsIndexExtender extender = allDatasources.get(tool);
-                    if (extender == null) {
-                        ProcessOutput.writeInfoMessage("Unknown tool: {0}. Available tools: {1}", tool, allDatasources.keySet());
-                        return ExitCode.USAGE;
-                    }
-                    datasources.add(extender);
-                }
-            } else {
-                datasources = new ArrayList<>(allDatasources.values());
-            }
+            toolsIndex = fetchInParallel(datasources, toolsIndex);
 
-            toolsIndex = fetchDatasourcesInParallel(datasources, toolsIndex);
-
-            toolsIndex = new DownloadUrlValidator().extendToolsIndex(toolsIndex);
+            toolsIndex = new DownloadUrlValidator(getLog()).validateUrls(toolsIndex);
 
             ToolIndexV2Parser.writeTo(toolsIndex, indexFile);
             ToolIndexParser.writeTo(toolsIndex.toLegacyToolsIndex(), legacyIndexFile);
 
-            return ExitCode.OK;
+            getLog().info("Tools index written to " + indexFile.getAbsolutePath());
         } catch (Exception e) {
-            var rootCauseMessage = ExceptionUtils.getRootCauseMessage(e);
-
-            ProcessOutput.writeInfoMessage("failed to produce tools index: {0}", rootCauseMessage);
-            ProcessOutput.writeDebugMessage(e);
-
-            return ExitCode.SOFTWARE;
+            throw new MojoExecutionException("Failed to generate tools index", e);
         }
     }
 
-    private ToolsIndexV2 fetchDatasourcesInParallel(List<ToolsIndexExtender> datasources, ToolsIndexV2 initialIndex) throws Exception {
+    private Map<String, ToolsIndexDatasource> createDatasources(GithubClient githubClient) {
+        Map<String, ToolsIndexDatasource> datasources = new LinkedHashMap<>();
+        datasources.put("temurin", new TemurinVersionsDatasource(githubClient, getLog()));
+        datasources.put("graalvm", new GraalVmVersionsDatasource(githubClient, ResilientHttpClient.create(getLog()), getLog()));
+        datasources.put("nodejs", new NodeVersionsDatasource());
+        datasources.put("maven", new MavenVersionsDatasource());
+        datasources.put("mvnd", new MavenDaemonVersionsDatasource(githubClient, getLog()));
+        datasources.put("gradle", new GradleVersionsDatasource(githubClient, getLog()));
+        datasources.put("clojure", new ClojureVersionsDatasource(githubClient, getLog()));
+        return datasources;
+    }
+
+    private List<ToolsIndexDatasource> selectDatasources(Map<String, ToolsIndexDatasource> allDatasources)
+            throws MojoFailureException {
+        if (tools == null || tools.isBlank()) {
+            return new ArrayList<>(allDatasources.values());
+        }
+
+        List<ToolsIndexDatasource> selected = new ArrayList<>();
+        for (String tool : tools.split(",")) {
+            String trimmed = tool.trim();
+            ToolsIndexDatasource datasource = allDatasources.get(trimmed);
+            if (datasource == null) {
+                throw new MojoFailureException("Unknown tool: " + trimmed
+                        + ". Available tools: " + allDatasources.keySet());
+            }
+            selected.add(datasource);
+        }
+        return selected;
+    }
+
+    private ToolsIndexV2 fetchInParallel(List<ToolsIndexDatasource> datasources, ToolsIndexV2 initialIndex)
+            throws Exception {
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
             List<Future<ToolsIndexV2>> futures = new ArrayList<>();
-            for (ToolsIndexExtender datasource : datasources) {
-                futures.add(executor.submit(() -> datasource.extendToolsIndex(initialIndex)));
+            for (ToolsIndexDatasource datasource : datasources) {
+                futures.add(executor.submit(datasource::fetchToolVersions));
             }
 
             return mergeResults(initialIndex, futures);
@@ -148,20 +156,11 @@ public class ToolsIndexProducer implements Callable<Integer> {
                 .build();
     }
 
-    public static void main(String[] args) {
-        System.exit(executeProjectEnvToolsIndexProducer(args));
-    }
-
-    public static int executeProjectEnvToolsIndexProducer(String[] args) {
-        return new CommandLine(new ToolsIndexProducer()).execute(args);
-    }
-
-    private ToolsIndexV2 readOrCreateToolsIndexV2() {
+    private ToolsIndexV2 readOrCreateToolsIndex() {
         if (indexFile.exists()) {
             return ToolIndexV2Parser.readFrom(indexFile);
-        } else {
-            return ImmutableToolsIndexV2.builder().build();
         }
+        return ImmutableToolsIndexV2.builder().build();
     }
 
     private static <K, V> void putAllIfNotNull(Map<K, V> target, Map<K, V> source) {

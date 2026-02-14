@@ -1,9 +1,9 @@
 package io.projectenv.tools.jdk;
 
 import io.projectenv.tools.*;
-import io.projectenv.tools.jdk.github.GithubClient;
-import io.projectenv.tools.jdk.github.Release;
-import io.projectenv.tools.jdk.github.Repository;
+import io.projectenv.tools.github.GithubClient;
+import io.projectenv.tools.github.Release;
+import io.projectenv.tools.github.Repository;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -16,7 +16,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.regex.Pattern;
 
-public class TemurinVersionsDatasource implements ToolsIndexExtender {
+import org.apache.maven.plugin.logging.Log;
+
+public class TemurinVersionsDatasource implements ToolsIndexDatasource {
 
     private static final String DISTRIBUTION_ID = "temurin";
     private static final Pattern RELEASES_REPOSITORY_PATTERN = Pattern.compile("^temurin(\\d+)-binaries$");
@@ -33,15 +35,17 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
     );
 
     private final GithubClient githubClient;
+    private final Log log;
 
-    public TemurinVersionsDatasource(GithubClient githubClient) {
+    public TemurinVersionsDatasource(GithubClient githubClient, Log log) {
         this.githubClient = githubClient;
+        this.log = log;
     }
 
     @Override
-    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
-        SortedMap<String, SortedSet<String>> jdkDistributionSynonyms = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkDistributionSynonyms());
-        SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> jdkVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkVersions());
+    public ToolsIndexV2 fetchToolVersions() {
+        SortedMap<String, SortedSet<String>> jdkDistributionSynonyms = SortedCollections.createNaturallySortedMap();
+        SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> jdkVersions = SortedCollections.createNaturallySortedMap();
 
         List<Repository> matchingRepos = githubClient.getRepositories("adoptium")
                 .stream()
@@ -69,7 +73,6 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
         jdkDistributionSynonyms.put(DISTRIBUTION_ID, SYNONYMS);
 
         return ImmutableToolsIndexV2.builder()
-                .from(currentToolsIndex)
                 .jdkVersions(jdkVersions)
                 .jdkDistributionSynonyms(jdkDistributionSynonyms)
                 .build();
@@ -80,7 +83,7 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
         for (var release : releases) {
             var version = extractJavaVersion(release.getTagName());
             if (version == null) {
-                ProcessOutput.writeInfoMessage("unexpected release tag name {0}", release.getTagName());
+                log.info("Unexpected release tag name: " + release.getTagName());
                 continue;
             }
 
@@ -90,44 +93,40 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
                     continue;
                 }
 
-                var cpuArchitectureName = releaseAssetNameMatcher.group(1);
-                var cpuArchitecture = mapToCpuArchitecture(cpuArchitectureName);
-
-                var operatingSystemName = releaseAssetNameMatcher.group(2);
-                var operatingSystem = mapToOperatingSystem(operatingSystemName);
+                var cpuArchitecture = mapToCpuArchitecture(releaseAssetNameMatcher.group(1));
+                var operatingSystem = mapToOperatingSystem(releaseAssetNameMatcher.group(2));
                 if (operatingSystem == null) {
                     continue;
                 }
 
                 jdkVersions
-                        .computeIfAbsent(DISTRIBUTION_ID, (key) -> SortedCollections.createSemverSortedMap())
-                        .computeIfAbsent(version, (key) -> SortedCollections.createNaturallySortedMap())
-                        .computeIfAbsent(operatingSystem, (key) -> SortedCollections.createNaturallySortedMap())
+                        .computeIfAbsent(DISTRIBUTION_ID, k -> SortedCollections.createSemverSortedMap())
+                        .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
+                        .computeIfAbsent(operatingSystem, k -> SortedCollections.createNaturallySortedMap())
                         .put(cpuArchitecture, releaseAsset.getBrowserDownloadUrl());
             }
         }
     }
 
     private String extractJavaVersion(String releaseTagName) {
-        var releaseTagNameMatcher = LEGACY_RELEASE_TAG_PATTERN.matcher(releaseTagName);
-        if (releaseTagNameMatcher.find()) {
-            var majorJavaVersion = releaseTagNameMatcher.group(1);
-            var minorJavaVersion = releaseTagNameMatcher.group(2);
-            var buildVersion = releaseTagNameMatcher.group(3);
-
+        var matcher = LEGACY_RELEASE_TAG_PATTERN.matcher(releaseTagName);
+        if (matcher.find()) {
+            var majorJavaVersion = matcher.group(1);
+            var minorJavaVersion = matcher.group(2);
+            var buildVersion = matcher.group(3);
             return majorJavaVersion + ".0." + minorJavaVersion + "+" + StringUtils.stripStart(buildVersion, "0");
         }
 
-        releaseTagNameMatcher = RELEASE_TAG_PATTERN.matcher(releaseTagName);
-        if (releaseTagNameMatcher.find()) {
-            return releaseTagNameMatcher.group(1);
+        matcher = RELEASE_TAG_PATTERN.matcher(releaseTagName);
+        if (matcher.find()) {
+            return matcher.group(1);
         }
 
         return null;
     }
 
-    private OperatingSystem mapToOperatingSystem(String operatingSystemName) {
-        return switch (operatingSystemName) {
+    private OperatingSystem mapToOperatingSystem(String name) {
+        return switch (name) {
             case "mac" -> OperatingSystem.MACOS;
             case "linux" -> OperatingSystem.LINUX;
             case "windows" -> OperatingSystem.WINDOWS;
@@ -135,8 +134,8 @@ public class TemurinVersionsDatasource implements ToolsIndexExtender {
         };
     }
 
-    private CpuArchitecture mapToCpuArchitecture(String cpuArchitectureName) {
-        return switch (cpuArchitectureName) {
+    private CpuArchitecture mapToCpuArchitecture(String name) {
+        return switch (name) {
             case "aarch64" -> CpuArchitecture.AARCH64;
             default -> CpuArchitecture.AMD64;
         };

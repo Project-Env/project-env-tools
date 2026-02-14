@@ -2,8 +2,8 @@ package io.projectenv.tools.jdk;
 
 import io.projectenv.tools.*;
 import io.projectenv.tools.http.ResilientHttpClient;
-import io.projectenv.tools.jdk.github.GithubClient;
-import io.projectenv.tools.jdk.github.Release;
+import io.projectenv.tools.github.GithubClient;
+import io.projectenv.tools.github.Release;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -21,7 +21,9 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-public class GraalVmVersionsDatasource implements ToolsIndexExtender {
+import org.apache.maven.plugin.logging.Log;
+
+public class GraalVmVersionsDatasource implements ToolsIndexDatasource {
 
     private static final String DISTRIBUTION_ID_BASE_NAME = "graalvm_ce";
     private static final Pattern DISTRIBUTION_ID_PATTERN = Pattern.compile("^" + DISTRIBUTION_ID_BASE_NAME + "(\\d+)$");
@@ -43,16 +45,18 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
 
     private final GithubClient githubClient;
     private final ResilientHttpClient httpClient;
+    private final Log log;
 
-    public GraalVmVersionsDatasource(GithubClient githubClient, ResilientHttpClient httpClient) {
+    public GraalVmVersionsDatasource(GithubClient githubClient, ResilientHttpClient httpClient, Log log) {
         this.githubClient = githubClient;
         this.httpClient = httpClient;
+        this.log = log;
     }
 
     @Override
-    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
-        SortedMap<String, SortedSet<String>> jdkDistributionSynonyms = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkDistributionSynonyms());
-        SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> jdkVersions = SortedCollections.createNaturallySortedMap(currentToolsIndex.getJdkVersions());
+    public ToolsIndexV2 fetchToolVersions() {
+        SortedMap<String, SortedSet<String>> jdkDistributionSynonyms = SortedCollections.createNaturallySortedMap();
+        SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> jdkVersions = SortedCollections.createNaturallySortedMap();
 
         var releases = githubClient.getReleases("graalvm", "graalvm-ce-builds")
                 .stream()
@@ -67,28 +71,27 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
 
                 for (Map.Entry<OperatingSystem, Map<CpuArchitecture, String>> osEntry : entry.getValue().entrySet()) {
                     jdkVersions
-                            .computeIfAbsent(distributionName, key -> SortedCollections.createSemverSortedMap())
-                            .computeIfAbsent(result.graalVmVersion(), key -> SortedCollections.createNaturallySortedMap())
-                            .computeIfAbsent(osEntry.getKey(), key -> SortedCollections.createNaturallySortedMap())
+                            .computeIfAbsent(distributionName, k -> SortedCollections.createSemverSortedMap())
+                            .computeIfAbsent(result.graalVmVersion(), k -> SortedCollections.createNaturallySortedMap())
+                            .computeIfAbsent(osEntry.getKey(), k -> SortedCollections.createNaturallySortedMap())
                             .putAll(osEntry.getValue());
                 }
             }
         }
 
         for (var distributionId : jdkVersions.keySet()) {
-            var distributionIdMatcher = DISTRIBUTION_ID_PATTERN.matcher(distributionId);
-            if (!distributionIdMatcher.find()) {
+            var matcher = DISTRIBUTION_ID_PATTERN.matcher(distributionId);
+            if (!matcher.find()) {
                 continue;
             }
 
-            var majorJavaVersion = distributionIdMatcher.group(1);
+            var majorJavaVersion = matcher.group(1);
             jdkDistributionSynonyms.put(distributionId, SYNONYMS_BASES.stream()
-                    .map(synonymBaseName -> synonymBaseName + majorJavaVersion)
+                    .map(base -> base + majorJavaVersion)
                     .collect(SortedCollections.toNaturallySortedSet()));
         }
 
         return ImmutableToolsIndexV2.builder()
-                .from(currentToolsIndex)
                 .jdkVersions(jdkVersions)
                 .jdkDistributionSynonyms(jdkDistributionSynonyms)
                 .build();
@@ -111,26 +114,26 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
             }
             return results;
         } catch (Exception e) {
-            throw new RuntimeException("failed to process GraalVM releases in parallel", e);
+            throw new RuntimeException("Failed to process GraalVM releases in parallel", e);
         }
     }
 
     private ReleaseResult processRelease(Release release) {
         var downloadUrls = new HashMap<String, Map<OperatingSystem, Map<CpuArchitecture, String>>>();
         for (var releaseAsset : release.getAssets()) {
-            var releaseAssetNameMatcher = RELEASE_ASSET_NAME_PATTERN.matcher(releaseAsset.getName());
-            if (!releaseAssetNameMatcher.find()) {
-                ProcessOutput.writeInfoMessage("skipping unknown release asset name {0}", releaseAsset.getName());
+            var matcher = RELEASE_ASSET_NAME_PATTERN.matcher(releaseAsset.getName());
+            if (!matcher.find()) {
+                log.debug("Skipping unknown release asset: " + releaseAsset.getName());
                 continue;
             }
 
-            var javaMajorVersion = releaseAssetNameMatcher.group(1);
-            var operatingSystem = mapToOperatingSystem(releaseAssetNameMatcher.group(2));
-            var cpuArchitecture = mapToCpuArchitecture(releaseAssetNameMatcher.group(3));
+            var javaMajorVersion = matcher.group(1);
+            var operatingSystem = mapToOperatingSystem(matcher.group(2));
+            var cpuArchitecture = mapToCpuArchitecture(matcher.group(3));
 
             downloadUrls
-                    .computeIfAbsent(javaMajorVersion, key -> new EnumMap<>(OperatingSystem.class))
-                    .computeIfAbsent(operatingSystem, key -> new EnumMap<>(CpuArchitecture.class))
+                    .computeIfAbsent(javaMajorVersion, k -> new EnumMap<>(OperatingSystem.class))
+                    .computeIfAbsent(operatingSystem, k -> new EnumMap<>(CpuArchitecture.class))
                     .put(cpuArchitecture, releaseAsset.getBrowserDownloadUrl());
         }
 
@@ -148,15 +151,15 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
         return new ReleaseResult(graalVmVersion, downloadUrls);
     }
 
-    private OperatingSystem mapToOperatingSystem(String operatingSystemName) {
-        return switch (operatingSystemName) {
+    private OperatingSystem mapToOperatingSystem(String name) {
+        return switch (name) {
             case "darwin" -> OperatingSystem.MACOS;
-            default -> OperatingSystem.valueOf(operatingSystemName.toUpperCase());
+            default -> OperatingSystem.valueOf(name.toUpperCase());
         };
     }
 
-    private CpuArchitecture mapToCpuArchitecture(String cpuArchitectureName) {
-        return switch (cpuArchitectureName) {
+    private CpuArchitecture mapToCpuArchitecture(String name) {
+        return switch (name) {
             case "aarch64" -> CpuArchitecture.AARCH64;
             default -> CpuArchitecture.AMD64;
         };
@@ -171,7 +174,7 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
 
             HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
             if (response.statusCode() != 200) {
-                throw new IOException("unexpected status code " + response.statusCode() + " for " + windowsDistributionUrl);
+                throw new IOException("Unexpected status code " + response.statusCode() + " for " + windowsDistributionUrl);
             }
 
             try (InputStream in = response.body();
@@ -184,17 +187,16 @@ public class GraalVmVersionsDatasource implements ToolsIndexExtender {
                         zipIn.transferTo(buffer);
 
                         String versionFileContent = buffer.toString(StandardCharsets.UTF_8);
-
-                        var graalVmVersionMatcher = GRAAL_VM_VERSION_PATTERN.matcher(versionFileContent);
-                        if (!graalVmVersionMatcher.find()) {
-                            throw new IllegalStateException("found release file, but could not extract GraalVM version");
+                        var versionMatcher = GRAAL_VM_VERSION_PATTERN.matcher(versionFileContent);
+                        if (!versionMatcher.find()) {
+                            throw new IllegalStateException("Found release file but could not extract GraalVM version");
                         }
-                        return graalVmVersionMatcher.group(1);
+                        return versionMatcher.group(1);
                     }
                 }
             }
 
-            throw new IllegalStateException("could not find release file in " + windowsDistributionUrl);
+            throw new IllegalStateException("Could not find release file in " + windowsDistributionUrl);
         } catch (IOException | InterruptedException e) {
             if (e instanceof InterruptedException) {
                 Thread.currentThread().interrupt();

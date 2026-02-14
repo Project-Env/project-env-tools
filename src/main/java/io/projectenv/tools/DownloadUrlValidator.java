@@ -15,15 +15,26 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 
-public class DownloadUrlValidator implements ToolsIndexExtender {
+import org.apache.maven.plugin.logging.Log;
+
+/**
+ * Validates all download URLs in a tools index by sending HTTP HEAD requests.
+ * URLs that don't return a 2xx status code are removed from the index.
+ */
+public class DownloadUrlValidator {
 
     private static final int MAX_CONCURRENT_VALIDATIONS = 40;
 
-    private final ResilientHttpClient httpClient = ResilientHttpClient.create();
+    private final ResilientHttpClient httpClient;
     private final Semaphore semaphore = new Semaphore(MAX_CONCURRENT_VALIDATIONS);
+    private final Log log;
 
-    @Override
-    public ToolsIndexV2 extendToolsIndex(ToolsIndexV2 currentToolsIndex) {
+    public DownloadUrlValidator(Log log) {
+        this.httpClient = ResilientHttpClient.create(log);
+        this.log = log;
+    }
+
+    public ToolsIndexV2 validateUrls(ToolsIndexV2 toolsIndex) {
         SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> validatedJdkVersions = SortedCollections.createNaturallySortedMap();
         SortedMap<String, String> validatedGradleVersions = SortedCollections.createSemverSortedMap();
         SortedMap<String, String> validatedMavenVersions = SortedCollections.createSemverSortedMap();
@@ -34,24 +45,23 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
             List<Future<?>> futures = new ArrayList<>();
 
-            // Validate JDK URLs
-            for (Map.Entry<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> distributionEntry : currentToolsIndex.getJdkVersions().entrySet()) {
+            for (Map.Entry<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> distributionEntry : toolsIndex.getJdkVersions().entrySet()) {
                 for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : distributionEntry.getValue().entrySet()) {
-                    for (Map.Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> operatingSystemEntry : versionEntry.getValue().entrySet()) {
-                        for (Map.Entry<CpuArchitecture, String> cpuArchitectureEntry : operatingSystemEntry.getValue().entrySet()) {
+                    for (Map.Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> osEntry : versionEntry.getValue().entrySet()) {
+                        for (Map.Entry<CpuArchitecture, String> cpuEntry : osEntry.getValue().entrySet()) {
                             String distribution = distributionEntry.getKey();
                             String version = versionEntry.getKey();
-                            OperatingSystem os = operatingSystemEntry.getKey();
-                            CpuArchitecture cpu = cpuArchitectureEntry.getKey();
-                            String url = cpuArchitectureEntry.getValue();
+                            OperatingSystem os = osEntry.getKey();
+                            CpuArchitecture cpu = cpuEntry.getKey();
+                            String url = cpuEntry.getValue();
 
                             futures.add(executor.submit(() -> {
-                                if (urlReturns2XX(url)) {
+                                if (isUrlValid(url)) {
                                     synchronized (validatedJdkVersions) {
                                         validatedJdkVersions
-                                                .computeIfAbsent(distribution, key -> SortedCollections.createSemverSortedMap())
-                                                .computeIfAbsent(version, key -> SortedCollections.createNaturallySortedMap())
-                                                .computeIfAbsent(os, key -> SortedCollections.createNaturallySortedMap())
+                                                .computeIfAbsent(distribution, k -> SortedCollections.createSemverSortedMap())
+                                                .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
+                                                .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
                                                 .put(cpu, url);
                                     }
                                 }
@@ -61,49 +71,40 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
                 }
             }
 
-            // Validate Gradle URLs
-            for (Map.Entry<String, String> versionEntry : currentToolsIndex.getGradleVersions().entrySet()) {
-                String version = versionEntry.getKey();
-                String url = versionEntry.getValue();
-
+            for (Map.Entry<String, String> entry : toolsIndex.getGradleVersions().entrySet()) {
                 futures.add(executor.submit(() -> {
-                    if (urlReturns2XX(url)) {
+                    if (isUrlValid(entry.getValue())) {
                         synchronized (validatedGradleVersions) {
-                            validatedGradleVersions.put(version, url);
+                            validatedGradleVersions.put(entry.getKey(), entry.getValue());
                         }
                     }
                 }));
             }
 
-            // Validate Maven URLs
-            for (Map.Entry<String, String> versionEntry : currentToolsIndex.getMavenVersions().entrySet()) {
-                String version = versionEntry.getKey();
-                String url = versionEntry.getValue();
-
+            for (Map.Entry<String, String> entry : toolsIndex.getMavenVersions().entrySet()) {
                 futures.add(executor.submit(() -> {
-                    if (urlReturns2XX(url)) {
+                    if (isUrlValid(entry.getValue())) {
                         synchronized (validatedMavenVersions) {
-                            validatedMavenVersions.put(version, url);
+                            validatedMavenVersions.put(entry.getKey(), entry.getValue());
                         }
                     }
                 }));
             }
 
-            // Validate mvnd URLs
-            for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : currentToolsIndex.getMvndVersions().entrySet()) {
-                for (Map.Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> operatingSystemEntry : versionEntry.getValue().entrySet()) {
-                    for (Map.Entry<CpuArchitecture, String> cpuArchitectureEntry : operatingSystemEntry.getValue().entrySet()) {
+            for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : toolsIndex.getMvndVersions().entrySet()) {
+                for (Map.Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> osEntry : versionEntry.getValue().entrySet()) {
+                    for (Map.Entry<CpuArchitecture, String> cpuEntry : osEntry.getValue().entrySet()) {
                         String version = versionEntry.getKey();
-                        OperatingSystem os = operatingSystemEntry.getKey();
-                        CpuArchitecture cpu = cpuArchitectureEntry.getKey();
-                        String url = cpuArchitectureEntry.getValue();
+                        OperatingSystem os = osEntry.getKey();
+                        CpuArchitecture cpu = cpuEntry.getKey();
+                        String url = cpuEntry.getValue();
 
                         futures.add(executor.submit(() -> {
-                            if (urlReturns2XX(url)) {
+                            if (isUrlValid(url)) {
                                 synchronized (validatedMvndVersions) {
                                     validatedMvndVersions
-                                            .computeIfAbsent(version, key -> SortedCollections.createNaturallySortedMap())
-                                            .computeIfAbsent(os, key -> SortedCollections.createNaturallySortedMap())
+                                            .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
+                                            .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
                                             .put(cpu, url);
                                 }
                             }
@@ -112,21 +113,20 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
                 }
             }
 
-            // Validate Node URLs
-            for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : currentToolsIndex.getNodeVersions().entrySet()) {
-                for (Map.Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> operatingSystemEntry : versionEntry.getValue().entrySet()) {
-                    for (Map.Entry<CpuArchitecture, String> cpuArchitectureEntry : operatingSystemEntry.getValue().entrySet()) {
+            for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : toolsIndex.getNodeVersions().entrySet()) {
+                for (Map.Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> osEntry : versionEntry.getValue().entrySet()) {
+                    for (Map.Entry<CpuArchitecture, String> cpuEntry : osEntry.getValue().entrySet()) {
                         String version = versionEntry.getKey();
-                        OperatingSystem os = operatingSystemEntry.getKey();
-                        CpuArchitecture cpu = cpuArchitectureEntry.getKey();
-                        String url = cpuArchitectureEntry.getValue();
+                        OperatingSystem os = osEntry.getKey();
+                        CpuArchitecture cpu = cpuEntry.getKey();
+                        String url = cpuEntry.getValue();
 
                         futures.add(executor.submit(() -> {
-                            if (urlReturns2XX(url)) {
+                            if (isUrlValid(url)) {
                                 synchronized (validatedNodeVersions) {
                                     validatedNodeVersions
-                                            .computeIfAbsent(version, key -> SortedCollections.createNaturallySortedMap())
-                                            .computeIfAbsent(os, key -> SortedCollections.createNaturallySortedMap())
+                                            .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
+                                            .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
                                             .put(cpu, url);
                                 }
                             }
@@ -135,18 +135,17 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
                 }
             }
 
-            // Validate Clojure URLs
-            for (Map.Entry<String, SortedMap<OperatingSystem, String>> versionEntry : currentToolsIndex.getClojureVersions().entrySet()) {
-                for (Map.Entry<OperatingSystem, String> operatingSystemEntry : versionEntry.getValue().entrySet()) {
+            for (Map.Entry<String, SortedMap<OperatingSystem, String>> versionEntry : toolsIndex.getClojureVersions().entrySet()) {
+                for (Map.Entry<OperatingSystem, String> osEntry : versionEntry.getValue().entrySet()) {
                     String version = versionEntry.getKey();
-                    OperatingSystem os = operatingSystemEntry.getKey();
-                    String url = operatingSystemEntry.getValue();
+                    OperatingSystem os = osEntry.getKey();
+                    String url = osEntry.getValue();
 
                     futures.add(executor.submit(() -> {
-                        if (urlReturns2XX(url)) {
+                        if (isUrlValid(url)) {
                             synchronized (validatedClojureVersions) {
                                 validatedClojureVersions
-                                        .computeIfAbsent(version, key -> SortedCollections.createNaturallySortedMap())
+                                        .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
                                         .put(os, url);
                             }
                         }
@@ -154,7 +153,6 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
                 }
             }
 
-            // Wait for all validations to complete
             for (Future<?> future : futures) {
                 future.get();
             }
@@ -164,7 +162,7 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
 
         return ImmutableToolsIndexV2.builder()
                 .jdkVersions(validatedJdkVersions)
-                .jdkDistributionSynonyms(currentToolsIndex.getJdkDistributionSynonyms())
+                .jdkDistributionSynonyms(toolsIndex.getJdkDistributionSynonyms())
                 .gradleVersions(validatedGradleVersions)
                 .mavenVersions(validatedMavenVersions)
                 .mvndVersions(validatedMvndVersions)
@@ -173,11 +171,11 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
                 .build();
     }
 
-    private boolean urlReturns2XX(String url) {
+    private boolean isUrlValid(String url) {
         try {
             semaphore.acquire();
             try {
-                ProcessOutput.writeInfoMessage("Checking URL {0}...", url);
+                log.info("Checking URL " + url);
 
                 var httpRequest = HttpRequest.newBuilder()
                         .uri(URI.create(url))
@@ -188,10 +186,10 @@ public class DownloadUrlValidator implements ToolsIndexExtender {
                 int statusCode = httpClient.send(httpRequest, HttpResponse.BodyHandlers.discarding()).statusCode();
 
                 if (statusCode >= 200 && statusCode < 300) {
-                    ProcessOutput.writeInfoMessage("Got {0} for URL {1} - keeping URL", statusCode, url);
+                    log.info("Got " + statusCode + " for " + url + " - keeping");
                     return true;
                 } else {
-                    ProcessOutput.writeInfoMessage("Got {0} for URL {1} - removing URL from index", statusCode, url);
+                    log.info("Got " + statusCode + " for " + url + " - removing");
                     return false;
                 }
             } finally {
