@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.maven.plugin.logging.Log;
 
@@ -42,6 +43,9 @@ public class DownloadUrlValidator {
         SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> validatedNodeVersions = SortedCollections.createSemverSortedMap();
         SortedMap<String, SortedMap<OperatingSystem, String>> validatedClojureVersions = SortedCollections.createSemverSortedMap();
 
+        AtomicInteger totalCount = new AtomicInteger();
+        AtomicInteger removedCount = new AtomicInteger();
+
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
             List<Future<?>> futures = new ArrayList<>();
 
@@ -56,6 +60,7 @@ public class DownloadUrlValidator {
                             String url = cpuEntry.getValue();
 
                             futures.add(executor.submit(() -> {
+                                totalCount.incrementAndGet();
                                 if (isUrlValid(url)) {
                                     synchronized (validatedJdkVersions) {
                                         validatedJdkVersions
@@ -64,6 +69,9 @@ public class DownloadUrlValidator {
                                                 .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
                                                 .put(cpu, url);
                                     }
+                                } else {
+                                    removedCount.incrementAndGet();
+                                    log.warn("Removed invalid URL for JDK " + distribution + " " + version + " " + os + "/" + cpu + ": " + url);
                                 }
                             }));
                         }
@@ -73,20 +81,28 @@ public class DownloadUrlValidator {
 
             for (Map.Entry<String, String> entry : toolsIndex.getGradleVersions().entrySet()) {
                 futures.add(executor.submit(() -> {
+                    totalCount.incrementAndGet();
                     if (isUrlValid(entry.getValue())) {
                         synchronized (validatedGradleVersions) {
                             validatedGradleVersions.put(entry.getKey(), entry.getValue());
                         }
+                    } else {
+                        removedCount.incrementAndGet();
+                        log.warn("Removed invalid URL for Gradle " + entry.getKey() + ": " + entry.getValue());
                     }
                 }));
             }
 
             for (Map.Entry<String, String> entry : toolsIndex.getMavenVersions().entrySet()) {
                 futures.add(executor.submit(() -> {
+                    totalCount.incrementAndGet();
                     if (isUrlValid(entry.getValue())) {
                         synchronized (validatedMavenVersions) {
                             validatedMavenVersions.put(entry.getKey(), entry.getValue());
                         }
+                    } else {
+                        removedCount.incrementAndGet();
+                        log.warn("Removed invalid URL for Maven " + entry.getKey() + ": " + entry.getValue());
                     }
                 }));
             }
@@ -100,6 +116,7 @@ public class DownloadUrlValidator {
                         String url = cpuEntry.getValue();
 
                         futures.add(executor.submit(() -> {
+                            totalCount.incrementAndGet();
                             if (isUrlValid(url)) {
                                 synchronized (validatedMvndVersions) {
                                     validatedMvndVersions
@@ -107,6 +124,9 @@ public class DownloadUrlValidator {
                                             .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
                                             .put(cpu, url);
                                 }
+                            } else {
+                                removedCount.incrementAndGet();
+                                log.warn("Removed invalid URL for mvnd " + version + " " + os + "/" + cpu + ": " + url);
                             }
                         }));
                     }
@@ -122,6 +142,7 @@ public class DownloadUrlValidator {
                         String url = cpuEntry.getValue();
 
                         futures.add(executor.submit(() -> {
+                            totalCount.incrementAndGet();
                             if (isUrlValid(url)) {
                                 synchronized (validatedNodeVersions) {
                                     validatedNodeVersions
@@ -129,6 +150,9 @@ public class DownloadUrlValidator {
                                             .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
                                             .put(cpu, url);
                                 }
+                            } else {
+                                removedCount.incrementAndGet();
+                                log.warn("Removed invalid URL for Node " + version + " " + os + "/" + cpu + ": " + url);
                             }
                         }));
                     }
@@ -142,12 +166,16 @@ public class DownloadUrlValidator {
                     String url = osEntry.getValue();
 
                     futures.add(executor.submit(() -> {
+                        totalCount.incrementAndGet();
                         if (isUrlValid(url)) {
                             synchronized (validatedClojureVersions) {
                                 validatedClojureVersions
                                         .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
                                         .put(os, url);
                             }
+                        } else {
+                            removedCount.incrementAndGet();
+                            log.warn("Removed invalid URL for Clojure " + version + " " + os + ": " + url);
                         }
                     }));
                 }
@@ -159,6 +187,8 @@ public class DownloadUrlValidator {
         } catch (Exception e) {
             throw new RuntimeException("URL validation failed", e);
         }
+
+        log.info("URL validation complete: " + totalCount.get() + " checked, " + removedCount.get() + " removed");
 
         return ImmutableToolsIndexV2.builder()
                 .jdkVersions(validatedJdkVersions)
