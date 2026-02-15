@@ -3682,10 +3682,10 @@
     },
     "0.10.48": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v0.10.x/node-v0.10.48-darwin-x64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v0.10.48/node-v0.10.48-darwin-x64.tar.xz"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v0.10.x/node-v0.10.48-linux-x64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v0.10.48/node-v0.10.48-linux-x64.tar.xz"
       }
     },
     "0.11.0": {
@@ -4380,14 +4380,14 @@
     },
     "4.9.1": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v4.x/node-v4.9.1-darwin-x64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v4.9.1/node-v4.9.1-darwin-x64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v4.x/node-v4.9.1-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v4.9.1/node-v4.9.1-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v4.x/node-v4.9.1-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v4.x/node-v4.9.1-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v4.9.1/node-v4.9.1-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v4.9.1/node-v4.9.1-linux-arm64.tar.xz"
       }
     },
     "5.0.0": {
@@ -4700,9 +4700,6 @@
       "macos": {
         "amd64": "https://nodejs.org/download/release/v6.8.1/node-v6.8.1-darwin-x64.tar.xz"
       },
-      "windows": {
-        "amd64": "https://nodejs.org/download/release/v6.8.1/node-v6.8.1-win-x64.zip"
-      },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v6.8.1/node-v6.8.1-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v6.8.1/node-v6.8.1-linux-arm64.tar.xz"
@@ -4736,9 +4733,6 @@
       "macos": {
         "amd64": "https://nodejs.org/download/release/v6.9.2/node-v6.9.2-darwin-x64.tar.xz"
       },
-      "windows": {
-        "amd64": "https://nodejs.org/download/release/v6.9.2/node-v6.9.2-win-x64.zip"
-      },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v6.9.2/node-v6.9.2-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v6.9.2/node-v6.9.2-linux-arm64.tar.xz"
@@ -4747,6 +4741,9 @@
     "6.9.3": {
       "macos": {
         "amd64": "https://nodejs.org/download/release/v6.9.3/node-v6.9.3-darwin-x64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v6.9.3/node-v6.9.3-win-x64.zip"
       },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v6.9.3/node-v6.9.3-linux-x64.tar.xz",
@@ -4802,9 +4799,6 @@
       "macos": {
         "amd64": "https://nodejs.org/download/release/v6.10.2/node-v6.10.2-darwin-x64.tar.xz"
       },
-      "windows": {
-        "amd64": "https://nodejs.org/download/release/v6.10.2/node-v6.10.2-win-x64.zip"
-      },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v6.10.2/node-v6.10.2-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v6.10.2/node-v6.10.2-linux-arm64.tar.xz"
@@ -4813,9 +4807,6 @@
     "6.10.3": {
       "macos": {
         "amd64": "https://nodejs.org/download/release/v6.10.3/node-v6.10.3-darwin-x64.tar.xz"
-      },
-      "windows": {
-        "amd64": "https://nodejs.org/download/release/v6.10.3/node-v6.10.3-win-x64.zip"
       },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v6.10.3/node-v6.10.3-linux-x64.tar.xz",
@@ -4837,6 +4828,9 @@
     "6.11.1": {
       "macos": {
         "amd64": "https://nodejs.org/download/release/v6.11.1/node-v6.11.1-darwin-x64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v6.11.1/node-v6.11.1-win-x64.zip"
       },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v6.11.1/node-v6.11.1-linux-x64.tar.xz",
@@ -4907,6 +4901,9 @@
       "macos": {
         "amd64": "https://nodejs.org/download/release/v6.12.1/node-v6.12.1-darwin-x64.tar.xz"
       },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v6.12.1/node-v6.12.1-win-x64.zip"
+      },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v6.12.1/node-v6.12.1-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v6.12.1/node-v6.12.1-linux-arm64.tar.xz"
@@ -4928,9 +4925,6 @@
       "macos": {
         "amd64": "https://nodejs.org/download/release/v6.12.3/node-v6.12.3-darwin-x64.tar.xz"
       },
-      "windows": {
-        "amd64": "https://nodejs.org/download/release/v6.12.3/node-v6.12.3-win-x64.zip"
-      },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v6.12.3/node-v6.12.3-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v6.12.3/node-v6.12.3-linux-arm64.tar.xz"
@@ -4939,6 +4933,9 @@
     "6.13.0": {
       "macos": {
         "amd64": "https://nodejs.org/download/release/v6.13.0/node-v6.13.0-darwin-x64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v6.13.0/node-v6.13.0-win-x64.zip"
       },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v6.13.0/node-v6.13.0-linux-x64.tar.xz",
@@ -5045,9 +5042,6 @@
       "macos": {
         "amd64": "https://nodejs.org/download/release/v6.16.0/node-v6.16.0-darwin-x64.tar.xz"
       },
-      "windows": {
-        "amd64": "https://nodejs.org/download/release/v6.16.0/node-v6.16.0-win-x64.zip"
-      },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v6.16.0/node-v6.16.0-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v6.16.0/node-v6.16.0-linux-arm64.tar.xz"
@@ -5067,11 +5061,14 @@
     },
     "6.17.1": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v6.x/node-v6.17.1-darwin-x64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v6.17.1/node-v6.17.1-darwin-x64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v6.17.1/node-v6.17.1-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v6.x/node-v6.17.1-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v6.x/node-v6.17.1-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v6.17.1/node-v6.17.1-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v6.17.1/node-v6.17.1-linux-arm64.tar.xz"
       }
     },
     "7.0.0": {
@@ -5150,9 +5147,6 @@
       "macos": {
         "amd64": "https://nodejs.org/download/release/v7.5.0/node-v7.5.0-darwin-x64.tar.xz"
       },
-      "windows": {
-        "amd64": "https://nodejs.org/download/release/v7.5.0/node-v7.5.0-win-x64.zip"
-      },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v7.5.0/node-v7.5.0-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v7.5.0/node-v7.5.0-linux-arm64.tar.xz"
@@ -5173,9 +5167,6 @@
     "7.7.0": {
       "macos": {
         "amd64": "https://nodejs.org/download/release/v7.7.0/node-v7.7.0-darwin-x64.tar.xz"
-      },
-      "windows": {
-        "amd64": "https://nodejs.org/download/release/v7.7.0/node-v7.7.0-win-x64.zip"
       },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v7.7.0/node-v7.7.0-linux-x64.tar.xz",
@@ -5246,9 +5237,6 @@
       "macos": {
         "amd64": "https://nodejs.org/download/release/v7.9.0/node-v7.9.0-darwin-x64.tar.xz"
       },
-      "windows": {
-        "amd64": "https://nodejs.org/download/release/v7.9.0/node-v7.9.0-win-x64.zip"
-      },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v7.9.0/node-v7.9.0-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v7.9.0/node-v7.9.0-linux-arm64.tar.xz"
@@ -5257,9 +5245,6 @@
     "7.10.0": {
       "macos": {
         "amd64": "https://nodejs.org/download/release/v7.10.0/node-v7.10.0-darwin-x64.tar.xz"
-      },
-      "windows": {
-        "amd64": "https://nodejs.org/download/release/v7.10.0/node-v7.10.0-win-x64.zip"
       },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v7.10.0/node-v7.10.0-linux-x64.tar.xz",
@@ -5318,6 +5303,9 @@
       "macos": {
         "amd64": "https://nodejs.org/download/release/v8.1.2/node-v8.1.2-darwin-x64.tar.xz"
       },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v8.1.2/node-v8.1.2-win-x64.zip"
+      },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v8.1.2/node-v8.1.2-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v8.1.2/node-v8.1.2-linux-arm64.tar.xz"
@@ -5374,6 +5362,9 @@
     "8.3.0": {
       "macos": {
         "amd64": "https://nodejs.org/download/release/v8.3.0/node-v8.3.0-darwin-x64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v8.3.0/node-v8.3.0-win-x64.zip"
       },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v8.3.0/node-v8.3.0-linux-x64.tar.xz",
@@ -5720,6 +5711,9 @@
       "macos": {
         "amd64": "https://nodejs.org/download/release/v9.1.0/node-v9.1.0-darwin-x64.tar.xz"
       },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v9.1.0/node-v9.1.0-win-x64.zip"
+      },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v9.1.0/node-v9.1.0-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v9.1.0/node-v9.1.0-linux-arm64.tar.xz"
@@ -5728,9 +5722,6 @@
     "9.2.0": {
       "macos": {
         "amd64": "https://nodejs.org/download/release/v9.2.0/node-v9.2.0-darwin-x64.tar.xz"
-      },
-      "windows": {
-        "amd64": "https://nodejs.org/download/release/v9.2.0/node-v9.2.0-win-x64.zip"
       },
       "linux": {
         "amd64": "https://nodejs.org/download/release/v9.2.0/node-v9.2.0-linux-x64.tar.xz",
@@ -7227,14 +7218,14 @@
     },
     "12.22.12": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v12.x/node-v12.22.12-darwin-x64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v12.22.12/node-v12.22.12-darwin-x64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v12.x/node-v12.22.12-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v12.22.12/node-v12.22.12-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v12.x/node-v12.22.12-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v12.x/node-v12.22.12-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v12.22.12/node-v12.22.12-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v12.22.12/node-v12.22.12-linux-arm64.tar.xz"
       }
     },
     "13.0.0": {
@@ -7431,14 +7422,14 @@
     },
     "13.14.0": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/v13.14.0/node-v13.14.0-darwin-x64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/latest-v13.x/node-v13.14.0-darwin-x64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/v13.14.0/node-v13.14.0-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/latest-v13.x/node-v13.14.0-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/v13.14.0/node-v13.14.0-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/v13.14.0/node-v13.14.0-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/latest-v13.x/node-v13.14.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/latest-v13.x/node-v13.14.0-linux-arm64.tar.xz"
       }
     },
     "14.0.0": {
@@ -8199,14 +8190,14 @@
     },
     "15.14.0": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v15.x/node-v15.14.0-darwin-x64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v15.14.0/node-v15.14.0-darwin-x64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v15.x/node-v15.14.0-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v15.14.0/node-v15.14.0-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v15.x/node-v15.14.0-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v15.x/node-v15.14.0-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v15.14.0/node-v15.14.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v15.14.0/node-v15.14.0-linux-arm64.tar.xz"
       }
     },
     "16.0.0": {
@@ -8679,15 +8670,15 @@
     },
     "16.20.2": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-darwin-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-darwin-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-darwin-arm64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-linux-arm64.tar.xz"
       }
     },
     "17.0.0": {
@@ -10044,15 +10035,15 @@
     },
     "20.20.0": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-darwin-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-darwin-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-darwin-arm64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-linux-arm64.tar.xz"
       }
     },
     "21.0.0": {
@@ -10213,15 +10204,15 @@
     },
     "21.7.3": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v21.x/node-v21.7.3-darwin-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v21.x/node-v21.7.3-darwin-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v21.7.3/node-v21.7.3-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v21.7.3/node-v21.7.3-darwin-arm64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v21.x/node-v21.7.3-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v21.7.3/node-v21.7.3-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v21.x/node-v21.7.3-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v21.x/node-v21.7.3-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v21.7.3/node-v21.7.3-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v21.7.3/node-v21.7.3-linux-arm64.tar.xz"
       }
     },
     "22.0.0": {
@@ -10772,15 +10763,15 @@
     },
     "23.11.1": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v23.x/node-v23.11.1-darwin-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v23.x/node-v23.11.1-darwin-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v23.11.1/node-v23.11.1-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v23.11.1/node-v23.11.1-darwin-arm64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v23.x/node-v23.11.1-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v23.11.1/node-v23.11.1-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v23.x/node-v23.11.1-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v23.x/node-v23.11.1-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v23.11.1/node-v23.11.1-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v23.11.1/node-v23.11.1-linux-arm64.tar.xz"
       }
     },
     "24.0.0": {
@@ -11019,15 +11010,15 @@
     },
     "24.13.1": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v24.x/node-v24.13.1-darwin-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v24.x/node-v24.13.1-darwin-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v24.13.1/node-v24.13.1-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v24.13.1/node-v24.13.1-darwin-arm64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v24.x/node-v24.13.1-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v24.13.1/node-v24.13.1-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v24.x/node-v24.13.1-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v24.x/node-v24.13.1-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v24.13.1/node-v24.13.1-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v24.13.1/node-v24.13.1-linux-arm64.tar.xz"
       }
     },
     "25.0.0": {
@@ -11136,15 +11127,15 @@
     },
     "25.6.1": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest/node-v25.6.1-darwin-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest/node-v25.6.1-darwin-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v25.6.1/node-v25.6.1-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v25.6.1/node-v25.6.1-darwin-arm64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest/node-v25.6.1-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v25.6.1/node-v25.6.1-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest/node-v25.6.1-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest/node-v25.6.1-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v25.6.1/node-v25.6.1-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v25.6.1/node-v25.6.1-linux-arm64.tar.xz"
       }
     }
   },
