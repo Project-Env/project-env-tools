@@ -20,7 +20,11 @@ import org.apache.maven.plugin.logging.Log;
 
 /**
  * Validates all download URLs in a tools index by sending HTTP HEAD requests.
- * URLs that don't return a 2xx status code are removed from the index.
+ * <p>
+ * URLs that existed in the previous index are never removed, even if validation
+ * fails -- they are kept with a warning to avoid false positives from transient
+ * outages. New URLs that fail validation are rejected to prevent bad data from
+ * entering the index.
  */
 public class DownloadUrlValidator {
 
@@ -35,7 +39,11 @@ public class DownloadUrlValidator {
         this.log = log;
     }
 
-    public ToolsIndexV2 validateUrls(ToolsIndexV2 toolsIndex) {
+    /**
+     * Validates all URLs in the merged index. Existing URLs (present in previousIndex)
+     * are kept even if validation fails. New URLs are only included if validation succeeds.
+     */
+    public ToolsIndexV2 validateUrls(ToolsIndexV2 previousIndex, ToolsIndexV2 mergedIndex) {
         SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> validatedJdkVersions = SortedCollections.createNaturallySortedMap();
         SortedMap<String, String> validatedGradleVersions = SortedCollections.createSemverSortedMap();
         SortedMap<String, String> validatedMavenVersions = SortedCollections.createSemverSortedMap();
@@ -44,12 +52,13 @@ public class DownloadUrlValidator {
         SortedMap<String, SortedMap<OperatingSystem, String>> validatedClojureVersions = SortedCollections.createSemverSortedMap();
 
         AtomicInteger totalCount = new AtomicInteger();
-        AtomicInteger removedCount = new AtomicInteger();
+        AtomicInteger keptInvalidCount = new AtomicInteger();
+        AtomicInteger rejectedNewCount = new AtomicInteger();
 
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
             List<Future<?>> futures = new ArrayList<>();
 
-            for (Map.Entry<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> distributionEntry : toolsIndex.getJdkVersions().entrySet()) {
+            for (Map.Entry<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> distributionEntry : mergedIndex.getJdkVersions().entrySet()) {
                 for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : distributionEntry.getValue().entrySet()) {
                     for (Map.Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> osEntry : versionEntry.getValue().entrySet()) {
                         for (Map.Entry<CpuArchitecture, String> cpuEntry : osEntry.getValue().entrySet()) {
@@ -59,19 +68,29 @@ public class DownloadUrlValidator {
                             CpuArchitecture cpu = cpuEntry.getKey();
                             String url = cpuEntry.getValue();
 
+                            var prevDistribution = previousIndex.getJdkVersions().get(distribution);
+                            var prevVersion = prevDistribution != null ? prevDistribution.get(version) : null;
+                            var prevOs = prevVersion != null ? prevVersion.get(os) : null;
+                            boolean existedBefore = prevOs != null && prevOs.containsKey(cpu);
+
                             futures.add(executor.submit(() -> {
                                 totalCount.incrementAndGet();
-                                if (isUrlValid(url)) {
-                                    synchronized (validatedJdkVersions) {
-                                        validatedJdkVersions
-                                                .computeIfAbsent(distribution, k -> SortedCollections.createSemverSortedMap())
-                                                .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
-                                                .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
-                                                .put(cpu, url);
-                                    }
-                                } else {
-                                    removedCount.incrementAndGet();
-                                    log.warn("Removed invalid URL for JDK " + distribution + " " + version + " " + os + "/" + cpu + ": " + url);
+                                boolean valid = isUrlValid(url);
+                                if (!valid && !existedBefore) {
+                                    rejectedNewCount.incrementAndGet();
+                                    log.warn("Rejected new invalid URL for JDK " + distribution + " " + version + " " + os + "/" + cpu + ": " + url);
+                                    return;
+                                }
+                                if (!valid) {
+                                    keptInvalidCount.incrementAndGet();
+                                    log.warn("Keeping potentially broken URL for JDK " + distribution + " " + version + " " + os + "/" + cpu + " (existed in previous index): " + url);
+                                }
+                                synchronized (validatedJdkVersions) {
+                                    validatedJdkVersions
+                                            .computeIfAbsent(distribution, k -> SortedCollections.createSemverSortedMap())
+                                            .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
+                                            .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
+                                            .put(cpu, url);
                                 }
                             }));
                         }
@@ -79,35 +98,49 @@ public class DownloadUrlValidator {
                 }
             }
 
-            for (Map.Entry<String, String> entry : toolsIndex.getGradleVersions().entrySet()) {
+            for (Map.Entry<String, String> entry : mergedIndex.getGradleVersions().entrySet()) {
+                boolean existedBefore = previousIndex.getGradleVersions().containsKey(entry.getKey());
+
                 futures.add(executor.submit(() -> {
                     totalCount.incrementAndGet();
-                    if (isUrlValid(entry.getValue())) {
-                        synchronized (validatedGradleVersions) {
-                            validatedGradleVersions.put(entry.getKey(), entry.getValue());
-                        }
-                    } else {
-                        removedCount.incrementAndGet();
-                        log.warn("Removed invalid URL for Gradle " + entry.getKey() + ": " + entry.getValue());
+                    boolean valid = isUrlValid(entry.getValue());
+                    if (!valid && !existedBefore) {
+                        rejectedNewCount.incrementAndGet();
+                        log.warn("Rejected new invalid URL for Gradle " + entry.getKey() + ": " + entry.getValue());
+                        return;
+                    }
+                    if (!valid) {
+                        keptInvalidCount.incrementAndGet();
+                        log.warn("Keeping potentially broken URL for Gradle " + entry.getKey() + " (existed in previous index): " + entry.getValue());
+                    }
+                    synchronized (validatedGradleVersions) {
+                        validatedGradleVersions.put(entry.getKey(), entry.getValue());
                     }
                 }));
             }
 
-            for (Map.Entry<String, String> entry : toolsIndex.getMavenVersions().entrySet()) {
+            for (Map.Entry<String, String> entry : mergedIndex.getMavenVersions().entrySet()) {
+                boolean existedBefore = previousIndex.getMavenVersions().containsKey(entry.getKey());
+
                 futures.add(executor.submit(() -> {
                     totalCount.incrementAndGet();
-                    if (isUrlValid(entry.getValue())) {
-                        synchronized (validatedMavenVersions) {
-                            validatedMavenVersions.put(entry.getKey(), entry.getValue());
-                        }
-                    } else {
-                        removedCount.incrementAndGet();
-                        log.warn("Removed invalid URL for Maven " + entry.getKey() + ": " + entry.getValue());
+                    boolean valid = isUrlValid(entry.getValue());
+                    if (!valid && !existedBefore) {
+                        rejectedNewCount.incrementAndGet();
+                        log.warn("Rejected new invalid URL for Maven " + entry.getKey() + ": " + entry.getValue());
+                        return;
+                    }
+                    if (!valid) {
+                        keptInvalidCount.incrementAndGet();
+                        log.warn("Keeping potentially broken URL for Maven " + entry.getKey() + " (existed in previous index): " + entry.getValue());
+                    }
+                    synchronized (validatedMavenVersions) {
+                        validatedMavenVersions.put(entry.getKey(), entry.getValue());
                     }
                 }));
             }
 
-            for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : toolsIndex.getMvndVersions().entrySet()) {
+            for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : mergedIndex.getMvndVersions().entrySet()) {
                 for (Map.Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> osEntry : versionEntry.getValue().entrySet()) {
                     for (Map.Entry<CpuArchitecture, String> cpuEntry : osEntry.getValue().entrySet()) {
                         String version = versionEntry.getKey();
@@ -115,25 +148,34 @@ public class DownloadUrlValidator {
                         CpuArchitecture cpu = cpuEntry.getKey();
                         String url = cpuEntry.getValue();
 
+                        var prevVersion = previousIndex.getMvndVersions().get(version);
+                        var prevOs = prevVersion != null ? prevVersion.get(os) : null;
+                        boolean existedBefore = prevOs != null && prevOs.containsKey(cpu);
+
                         futures.add(executor.submit(() -> {
                             totalCount.incrementAndGet();
-                            if (isUrlValid(url)) {
-                                synchronized (validatedMvndVersions) {
-                                    validatedMvndVersions
-                                            .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
-                                            .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
-                                            .put(cpu, url);
-                                }
-                            } else {
-                                removedCount.incrementAndGet();
-                                log.warn("Removed invalid URL for mvnd " + version + " " + os + "/" + cpu + ": " + url);
+                            boolean valid = isUrlValid(url);
+                            if (!valid && !existedBefore) {
+                                rejectedNewCount.incrementAndGet();
+                                log.warn("Rejected new invalid URL for mvnd " + version + " " + os + "/" + cpu + ": " + url);
+                                return;
+                            }
+                            if (!valid) {
+                                keptInvalidCount.incrementAndGet();
+                                log.warn("Keeping potentially broken URL for mvnd " + version + " " + os + "/" + cpu + " (existed in previous index): " + url);
+                            }
+                            synchronized (validatedMvndVersions) {
+                                validatedMvndVersions
+                                        .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
+                                        .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
+                                        .put(cpu, url);
                             }
                         }));
                     }
                 }
             }
 
-            for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : toolsIndex.getNodeVersions().entrySet()) {
+            for (Map.Entry<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> versionEntry : mergedIndex.getNodeVersions().entrySet()) {
                 for (Map.Entry<OperatingSystem, SortedMap<CpuArchitecture, String>> osEntry : versionEntry.getValue().entrySet()) {
                     for (Map.Entry<CpuArchitecture, String> cpuEntry : osEntry.getValue().entrySet()) {
                         String version = versionEntry.getKey();
@@ -141,41 +183,58 @@ public class DownloadUrlValidator {
                         CpuArchitecture cpu = cpuEntry.getKey();
                         String url = cpuEntry.getValue();
 
+                        var prevVersion = previousIndex.getNodeVersions().get(version);
+                        var prevOs = prevVersion != null ? prevVersion.get(os) : null;
+                        boolean existedBefore = prevOs != null && prevOs.containsKey(cpu);
+
                         futures.add(executor.submit(() -> {
                             totalCount.incrementAndGet();
-                            if (isUrlValid(url)) {
-                                synchronized (validatedNodeVersions) {
-                                    validatedNodeVersions
-                                            .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
-                                            .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
-                                            .put(cpu, url);
-                                }
-                            } else {
-                                removedCount.incrementAndGet();
-                                log.warn("Removed invalid URL for Node " + version + " " + os + "/" + cpu + ": " + url);
+                            boolean valid = isUrlValid(url);
+                            if (!valid && !existedBefore) {
+                                rejectedNewCount.incrementAndGet();
+                                log.warn("Rejected new invalid URL for Node " + version + " " + os + "/" + cpu + ": " + url);
+                                return;
+                            }
+                            if (!valid) {
+                                keptInvalidCount.incrementAndGet();
+                                log.warn("Keeping potentially broken URL for Node " + version + " " + os + "/" + cpu + " (existed in previous index): " + url);
+                            }
+                            synchronized (validatedNodeVersions) {
+                                validatedNodeVersions
+                                        .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
+                                        .computeIfAbsent(os, k -> SortedCollections.createNaturallySortedMap())
+                                        .put(cpu, url);
                             }
                         }));
                     }
                 }
             }
 
-            for (Map.Entry<String, SortedMap<OperatingSystem, String>> versionEntry : toolsIndex.getClojureVersions().entrySet()) {
+            for (Map.Entry<String, SortedMap<OperatingSystem, String>> versionEntry : mergedIndex.getClojureVersions().entrySet()) {
                 for (Map.Entry<OperatingSystem, String> osEntry : versionEntry.getValue().entrySet()) {
                     String version = versionEntry.getKey();
                     OperatingSystem os = osEntry.getKey();
                     String url = osEntry.getValue();
 
+                    var prevVersion = previousIndex.getClojureVersions().get(version);
+                    boolean existedBefore = prevVersion != null && prevVersion.containsKey(os);
+
                     futures.add(executor.submit(() -> {
                         totalCount.incrementAndGet();
-                        if (isUrlValid(url)) {
-                            synchronized (validatedClojureVersions) {
-                                validatedClojureVersions
-                                        .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
-                                        .put(os, url);
-                            }
-                        } else {
-                            removedCount.incrementAndGet();
-                            log.warn("Removed invalid URL for Clojure " + version + " " + os + ": " + url);
+                        boolean valid = isUrlValid(url);
+                        if (!valid && !existedBefore) {
+                            rejectedNewCount.incrementAndGet();
+                            log.warn("Rejected new invalid URL for Clojure " + version + " " + os + ": " + url);
+                            return;
+                        }
+                        if (!valid) {
+                            keptInvalidCount.incrementAndGet();
+                            log.warn("Keeping potentially broken URL for Clojure " + version + " " + os + " (existed in previous index): " + url);
+                        }
+                        synchronized (validatedClojureVersions) {
+                            validatedClojureVersions
+                                    .computeIfAbsent(version, k -> SortedCollections.createNaturallySortedMap())
+                                    .put(os, url);
                         }
                     }));
                 }
@@ -188,11 +247,13 @@ public class DownloadUrlValidator {
             throw new RuntimeException("URL validation failed", e);
         }
 
-        log.info("URL validation complete: " + totalCount.get() + " checked, " + removedCount.get() + " removed");
+        log.info("URL validation complete: " + totalCount.get() + " checked, "
+                + keptInvalidCount.get() + " kept despite validation failure (previously indexed), "
+                + rejectedNewCount.get() + " new URLs rejected");
 
         return ImmutableToolsIndexV2.builder()
                 .jdkVersions(validatedJdkVersions)
-                .jdkDistributionSynonyms(toolsIndex.getJdkDistributionSynonyms())
+                .jdkDistributionSynonyms(mergedIndex.getJdkDistributionSynonyms())
                 .gradleVersions(validatedGradleVersions)
                 .mavenVersions(validatedMavenVersions)
                 .mvndVersions(validatedMvndVersions)
@@ -216,10 +277,10 @@ public class DownloadUrlValidator {
                 int statusCode = httpClient.send(httpRequest, HttpResponse.BodyHandlers.discarding()).statusCode();
 
                 if (statusCode >= 200 && statusCode < 300) {
-                    log.debug("Got " + statusCode + " for " + url + " - keeping");
+                    log.debug("Got " + statusCode + " for " + url + " - valid");
                     return true;
                 } else {
-                    log.warn("Got " + statusCode + " for " + url + " - removing");
+                    log.warn("Got " + statusCode + " for " + url + " - invalid");
                     return false;
                 }
             } finally {

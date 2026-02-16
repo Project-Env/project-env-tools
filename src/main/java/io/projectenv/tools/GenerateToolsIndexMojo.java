@@ -55,7 +55,8 @@ public class GenerateToolsIndexMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
-            var toolsIndex = readOrCreateToolsIndex();
+            var previousIndex = readOrCreateToolsIndex();
+            var toolsIndex = previousIndex;
 
             GithubClient githubClient = SimpleGithubClient.withAccessToken(githubAccessToken, getLog());
             Map<String, ToolsIndexDatasource> allDatasources = createDatasources(githubClient);
@@ -66,7 +67,7 @@ public class GenerateToolsIndexMojo extends AbstractMojo {
             toolsIndex = fetchInParallel(datasources, toolsIndex);
 
             getLog().info("Validating download URLs...");
-            toolsIndex = new DownloadUrlValidator(getLog()).validateUrls(toolsIndex);
+            toolsIndex = new DownloadUrlValidator(getLog()).validateUrls(previousIndex, toolsIndex);
 
             ToolIndexV2Parser.writeTo(toolsIndex, indexFile);
             ToolIndexParser.writeTo(toolsIndex.toLegacyToolsIndex(), legacyIndexFile);
