@@ -7,6 +7,7 @@ import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -44,6 +45,18 @@ public class DownloadUrlValidator {
      * are kept even if validation fails. New URLs are only included if validation succeeds.
      */
     public ToolsIndexV2 validateUrls(ToolsIndexV2 previousIndex, ToolsIndexV2 mergedIndex) {
+        // Null-safe references to previous index maps (null when no previous index file exists)
+        Map<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> prevJdkVersions =
+                nullToEmpty(previousIndex.getJdkVersions());
+        Map<String, String> prevGradleVersions = nullToEmpty(previousIndex.getGradleVersions());
+        Map<String, String> prevMavenVersions = nullToEmpty(previousIndex.getMavenVersions());
+        Map<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> prevMvndVersions =
+                nullToEmpty(previousIndex.getMvndVersions());
+        Map<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> prevNodeVersions =
+                nullToEmpty(previousIndex.getNodeVersions());
+        Map<String, SortedMap<OperatingSystem, String>> prevClojureVersions =
+                nullToEmpty(previousIndex.getClojureVersions());
+
         SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> validatedJdkVersions = SortedCollections.createNaturallySortedMap();
         SortedMap<String, String> validatedGradleVersions = SortedCollections.createSemverSortedMap();
         SortedMap<String, String> validatedMavenVersions = SortedCollections.createSemverSortedMap();
@@ -68,7 +81,7 @@ public class DownloadUrlValidator {
                             CpuArchitecture cpu = cpuEntry.getKey();
                             String url = cpuEntry.getValue();
 
-                            var prevDistribution = previousIndex.getJdkVersions().get(distribution);
+                            var prevDistribution = prevJdkVersions.get(distribution);
                             var prevVersion = prevDistribution != null ? prevDistribution.get(version) : null;
                             var prevOs = prevVersion != null ? prevVersion.get(os) : null;
                             boolean existedBefore = prevOs != null && prevOs.containsKey(cpu);
@@ -99,7 +112,7 @@ public class DownloadUrlValidator {
             }
 
             for (Map.Entry<String, String> entry : mergedIndex.getGradleVersions().entrySet()) {
-                boolean existedBefore = previousIndex.getGradleVersions().containsKey(entry.getKey());
+                boolean existedBefore = prevGradleVersions.containsKey(entry.getKey());
 
                 futures.add(executor.submit(() -> {
                     totalCount.incrementAndGet();
@@ -120,7 +133,7 @@ public class DownloadUrlValidator {
             }
 
             for (Map.Entry<String, String> entry : mergedIndex.getMavenVersions().entrySet()) {
-                boolean existedBefore = previousIndex.getMavenVersions().containsKey(entry.getKey());
+                boolean existedBefore = prevMavenVersions.containsKey(entry.getKey());
 
                 futures.add(executor.submit(() -> {
                     totalCount.incrementAndGet();
@@ -148,7 +161,7 @@ public class DownloadUrlValidator {
                         CpuArchitecture cpu = cpuEntry.getKey();
                         String url = cpuEntry.getValue();
 
-                        var prevVersion = previousIndex.getMvndVersions().get(version);
+                        var prevVersion = prevMvndVersions.get(version);
                         var prevOs = prevVersion != null ? prevVersion.get(os) : null;
                         boolean existedBefore = prevOs != null && prevOs.containsKey(cpu);
 
@@ -183,7 +196,7 @@ public class DownloadUrlValidator {
                         CpuArchitecture cpu = cpuEntry.getKey();
                         String url = cpuEntry.getValue();
 
-                        var prevVersion = previousIndex.getNodeVersions().get(version);
+                        var prevVersion = prevNodeVersions.get(version);
                         var prevOs = prevVersion != null ? prevVersion.get(os) : null;
                         boolean existedBefore = prevOs != null && prevOs.containsKey(cpu);
 
@@ -216,7 +229,7 @@ public class DownloadUrlValidator {
                     OperatingSystem os = osEntry.getKey();
                     String url = osEntry.getValue();
 
-                    var prevVersion = previousIndex.getClojureVersions().get(version);
+                    var prevVersion = prevClojureVersions.get(version);
                     boolean existedBefore = prevVersion != null && prevVersion.containsKey(os);
 
                     futures.add(executor.submit(() -> {
@@ -289,6 +302,10 @@ public class DownloadUrlValidator {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static <K, V> Map<K, V> nullToEmpty(Map<K, V> map) {
+        return map != null ? map : Collections.emptyMap();
     }
 
 }

@@ -129,30 +129,38 @@ public class GenerateToolsIndexMojo extends AbstractMojo {
     }
 
     private ToolsIndexV2 mergeResults(ToolsIndexV2 initialIndex, List<Future<ToolsIndexV2>> futures) throws Exception {
+        // Start with empty maps to avoid sharing inner map references with previousIndex.
+        // The initialIndex is merged as the first source, so all inner maps are freshly created.
         SortedMap<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> mergedJdkVersions =
-                SortedCollections.createNaturallySortedMap(initialIndex.getJdkVersions());
+                SortedCollections.createNaturallySortedMap();
         SortedMap<String, SortedSet<String>> mergedJdkDistributionSynonyms =
-                SortedCollections.createNaturallySortedMap(initialIndex.getJdkDistributionSynonyms());
+                SortedCollections.createNaturallySortedMap();
         SortedMap<String, String> mergedGradleVersions =
-                SortedCollections.createSemverSortedMap(initialIndex.getGradleVersions());
+                SortedCollections.createSemverSortedMap();
         SortedMap<String, String> mergedMavenVersions =
-                SortedCollections.createSemverSortedMap(initialIndex.getMavenVersions());
+                SortedCollections.createSemverSortedMap();
         SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> mergedMvndVersions =
-                SortedCollections.createSemverSortedMap(initialIndex.getMvndVersions());
+                SortedCollections.createSemverSortedMap();
         SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> mergedNodeVersions =
-                SortedCollections.createSemverSortedMap(initialIndex.getNodeVersions());
+                SortedCollections.createSemverSortedMap();
         SortedMap<String, SortedMap<OperatingSystem, String>> mergedClojureVersions =
-                SortedCollections.createSemverSortedMap(initialIndex.getClojureVersions());
+                SortedCollections.createSemverSortedMap();
 
+        // Collect initialIndex + datasource results into a single list
+        List<ToolsIndexV2> allResults = new ArrayList<>();
+        allResults.add(initialIndex);
         for (Future<ToolsIndexV2> future : futures) {
-            ToolsIndexV2 result = future.get();
-            putAllIfNotNull(mergedJdkVersions, result.getJdkVersions());
+            allResults.add(future.get());
+        }
+
+        for (ToolsIndexV2 result : allResults) {
+            deepMergeJdkVersions(mergedJdkVersions, result.getJdkVersions());
             putAllIfNotNull(mergedJdkDistributionSynonyms, result.getJdkDistributionSynonyms());
             putAllIfNotNull(mergedGradleVersions, result.getGradleVersions());
             putAllIfNotNull(mergedMavenVersions, result.getMavenVersions());
-            putAllIfNotNull(mergedMvndVersions, result.getMvndVersions());
-            putAllIfNotNull(mergedNodeVersions, result.getNodeVersions());
-            putAllIfNotNull(mergedClojureVersions, result.getClojureVersions());
+            deepMergeByVersionOsCpu(mergedMvndVersions, result.getMvndVersions());
+            deepMergeByVersionOsCpu(mergedNodeVersions, result.getNodeVersions());
+            deepMergeByVersionOs(mergedClojureVersions, result.getClojureVersions());
         }
 
         return ImmutableToolsIndexV2.builder()
@@ -171,6 +179,62 @@ public class GenerateToolsIndexMojo extends AbstractMojo {
             return ToolIndexV2Parser.readFrom(indexFile);
         }
         return ImmutableToolsIndexV2.builder().build();
+    }
+
+    /**
+     * Deep-merges JDK versions: distribution -> version -> OS -> CPU -> URL.
+     * Uses computeIfAbsent at each level so existing entries from earlier sources are preserved.
+     */
+    private static void deepMergeJdkVersions(
+            Map<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> target,
+            Map<String, SortedMap<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>>> source) {
+        if (source == null) {
+            return;
+        }
+        for (var distEntry : source.entrySet()) {
+            var targetVersions = target.computeIfAbsent(distEntry.getKey(),
+                    k -> SortedCollections.createSemverSortedMap());
+            deepMergeByVersionOsCpu(targetVersions, distEntry.getValue());
+        }
+    }
+
+    /**
+     * Deep-merges version -> OS -> CPU -> URL (used for Node and Mvnd).
+     * Uses computeIfAbsent at each level so existing OS/CPU entries are preserved
+     * even when a datasource omits them.
+     */
+    private static void deepMergeByVersionOsCpu(
+            Map<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> target,
+            Map<String, SortedMap<OperatingSystem, SortedMap<CpuArchitecture, String>>> source) {
+        if (source == null) {
+            return;
+        }
+        for (var versionEntry : source.entrySet()) {
+            var targetOsMap = target.computeIfAbsent(versionEntry.getKey(),
+                    k -> SortedCollections.createNaturallySortedMap());
+            for (var osEntry : versionEntry.getValue().entrySet()) {
+                var targetCpuMap = targetOsMap.computeIfAbsent(osEntry.getKey(),
+                        k -> SortedCollections.createNaturallySortedMap());
+                targetCpuMap.putAll(osEntry.getValue());
+            }
+        }
+    }
+
+    /**
+     * Deep-merges version -> OS -> URL (used for Clojure).
+     * Uses computeIfAbsent so existing OS entries are preserved.
+     */
+    private static void deepMergeByVersionOs(
+            Map<String, SortedMap<OperatingSystem, String>> target,
+            Map<String, SortedMap<OperatingSystem, String>> source) {
+        if (source == null) {
+            return;
+        }
+        for (var versionEntry : source.entrySet()) {
+            var targetOsMap = target.computeIfAbsent(versionEntry.getKey(),
+                    k -> SortedCollections.createNaturallySortedMap());
+            targetOsMap.putAll(versionEntry.getValue());
+        }
     }
 
     private static <K, V> void putAllIfNotNull(Map<K, V> target, Map<K, V> source) {
