@@ -2947,9 +2947,9 @@
       "linux": "https://nodejs.org/download/release/v10.24.0/node-v10.24.0-linux-x64.tar.xz"
     },
     "10.24.1": {
-      "macos": "https://nodejs.org/download/release/latest-dubnium/node-v10.24.1-darwin-x64.tar.xz",
-      "windows": "https://nodejs.org/download/release/latest-dubnium/node-v10.24.1-win-x64.zip",
-      "linux": "https://nodejs.org/download/release/latest-dubnium/node-v10.24.1-linux-x64.tar.xz"
+      "macos": "https://nodejs.org/download/release/v10.24.1/node-v10.24.1-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v10.24.1/node-v10.24.1-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v10.24.1/node-v10.24.1-linux-x64.tar.xz"
     },
     "11.0.0": {
       "macos": "https://nodejs.org/download/release/v11.0.0/node-v11.0.0-darwin-x64.tar.xz",
@@ -3602,9 +3602,9 @@
       "linux": "https://nodejs.org/download/release/v14.21.2/node-v14.21.2-linux-x64.tar.xz"
     },
     "14.21.3": {
-      "macos": "https://nodejs.org/download/release/latest-v14.x/node-v14.21.3-darwin-x64.tar.xz",
-      "windows": "https://nodejs.org/download/release/latest-v14.x/node-v14.21.3-win-x64.zip",
-      "linux": "https://nodejs.org/download/release/latest-v14.x/node-v14.21.3-linux-x64.tar.xz"
+      "macos": "https://nodejs.org/download/release/v14.21.3/node-v14.21.3-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v14.21.3/node-v14.21.3-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v14.21.3/node-v14.21.3-linux-x64.tar.xz"
     },
     "15.0.0": {
       "macos": "https://nodejs.org/download/release/v15.0.0/node-v15.0.0-darwin-x64.tar.xz",
@@ -4682,9 +4682,9 @@
       "linux": "https://nodejs.org/download/release/v23.11.0/node-v23.11.0-linux-x64.tar.xz"
     },
     "23.11.1": {
-      "macos": "https://nodejs.org/download/release/v23.11.1/node-v23.11.1-darwin-x64.tar.xz",
-      "windows": "https://nodejs.org/download/release/v23.11.1/node-v23.11.1-win-x64.zip",
-      "linux": "https://nodejs.org/download/release/v23.11.1/node-v23.11.1-linux-x64.tar.xz"
+      "macos": "https://nodejs.org/download/release/latest-v23.x/node-v23.11.1-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/latest-v23.x/node-v23.11.1-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/latest-v23.x/node-v23.11.1-linux-x64.tar.xz"
     },
     "24.0.0": {
       "macos": "https://nodejs.org/download/release/v24.0.0/node-v24.0.0-darwin-x64.tar.xz",
