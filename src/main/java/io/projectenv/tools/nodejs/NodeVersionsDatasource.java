@@ -102,11 +102,12 @@ public class NodeVersionsDatasource implements ToolsIndexDatasource {
                 Document doc = Jsoup.connect(versionUrl).get();
 
                 // Build a map from filename to absolute download URL using the actual href
+                // Skip URLs containing "latest" to avoid flip-flopping between URL formats
                 Map<String, String> fileToUrl = new HashMap<>();
                 for (var element : doc.getElementsByTag("a")) {
                     String url = element.absUrl("href");
                     String filename = element.text().trim();
-                    if (!url.isEmpty() && !filename.isEmpty()) {
+                    if (!url.isEmpty() && !filename.isEmpty() && !url.contains("/latest")) {
                         fileToUrl.put(filename, url);
                     }
                 }
