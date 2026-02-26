@@ -9395,15 +9395,15 @@
     },
     "18.20.8": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-hydrogen/node-v18.20.8-darwin-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-hydrogen/node-v18.20.8-darwin-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v18.20.8/node-v18.20.8-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v18.20.8/node-v18.20.8-darwin-arm64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-hydrogen/node-v18.20.8-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v18.20.8/node-v18.20.8-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-hydrogen/node-v18.20.8-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-hydrogen/node-v18.20.8-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v18.20.8/node-v18.20.8-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v18.20.8/node-v18.20.8-linux-arm64.tar.xz"
       }
     },
     "19.0.0": {
@@ -10617,15 +10617,15 @@
     },
     "22.22.0": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v22.x/node-v22.22.0-darwin-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v22.x/node-v22.22.0-darwin-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v22.22.0/node-v22.22.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v22.22.0/node-v22.22.0-darwin-arm64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v22.x/node-v22.22.0-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v22.22.0/node-v22.22.0-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v22.x/node-v22.22.0-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v22.x/node-v22.22.0-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v22.22.0/node-v22.22.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v22.22.0/node-v22.22.0-linux-arm64.tar.xz"
       }
     },
     "23.0.0": {
