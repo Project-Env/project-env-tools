@@ -7254,14 +7254,14 @@
     },
     "12.22.12": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v12.x/node-v12.22.12-darwin-x64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v12.22.12/node-v12.22.12-darwin-x64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v12.x/node-v12.22.12-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v12.22.12/node-v12.22.12-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v12.x/node-v12.22.12-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v12.x/node-v12.22.12-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v12.22.12/node-v12.22.12-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v12.22.12/node-v12.22.12-linux-arm64.tar.xz"
       }
     },
     "13.0.0": {
@@ -8706,15 +8706,15 @@
     },
     "16.20.2": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-darwin-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-darwin-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-darwin-arm64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-linux-arm64.tar.xz"
       }
     },
     "17.0.0": {

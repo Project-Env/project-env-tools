@@ -3287,9 +3287,9 @@
       "linux": "https://nodejs.org/download/release/v12.22.11/node-v12.22.11-linux-x64.tar.xz"
     },
     "12.22.12": {
-      "macos": "https://nodejs.org/download/release/latest-v12.x/node-v12.22.12-darwin-x64.tar.xz",
-      "windows": "https://nodejs.org/download/release/latest-v12.x/node-v12.22.12-win-x64.zip",
-      "linux": "https://nodejs.org/download/release/latest-v12.x/node-v12.22.12-linux-x64.tar.xz"
+      "macos": "https://nodejs.org/download/release/v12.22.12/node-v12.22.12-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v12.22.12/node-v12.22.12-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v12.22.12/node-v12.22.12-linux-x64.tar.xz"
     },
     "13.0.0": {
       "macos": "https://nodejs.org/download/release/v13.0.0/node-v13.0.0-darwin-x64.tar.xz",
@@ -3877,9 +3877,9 @@
       "linux": "https://nodejs.org/download/release/v16.20.1/node-v16.20.1-linux-x64.tar.xz"
     },
     "16.20.2": {
-      "macos": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-darwin-x64.tar.xz",
-      "windows": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-win-x64.zip",
-      "linux": "https://nodejs.org/download/release/latest-v16.x/node-v16.20.2-linux-x64.tar.xz"
+      "macos": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v16.20.2/node-v16.20.2-linux-x64.tar.xz"
     },
     "17.0.0": {
       "macos": "https://nodejs.org/download/release/v17.0.0/node-v17.0.0-darwin-x64.tar.xz",
