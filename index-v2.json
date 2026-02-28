@@ -8010,14 +8010,14 @@
     },
     "14.21.3": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v14.x/node-v14.21.3-darwin-x64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v14.21.3/node-v14.21.3-darwin-x64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v14.x/node-v14.21.3-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v14.21.3/node-v14.21.3-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v14.x/node-v14.21.3-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v14.x/node-v14.21.3-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v14.21.3/node-v14.21.3-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v14.21.3/node-v14.21.3-linux-arm64.tar.xz"
       }
     },
     "15.0.0": {
@@ -11451,6 +11451,11 @@
       "macos": "https://github.com/clojure/brew-install/releases/download/1.12.4.1602/clojure-tools-1.12.4.1602.tar.gz",
       "windows": "https://github.com/clojure/brew-install/releases/download/1.12.4.1602/clojure-tools.zip",
       "linux": "https://github.com/clojure/brew-install/releases/download/1.12.4.1602/clojure-tools-1.12.4.1602.tar.gz"
+    },
+    "1.12.4.1607": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.4.1607/clojure-tools-1.12.4.1607.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.4.1607/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.4.1607/clojure-tools-1.12.4.1607.tar.gz"
     }
   }
 }
