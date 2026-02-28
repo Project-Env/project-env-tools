@@ -3602,9 +3602,9 @@
       "linux": "https://nodejs.org/download/release/v14.21.2/node-v14.21.2-linux-x64.tar.xz"
     },
     "14.21.3": {
-      "macos": "https://nodejs.org/download/release/latest-v14.x/node-v14.21.3-darwin-x64.tar.xz",
-      "windows": "https://nodejs.org/download/release/latest-v14.x/node-v14.21.3-win-x64.zip",
-      "linux": "https://nodejs.org/download/release/latest-v14.x/node-v14.21.3-linux-x64.tar.xz"
+      "macos": "https://nodejs.org/download/release/v14.21.3/node-v14.21.3-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v14.21.3/node-v14.21.3-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v14.21.3/node-v14.21.3-linux-x64.tar.xz"
     },
     "15.0.0": {
       "macos": "https://nodejs.org/download/release/v15.0.0/node-v15.0.0-darwin-x64.tar.xz",
