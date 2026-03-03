@@ -10071,15 +10071,15 @@
     },
     "20.20.0": {
       "macos": {
-        "amd64": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-darwin-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-darwin-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-darwin-arm64.tar.xz"
       },
       "windows": {
-        "amd64": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-win-x64.zip"
+        "amd64": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-win-x64.zip"
       },
       "linux": {
-        "amd64": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-linux-x64.tar.xz",
-        "aarch64": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-linux-arm64.tar.xz"
+        "amd64": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-linux-arm64.tar.xz"
       }
     },
     "21.0.0": {

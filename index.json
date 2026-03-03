@@ -4402,9 +4402,9 @@
       "linux": "https://nodejs.org/download/release/v20.19.6/node-v20.19.6-linux-x64.tar.xz"
     },
     "20.20.0": {
-      "macos": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-darwin-x64.tar.xz",
-      "windows": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-win-x64.zip",
-      "linux": "https://nodejs.org/download/release/latest-v20.x/node-v20.20.0-linux-x64.tar.xz"
+      "macos": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v20.20.0/node-v20.20.0-linux-x64.tar.xz"
     },
     "21.0.0": {
       "macos": "https://nodejs.org/download/release/v21.0.0/node-v21.0.0-darwin-x64.tar.xz",
