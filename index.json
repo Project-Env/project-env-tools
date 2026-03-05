@@ -1213,7 +1213,8 @@
     "9.2.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.2.0/gradle-9.2.0-bin.zip",
     "9.2.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.2.1/gradle-9.2.1-bin.zip",
     "9.3.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.3.0/gradle-9.3.0-bin.zip",
-    "9.3.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.3.1/gradle-9.3.1-bin.zip"
+    "9.3.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.3.1/gradle-9.3.1-bin.zip",
+    "9.4.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.4.0/gradle-9.4.0-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
@@ -4835,6 +4836,11 @@
       "macos": "https://nodejs.org/download/release/v25.7.0/node-v25.7.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/download/release/v25.7.0/node-v25.7.0-win-x64.zip",
       "linux": "https://nodejs.org/download/release/v25.7.0/node-v25.7.0-linux-x64.tar.xz"
+    },
+    "25.8.0": {
+      "macos": "https://nodejs.org/download/release/v25.8.0/node-v25.8.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v25.8.0/node-v25.8.0-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v25.8.0/node-v25.8.0-linux-x64.tar.xz"
     }
   }
 }
