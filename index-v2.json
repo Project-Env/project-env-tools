@@ -2597,7 +2597,8 @@
     "9.2.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.2.0/gradle-9.2.0-bin.zip",
     "9.2.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.2.1/gradle-9.2.1-bin.zip",
     "9.3.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.3.0/gradle-9.3.0-bin.zip",
-    "9.3.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.3.1/gradle-9.3.1-bin.zip"
+    "9.3.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.3.1/gradle-9.3.1-bin.zip",
+    "9.4.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.4.0/gradle-9.4.0-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
@@ -11199,6 +11200,19 @@
         "amd64": "https://nodejs.org/download/release/v25.7.0/node-v25.7.0-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v25.7.0/node-v25.7.0-linux-arm64.tar.xz"
       }
+    },
+    "25.8.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/download/release/v25.8.0/node-v25.8.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v25.8.0/node-v25.8.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v25.8.0/node-v25.8.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/download/release/v25.8.0/node-v25.8.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v25.8.0/node-v25.8.0-linux-arm64.tar.xz"
+      }
     }
   },
   "clojureVersions": {
@@ -11456,6 +11470,11 @@
       "macos": "https://github.com/clojure/brew-install/releases/download/1.12.4.1607/clojure-tools-1.12.4.1607.tar.gz",
       "windows": "https://github.com/clojure/brew-install/releases/download/1.12.4.1607/clojure-tools.zip",
       "linux": "https://github.com/clojure/brew-install/releases/download/1.12.4.1607/clojure-tools-1.12.4.1607.tar.gz"
+    },
+    "1.12.4.1612": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.4.1612/clojure-tools-1.12.4.1612.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.4.1612/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.4.1612/clojure-tools-1.12.4.1612.tar.gz"
     }
   }
 }
