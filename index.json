@@ -1214,7 +1214,8 @@
     "9.2.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.2.1/gradle-9.2.1-bin.zip",
     "9.3.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.3.0/gradle-9.3.0-bin.zip",
     "9.3.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.3.1/gradle-9.3.1-bin.zip",
-    "9.4.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.4.0/gradle-9.4.0-bin.zip"
+    "9.4.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.4.0/gradle-9.4.0-bin.zip",
+    "9.4.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.4.1/gradle-9.4.1-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
@@ -1430,6 +1431,16 @@
       "macos": "https://github.com/apache/maven-mvnd/releases/download/1.0.3/maven-mvnd-1.0.3-darwin-amd64.zip",
       "windows": "https://github.com/apache/maven-mvnd/releases/download/1.0.3/maven-mvnd-1.0.3-windows-amd64.zip",
       "linux": "https://github.com/apache/maven-mvnd/releases/download/1.0.3/maven-mvnd-1.0.3-linux-amd64.zip"
+    },
+    "1.0.4": {
+      "macos": "https://github.com/apache/maven-mvnd/releases/download/1.0.4/maven-mvnd-1.0.4-darwin-amd64.zip",
+      "windows": "https://github.com/apache/maven-mvnd/releases/download/1.0.4/maven-mvnd-1.0.4-windows-amd64.zip",
+      "linux": "https://github.com/apache/maven-mvnd/releases/download/1.0.4/maven-mvnd-1.0.4-linux-amd64.zip"
+    },
+    "1.0.5": {
+      "macos": "https://github.com/apache/maven-mvnd/releases/download/1.0.5/maven-mvnd-1.0.5-darwin-amd64.zip",
+      "windows": "https://github.com/apache/maven-mvnd/releases/download/1.0.5/maven-mvnd-1.0.5-windows-amd64.zip",
+      "linux": "https://github.com/apache/maven-mvnd/releases/download/1.0.5/maven-mvnd-1.0.5-linux-amd64.zip"
     }
   },
   "nodeVersions": {
