@@ -2338,6 +2338,19 @@
           "amd64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.2%2B10/OpenJDK25U-jdk_x64_linux_hotspot_25.0.2_10.tar.gz",
           "aarch64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.2%2B10/OpenJDK25U-jdk_aarch64_linux_hotspot_25.0.2_10.tar.gz"
         }
+      },
+      "26+35": {
+        "macos": {
+          "amd64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26%2B35/OpenJDK26U-jdk_x64_mac_hotspot_26_35.tar.gz",
+          "aarch64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26%2B35/OpenJDK26U-jdk_aarch64_mac_hotspot_26_35.tar.gz"
+        },
+        "windows": {
+          "amd64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26%2B35/OpenJDK26U-jdk_x64_windows_hotspot_26_35.zip"
+        },
+        "linux": {
+          "amd64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26%2B35/OpenJDK26U-jdk_x64_linux_hotspot_26_35.tar.gz",
+          "aarch64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26%2B35/OpenJDK26U-jdk_aarch64_linux_hotspot_26_35.tar.gz"
+        }
       }
     }
   },
@@ -10696,6 +10709,19 @@
         "aarch64": "https://nodejs.org/download/release/v22.22.1/node-v22.22.1-linux-arm64.tar.xz"
       }
     },
+    "22.22.2": {
+      "macos": {
+        "amd64": "https://nodejs.org/download/release/v22.22.2/node-v22.22.2-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v22.22.2/node-v22.22.2-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v22.22.2/node-v22.22.2-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/download/release/v22.22.2/node-v22.22.2-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v22.22.2/node-v22.22.2-linux-arm64.tar.xz"
+      }
+    },
     "23.0.0": {
       "macos": {
         "amd64": "https://nodejs.org/download/release/v23.0.0/node-v23.0.0-darwin-x64.tar.xz",
@@ -11293,6 +11319,19 @@
         "amd64": "https://nodejs.org/download/release/v25.8.1/node-v25.8.1-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v25.8.1/node-v25.8.1-linux-arm64.tar.xz"
       }
+    },
+    "25.8.2": {
+      "macos": {
+        "amd64": "https://nodejs.org/download/release/v25.8.2/node-v25.8.2-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v25.8.2/node-v25.8.2-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v25.8.2/node-v25.8.2-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/download/release/v25.8.2/node-v25.8.2-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v25.8.2/node-v25.8.2-linux-arm64.tar.xz"
+      }
     }
   },
   "clojureVersions": {
@@ -11560,6 +11599,15 @@
       "macos": "https://github.com/clojure/brew-install/releases/download/1.12.4.1618/clojure-tools-1.12.4.1618.tar.gz",
       "windows": "https://github.com/clojure/brew-install/releases/download/1.12.4.1618/clojure-tools.zip",
       "linux": "https://github.com/clojure/brew-install/releases/download/1.12.4.1618/clojure-tools-1.12.4.1618.tar.gz"
+    },
+    "1.12.4.1624": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.4.1624/clojure-tools-1.12.4.1624.tar.gz",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.4.1624/clojure-tools-1.12.4.1624.tar.gz"
+    },
+    "1.12.4.1629": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.4.1629/clojure-tools-1.12.4.1629.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.4.1629/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.4.1629/clojure-tools-1.12.4.1629.tar.gz"
     }
   }
 }
