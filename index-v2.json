@@ -2658,6 +2658,7 @@
     "3.9.12": "https://archive.apache.org/dist/maven/maven-3/3.9.12/binaries/apache-maven-3.9.12-bin.zip",
     "3.9.13": "https://archive.apache.org/dist/maven/maven-3/3.9.13/binaries/apache-maven-3.9.13-bin.zip",
     "3.9.14": "https://downloads.apache.org/maven/maven-3/3.9.14/binaries/apache-maven-3.9.14-bin.zip",
+    "3.9.15": "https://downloads.apache.org/maven/maven-3/3.9.15/binaries/apache-maven-3.9.15-bin.zip",
     "4.0.0-rc-1": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-1/binaries/apache-maven-4.0.0-rc-1-bin.zip",
     "4.0.0-rc-2": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-2/binaries/apache-maven-4.0.0-rc-2-bin.zip",
     "4.0.0-rc-3": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-3/binaries/apache-maven-4.0.0-rc-3-bin.zip",
@@ -11344,6 +11345,19 @@
       "linux": {
         "amd64": "https://nodejs.org/download/release/v25.8.2/node-v25.8.2-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v25.8.2/node-v25.8.2-linux-arm64.tar.xz"
+      }
+    },
+    "25.9.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/download/release/v25.9.0/node-v25.9.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v25.9.0/node-v25.9.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v25.9.0/node-v25.9.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/download/release/v25.9.0/node-v25.9.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v25.9.0/node-v25.9.0-linux-arm64.tar.xz"
       }
     }
   },
