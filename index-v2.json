@@ -1902,6 +1902,11 @@
           "aarch64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.18%2B8/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.18_8.tar.gz"
         }
       },
+      "17.0.19+10": {
+        "linux": {
+          "amd64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.19%2B10/OpenJDK17U-jdk_x64_linux_hotspot_17.0.19_10.tar.gz"
+        }
+      },
       "18+36": {
         "macos": {
           "amd64": "https://github.com/adoptium/temurin18-binaries/releases/download/jdk-18%2B36/OpenJDK18U-jdk_x64_mac_hotspot_18_36.tar.gz",
@@ -2339,6 +2344,11 @@
           "aarch64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.2%2B10/OpenJDK25U-jdk_aarch64_linux_hotspot_25.0.2_10.tar.gz"
         }
       },
+      "25.0.3+9": {
+        "linux": {
+          "amd64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jdk_x64_linux_hotspot_25.0.3_9.tar.gz"
+        }
+      },
       "26+35": {
         "macos": {
           "amd64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26%2B35/OpenJDK26U-jdk_x64_mac_hotspot_26_35.tar.gz",
@@ -2642,7 +2652,7 @@
     "3.8.6": "https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.zip",
     "3.8.7": "https://archive.apache.org/dist/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.zip",
     "3.8.8": "https://archive.apache.org/dist/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.zip",
-    "3.8.9": "https://downloads.apache.org/maven/maven-3/3.8.9/binaries/apache-maven-3.8.9-bin.zip",
+    "3.8.9": "https://archive.apache.org/dist/maven/maven-3/3.8.9/binaries/apache-maven-3.8.9-bin.zip",
     "3.9.0": "https://archive.apache.org/dist/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.zip",
     "3.9.1": "https://archive.apache.org/dist/maven/maven-3/3.9.1/binaries/apache-maven-3.9.1-bin.zip",
     "3.9.2": "https://archive.apache.org/dist/maven/maven-3/3.9.2/binaries/apache-maven-3.9.2-bin.zip",
@@ -2657,7 +2667,7 @@
     "3.9.11": "https://archive.apache.org/dist/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.zip",
     "3.9.12": "https://archive.apache.org/dist/maven/maven-3/3.9.12/binaries/apache-maven-3.9.12-bin.zip",
     "3.9.13": "https://archive.apache.org/dist/maven/maven-3/3.9.13/binaries/apache-maven-3.9.13-bin.zip",
-    "3.9.14": "https://downloads.apache.org/maven/maven-3/3.9.14/binaries/apache-maven-3.9.14-bin.zip",
+    "3.9.14": "https://archive.apache.org/dist/maven/maven-3/3.9.14/binaries/apache-maven-3.9.14-bin.zip",
     "3.9.15": "https://downloads.apache.org/maven/maven-3/3.9.15/binaries/apache-maven-3.9.15-bin.zip",
     "4.0.0-rc-1": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-1/binaries/apache-maven-4.0.0-rc-1-bin.zip",
     "4.0.0-rc-2": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-2/binaries/apache-maven-4.0.0-rc-2-bin.zip",
