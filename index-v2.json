@@ -2186,6 +2186,11 @@
           "aarch64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.10%2B7/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.10_7.tar.gz"
         }
       },
+      "21.0.11+10": {
+        "linux": {
+          "amd64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.11%2B10/OpenJDK21U-jdk_x64_linux_hotspot_21.0.11_10.tar.gz"
+        }
+      },
       "22+36": {
         "macos": {
           "amd64": "https://github.com/adoptium/temurin22-binaries/releases/download/jdk-22%2B36/OpenJDK22U-jdk_x64_mac_hotspot_22_36.tar.gz",
@@ -2345,6 +2350,10 @@
         }
       },
       "25.0.3+9": {
+        "macos": {
+          "amd64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jdk_x64_mac_hotspot_25.0.3_9.tar.gz",
+          "aarch64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jdk_aarch64_mac_hotspot_25.0.3_9.tar.gz"
+        },
         "linux": {
           "amd64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.3%2B9/OpenJDK25U-jdk_x64_linux_hotspot_25.0.3_9.tar.gz"
         }
@@ -11186,6 +11195,19 @@
       "linux": {
         "amd64": "https://nodejs.org/download/release/v24.14.1/node-v24.14.1-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v24.14.1/node-v24.14.1-linux-arm64.tar.xz"
+      }
+    },
+    "24.15.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/download/release/v24.15.0/node-v24.15.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v24.15.0/node-v24.15.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v24.15.0/node-v24.15.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/download/release/v24.15.0/node-v24.15.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v24.15.0/node-v24.15.0-linux-arm64.tar.xz"
       }
     },
     "25.0.0": {
