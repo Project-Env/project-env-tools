@@ -2414,6 +2414,10 @@
         }
       },
       "26.0.1+8": {
+        "macos": {
+          "amd64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.1%2B8/OpenJDK26U-jdk_x64_mac_hotspot_26.0.1_8.tar.gz",
+          "aarch64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.1%2B8/OpenJDK26U-jdk_aarch64_mac_hotspot_26.0.1_8.tar.gz"
+        },
         "linux": {
           "amd64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.1%2B8/OpenJDK26U-jdk_x64_linux_hotspot_26.0.1_8.tar.gz",
           "aarch64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.1%2B8/OpenJDK26U-jdk_aarch64_linux_hotspot_26.0.1_8.tar.gz"
@@ -2672,6 +2676,7 @@
     "8.14.2": "https://github.com/gradle/gradle-distributions/releases/download/v8.14.2/gradle-8.14.2-bin.zip",
     "8.14.3": "https://github.com/gradle/gradle-distributions/releases/download/v8.14.3/gradle-8.14.3-bin.zip",
     "8.14.4": "https://github.com/gradle/gradle-distributions/releases/download/v8.14.4/gradle-8.14.4-bin.zip",
+    "8.14.5": "https://github.com/gradle/gradle-distributions/releases/download/v8.14.5/gradle-8.14.5-bin.zip",
     "9.0.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.0.0/gradle-9.0.0-bin.zip",
     "9.1.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.1.0/gradle-9.1.0-bin.zip",
     "9.2.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.2.0/gradle-9.2.0-bin.zip",
