@@ -11810,6 +11810,16 @@
       "macos": "https://github.com/clojure/brew-install/releases/download/1.12.5.1645/clojure-tools-1.12.5.1645.tar.gz",
       "windows": "https://github.com/clojure/brew-install/releases/download/1.12.5.1645/clojure-tools.zip",
       "linux": "https://github.com/clojure/brew-install/releases/download/1.12.5.1645/clojure-tools-1.12.5.1645.tar.gz"
+    },
+    "1.12.5.1650": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.5.1650/clojure-tools-1.12.5.1650.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.5.1650/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.5.1650/clojure-tools-1.12.5.1650.tar.gz"
+    },
+    "1.12.5.1654": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.5.1654/clojure-tools-1.12.5.1654.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.5.1654/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.5.1654/clojure-tools-1.12.5.1654.tar.gz"
     }
   }
 }
