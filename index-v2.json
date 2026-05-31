@@ -3138,6 +3138,19 @@
         "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.5/maven-mvnd-1.0.5-linux-amd64.zip",
         "aarch64": "https://github.com/apache/maven-mvnd/releases/download/1.0.5/maven-mvnd-1.0.5-linux-aarch64.zip"
       }
+    },
+    "1.0.6": {
+      "macos": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.6/maven-mvnd-1.0.6-darwin-amd64.zip",
+        "aarch64": "https://github.com/apache/maven-mvnd/releases/download/1.0.6/maven-mvnd-1.0.6-darwin-aarch64.zip"
+      },
+      "windows": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.6/maven-mvnd-1.0.6-windows-amd64.zip"
+      },
+      "linux": {
+        "amd64": "https://github.com/apache/maven-mvnd/releases/download/1.0.6/maven-mvnd-1.0.6-linux-amd64.zip",
+        "aarch64": "https://github.com/apache/maven-mvnd/releases/download/1.0.6/maven-mvnd-1.0.6-linux-aarch64.zip"
+      }
     }
   },
   "nodeVersions": {
@@ -11810,6 +11823,16 @@
       "macos": "https://github.com/clojure/brew-install/releases/download/1.12.5.1645/clojure-tools-1.12.5.1645.tar.gz",
       "windows": "https://github.com/clojure/brew-install/releases/download/1.12.5.1645/clojure-tools.zip",
       "linux": "https://github.com/clojure/brew-install/releases/download/1.12.5.1645/clojure-tools-1.12.5.1645.tar.gz"
+    },
+    "1.12.5.1650": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.5.1650/clojure-tools-1.12.5.1650.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.5.1650/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.5.1650/clojure-tools-1.12.5.1650.tar.gz"
+    },
+    "1.12.5.1654": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.5.1654/clojure-tools-1.12.5.1654.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.5.1654/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.5.1654/clojure-tools-1.12.5.1654.tar.gz"
     }
   }
 }
