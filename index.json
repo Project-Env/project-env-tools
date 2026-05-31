@@ -1481,6 +1481,11 @@
       "macos": "https://github.com/apache/maven-mvnd/releases/download/1.0.5/maven-mvnd-1.0.5-darwin-amd64.zip",
       "windows": "https://github.com/apache/maven-mvnd/releases/download/1.0.5/maven-mvnd-1.0.5-windows-amd64.zip",
       "linux": "https://github.com/apache/maven-mvnd/releases/download/1.0.5/maven-mvnd-1.0.5-linux-amd64.zip"
+    },
+    "1.0.6": {
+      "macos": "https://github.com/apache/maven-mvnd/releases/download/1.0.6/maven-mvnd-1.0.6-darwin-amd64.zip",
+      "windows": "https://github.com/apache/maven-mvnd/releases/download/1.0.6/maven-mvnd-1.0.6-windows-amd64.zip",
+      "linux": "https://github.com/apache/maven-mvnd/releases/download/1.0.6/maven-mvnd-1.0.6-linux-amd64.zip"
     }
   },
   "nodeVersions": {
