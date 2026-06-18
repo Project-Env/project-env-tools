@@ -4700,6 +4700,11 @@
       "windows": "https://nodejs.org/download/release/v22.22.3/node-v22.22.3-win-x64.zip",
       "linux": "https://nodejs.org/download/release/v22.22.3/node-v22.22.3-linux-x64.tar.xz"
     },
+    "22.23.0": {
+      "macos": "https://nodejs.org/download/release/v22.23.0/node-v22.23.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v22.23.0/node-v22.23.0-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v22.23.0/node-v22.23.0-linux-x64.tar.xz"
+    },
     "23.0.0": {
       "macos": "https://nodejs.org/download/release/v23.0.0/node-v23.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/download/release/v23.0.0/node-v23.0.0-win-x64.zip",
@@ -4885,6 +4890,11 @@
       "windows": "https://nodejs.org/download/release/v24.16.0/node-v24.16.0-win-x64.zip",
       "linux": "https://nodejs.org/download/release/v24.16.0/node-v24.16.0-linux-x64.tar.xz"
     },
+    "24.17.0": {
+      "macos": "https://nodejs.org/download/release/v24.17.0/node-v24.17.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v24.17.0/node-v24.17.0-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v24.17.0/node-v24.17.0-linux-x64.tar.xz"
+    },
     "25.0.0": {
       "macos": "https://nodejs.org/download/release/v25.0.0/node-v25.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/download/release/v25.0.0/node-v25.0.0-win-x64.zip",
@@ -4974,6 +4984,11 @@
       "macos": "https://nodejs.org/download/release/v26.3.0/node-v26.3.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/download/release/v26.3.0/node-v26.3.0-win-x64.zip",
       "linux": "https://nodejs.org/download/release/v26.3.0/node-v26.3.0-linux-x64.tar.xz"
+    },
+    "26.3.1": {
+      "macos": "https://nodejs.org/download/release/v26.3.1/node-v26.3.1-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v26.3.1/node-v26.3.1-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v26.3.1/node-v26.3.1-linux-x64.tar.xz"
     }
   }
 }
