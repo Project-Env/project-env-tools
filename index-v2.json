@@ -2500,6 +2500,9 @@
           "amd64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.2%2B10/OpenJDK26U-jdk_x64_mac_hotspot_26.0.2_10.tar.gz",
           "aarch64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.2%2B10/OpenJDK26U-jdk_aarch64_mac_hotspot_26.0.2_10.tar.gz"
         },
+        "windows": {
+          "amd64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.2%2B10/OpenJDK26U-jdk_x64_windows_hotspot_26.0.2_10.zip"
+        },
         "linux": {
           "amd64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.2%2B10/OpenJDK26U-jdk_x64_linux_hotspot_26.0.2_10.tar.gz",
           "aarch64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.2%2B10/OpenJDK26U-jdk_aarch64_linux_hotspot_26.0.2_10.tar.gz"
@@ -2823,7 +2826,8 @@
     "4.0.0-rc-2": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-2/binaries/apache-maven-4.0.0-rc-2-bin.zip",
     "4.0.0-rc-3": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-3/binaries/apache-maven-4.0.0-rc-3-bin.zip",
     "4.0.0-rc-4": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-4/binaries/apache-maven-4.0.0-rc-4-bin.zip",
-    "4.0.0-rc-5": "https://downloads.apache.org/maven/maven-4/4.0.0-rc-5/binaries/apache-maven-4.0.0-rc-5-bin.zip"
+    "4.0.0-rc-5": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-5/binaries/apache-maven-4.0.0-rc-5-bin.zip",
+    "4.0.0-rc-6": "https://downloads.apache.org/maven/maven-4/4.0.0-rc-6/binaries/apache-maven-4.0.0-rc-6-bin.zip"
   },
   "mvndVersions": {
     "0.0.2": {
@@ -11468,6 +11472,19 @@
         "aarch64": "https://nodejs.org/download/release/v24.18.1/node-v24.18.1-linux-arm64.tar.xz"
       }
     },
+    "24.19.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/download/release/v24.19.0/node-v24.19.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v24.19.0/node-v24.19.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v24.19.0/node-v24.19.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/download/release/v24.19.0/node-v24.19.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v24.19.0/node-v24.19.0-linux-arm64.tar.xz"
+      }
+    },
     "25.0.0": {
       "macos": {
         "amd64": "https://nodejs.org/download/release/v25.0.0/node-v25.0.0-darwin-x64.tar.xz",
@@ -11752,6 +11769,32 @@
       "linux": {
         "amd64": "https://nodejs.org/download/release/v26.5.1/node-v26.5.1-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v26.5.1/node-v26.5.1-linux-arm64.tar.xz"
+      }
+    },
+    "26.6.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/download/release/v26.6.0/node-v26.6.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v26.6.0/node-v26.6.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v26.6.0/node-v26.6.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/download/release/v26.6.0/node-v26.6.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v26.6.0/node-v26.6.0-linux-arm64.tar.xz"
+      }
+    },
+    "26.7.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/download/release/v26.7.0/node-v26.7.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v26.7.0/node-v26.7.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v26.7.0/node-v26.7.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/download/release/v26.7.0/node-v26.7.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v26.7.0/node-v26.7.0-linux-arm64.tar.xz"
       }
     }
   },
