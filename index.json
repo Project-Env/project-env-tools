@@ -4991,6 +4991,11 @@
       "windows": "https://nodejs.org/download/release/v24.20.0/node-v24.20.0-win-x64.zip",
       "linux": "https://nodejs.org/download/release/v24.20.0/node-v24.20.0-linux-x64.tar.xz"
     },
+    "24.21.0": {
+      "macos": "https://nodejs.org/download/release/v24.21.0/node-v24.21.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v24.21.0/node-v24.21.0-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v24.21.0/node-v24.21.0-linux-x64.tar.xz"
+    },
     "25.0.0": {
       "macos": "https://nodejs.org/download/release/v25.0.0/node-v25.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/download/release/v25.0.0/node-v25.0.0-win-x64.zip",
@@ -5120,6 +5125,11 @@
       "macos": "https://nodejs.org/download/release/v26.8.1/node-v26.8.1-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/download/release/v26.8.1/node-v26.8.1-win-x64.zip",
       "linux": "https://nodejs.org/download/release/v26.8.1/node-v26.8.1-linux-x64.tar.xz"
+    },
+    "26.8.2": {
+      "macos": "https://nodejs.org/download/release/v26.8.2/node-v26.8.2-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v26.8.2/node-v26.8.2-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v26.8.2/node-v26.8.2-linux-x64.tar.xz"
     }
   }
 }
