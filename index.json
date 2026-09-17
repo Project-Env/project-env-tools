@@ -5130,6 +5130,11 @@
       "macos": "https://nodejs.org/download/release/v26.8.2/node-v26.8.2-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/download/release/v26.8.2/node-v26.8.2-win-x64.zip",
       "linux": "https://nodejs.org/download/release/v26.8.2/node-v26.8.2-linux-x64.tar.xz"
+    },
+    "26.9.0": {
+      "macos": "https://nodejs.org/download/release/v26.9.0/node-v26.9.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v26.9.0/node-v26.9.0-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v26.9.0/node-v26.9.0-linux-x64.tar.xz"
     }
   }
 }
