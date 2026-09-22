@@ -11941,6 +11941,19 @@
         "amd64": "https://nodejs.org/download/release/v26.8.2/node-v26.8.2-linux-x64.tar.xz",
         "aarch64": "https://nodejs.org/download/release/v26.8.2/node-v26.8.2-linux-arm64.tar.xz"
       }
+    },
+    "26.9.0": {
+      "macos": {
+        "amd64": "https://nodejs.org/download/release/v26.9.0/node-v26.9.0-darwin-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v26.9.0/node-v26.9.0-darwin-arm64.tar.xz"
+      },
+      "windows": {
+        "amd64": "https://nodejs.org/download/release/v26.9.0/node-v26.9.0-win-x64.zip"
+      },
+      "linux": {
+        "amd64": "https://nodejs.org/download/release/v26.9.0/node-v26.9.0-linux-x64.tar.xz",
+        "aarch64": "https://nodejs.org/download/release/v26.9.0/node-v26.9.0-linux-arm64.tar.xz"
+      }
     }
   },
   "clojureVersions": {
