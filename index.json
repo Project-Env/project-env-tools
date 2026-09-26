@@ -1049,6 +1049,10 @@
         "macos": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.2.1%2B1/OpenJDK26U-jdk_x64_mac_hotspot_26.0.2.1_1.tar.gz",
         "windows": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.2.1%2B1/OpenJDK26U-jdk_x64_windows_hotspot_26.0.2.1_1.zip",
         "linux": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26.0.2.1%2B1/OpenJDK26U-jdk_x64_linux_hotspot_26.0.2.1_1.tar.gz"
+      },
+      "27+35": {
+        "windows": "https://github.com/adoptium/temurin27-binaries/releases/download/jdk-27%2B35/OpenJDK27U-jdk_x64_windows_hotspot_27_35.zip",
+        "linux": "https://github.com/adoptium/temurin27-binaries/releases/download/jdk-27%2B35/OpenJDK27U-jdk_x64_linux_hotspot_27_35.tar.gz"
       }
     }
   },
@@ -1317,7 +1321,8 @@
     "9.6.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.6.0/gradle-9.6.0-bin.zip",
     "9.6.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.6.1/gradle-9.6.1-bin.zip",
     "9.7.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.7.0/gradle-9.7.0-bin.zip",
-    "9.7.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.7.1/gradle-9.7.1-bin.zip"
+    "9.7.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.7.1/gradle-9.7.1-bin.zip",
+    "9.8.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.8.0/gradle-9.8.0-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
@@ -1371,7 +1376,8 @@
     "4.0.0-rc-3": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-3/binaries/apache-maven-4.0.0-rc-3-bin.zip",
     "4.0.0-rc-4": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-4/binaries/apache-maven-4.0.0-rc-4-bin.zip",
     "4.0.0-rc-5": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-5/binaries/apache-maven-4.0.0-rc-5-bin.zip",
-    "4.0.0-rc-6": "https://downloads.apache.org/maven/maven-4/4.0.0-rc-6/binaries/apache-maven-4.0.0-rc-6-bin.zip"
+    "4.0.0-rc-6": "https://downloads.apache.org/maven/maven-4/4.0.0-rc-6/binaries/apache-maven-4.0.0-rc-6-bin.zip",
+    "4.0.0-rc-7": "https://downloads.apache.org/maven/maven-4/4.0.0-rc-7/binaries/apache-maven-4.0.0-rc-7-bin.zip"
   },
   "mvndVersions": {
     "0.0.2": {
@@ -4781,6 +4787,11 @@
       "windows": "https://nodejs.org/download/release/v22.23.2/node-v22.23.2-win-x64.zip",
       "linux": "https://nodejs.org/download/release/v22.23.2/node-v22.23.2-linux-x64.tar.xz"
     },
+    "22.23.3": {
+      "macos": "https://nodejs.org/download/release/v22.23.3/node-v22.23.3-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v22.23.3/node-v22.23.3-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v22.23.3/node-v22.23.3-linux-x64.tar.xz"
+    },
     "23.0.0": {
       "macos": "https://nodejs.org/download/release/v23.0.0/node-v23.0.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/download/release/v23.0.0/node-v23.0.0-win-x64.zip",
@@ -5135,6 +5146,11 @@
       "macos": "https://nodejs.org/download/release/v26.9.0/node-v26.9.0-darwin-x64.tar.xz",
       "windows": "https://nodejs.org/download/release/v26.9.0/node-v26.9.0-win-x64.zip",
       "linux": "https://nodejs.org/download/release/v26.9.0/node-v26.9.0-linux-x64.tar.xz"
+    },
+    "26.10.0": {
+      "macos": "https://nodejs.org/download/release/v26.10.0/node-v26.10.0-darwin-x64.tar.xz",
+      "windows": "https://nodejs.org/download/release/v26.10.0/node-v26.10.0-win-x64.zip",
+      "linux": "https://nodejs.org/download/release/v26.10.0/node-v26.10.0-linux-x64.tar.xz"
     }
   }
 }
