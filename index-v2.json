@@ -1396,6 +1396,11 @@
           "aarch64": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u512-b09/OpenJDK8U-jdk_aarch64_linux_hotspot_8u512b09.tar.gz"
         }
       },
+      "8.0.514+1": {
+        "linux": {
+          "amd64": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u514-b01/OpenJDK8U-jdk_x64_linux_hotspot_8u514b01.tar.gz"
+        }
+      },
       "11.0.12+7": {
         "macos": {
           "amd64": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.12%2B7/OpenJDK11U-jdk_x64_mac_hotspot_11.0.12_7.tar.gz"
@@ -1730,6 +1735,14 @@
           "aarch64": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33%2B10/OpenJDK11U-jdk_aarch64_linux_hotspot_11.0.33_10.tar.gz"
         }
       },
+      "11.0.33.1+1": {
+        "macos": {
+          "amd64": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33.1%2B1/OpenJDK11U-jdk_x64_mac_hotspot_11.0.33.1_1.tar.gz"
+        },
+        "linux": {
+          "amd64": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33.1%2B1/OpenJDK11U-jdk_x64_linux_hotspot_11.0.33.1_1.tar.gz"
+        }
+      },
       "16.0.2+7": {
         "macos": {
           "amd64": "https://github.com/adoptium/temurin16-binaries/releases/download/jdk-16.0.2%2B7/OpenJDK16U-jdk_x64_mac_hotspot_16.0.2_7.tar.gz"
@@ -2052,6 +2065,18 @@
         "linux": {
           "amd64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21%2B9/OpenJDK17U-jdk_x64_linux_hotspot_17.0.21_9.tar.gz",
           "aarch64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21%2B9/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.21_9.tar.gz"
+        }
+      },
+      "17.0.21.1+2": {
+        "macos": {
+          "amd64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jdk_x64_mac_hotspot_17.0.21.1_2.tar.gz",
+          "aarch64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.21.1_2.tar.gz"
+        },
+        "windows": {
+          "amd64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jdk_x64_windows_hotspot_17.0.21.1_2.zip"
+        },
+        "linux": {
+          "amd64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jdk_x64_linux_hotspot_17.0.21.1_2.tar.gz"
         }
       },
       "18+36": {
@@ -2388,6 +2413,17 @@
           "aarch64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13%2B9/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.13_9.tar.gz"
         }
       },
+      "21.0.13.1+2": {
+        "macos": {
+          "aarch64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.13.1_2.tar.gz"
+        },
+        "windows": {
+          "amd64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_x64_windows_hotspot_21.0.13.1_2.zip"
+        },
+        "linux": {
+          "amd64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_x64_linux_hotspot_21.0.13.1_2.tar.gz"
+        }
+      },
       "22+36": {
         "macos": {
           "amd64": "https://github.com/adoptium/temurin22-binaries/releases/download/jdk-22%2B36/OpenJDK22U-jdk_x64_mac_hotspot_22_36.tar.gz",
@@ -2598,6 +2634,19 @@
           "aarch64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5%2B8/OpenJDK25U-jdk_aarch64_linux_hotspot_25.0.5_8.tar.gz"
         }
       },
+      "25.0.5.1+2": {
+        "macos": {
+          "amd64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_x64_mac_hotspot_25.0.5.1_2.tar.gz",
+          "aarch64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_aarch64_mac_hotspot_25.0.5.1_2.tar.gz"
+        },
+        "windows": {
+          "amd64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_x64_windows_hotspot_25.0.5.1_2.zip"
+        },
+        "linux": {
+          "amd64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_x64_linux_hotspot_25.0.5.1_2.tar.gz",
+          "aarch64": "https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.5.1%2B2/OpenJDK25U-jdk_aarch64_linux_hotspot_25.0.5.1_2.tar.gz"
+        }
+      },
       "26+35": {
         "macos": {
           "amd64": "https://github.com/adoptium/temurin26-binaries/releases/download/jdk-26%2B35/OpenJDK26U-jdk_x64_mac_hotspot_26_35.tar.gz",
@@ -2672,6 +2721,14 @@
         "linux": {
           "amd64": "https://github.com/adoptium/temurin27-binaries/releases/download/jdk-27.0.1.0.2%2B1/OpenJDK27U-jdk_x64_linux_hotspot_27.0.1.0.2_1.tar.gz",
           "aarch64": "https://github.com/adoptium/temurin27-binaries/releases/download/jdk-27.0.1.0.2%2B1/OpenJDK27U-jdk_aarch64_linux_hotspot_27.0.1.0.2_1.tar.gz"
+        }
+      },
+      "27.0.1.1+4": {
+        "macos": {
+          "aarch64": "https://github.com/adoptium/temurin27-binaries/releases/download/jdk-27.0.1.1%2B4/OpenJDK27U-jdk_aarch64_mac_hotspot_27.0.1.1_4.tar.gz"
+        },
+        "linux": {
+          "amd64": "https://github.com/adoptium/temurin27-binaries/releases/download/jdk-27.0.1.1%2B4/OpenJDK27U-jdk_x64_linux_hotspot_27.0.1.1_4.tar.gz"
         }
       }
     }
@@ -2930,6 +2987,7 @@
     "8.14.5": "https://github.com/gradle/gradle-distributions/releases/download/v8.14.5/gradle-8.14.5-bin.zip",
     "8.14.6": "https://github.com/gradle/gradle-distributions/releases/download/v8.14.6/gradle-8.14.6-bin.zip",
     "8.14.7": "https://github.com/gradle/gradle-distributions/releases/download/v8.14.7/gradle-8.14.7-bin.zip",
+    "8.14.8": "https://github.com/gradle/gradle-distributions/releases/download/v8.14.8/gradle-8.14.8-bin.zip",
     "9.0.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.0.0/gradle-9.0.0-bin.zip",
     "9.1.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.1.0/gradle-9.1.0-bin.zip",
     "9.2.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.2.0/gradle-9.2.0-bin.zip",
@@ -2948,7 +3006,8 @@
     "9.8.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.8.1/gradle-9.8.1-bin.zip",
     "9.8.2": "https://github.com/gradle/gradle-distributions/releases/download/v9.8.2/gradle-9.8.2-bin.zip",
     "9.9.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.9.0/gradle-9.9.0-bin.zip",
-    "9.9.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.9.1/gradle-9.9.1-bin.zip"
+    "9.9.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.9.1/gradle-9.9.1-bin.zip",
+    "9.9.2": "https://github.com/gradle/gradle-distributions/releases/download/v9.9.2/gradle-9.9.2-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
@@ -12550,6 +12609,16 @@
       "macos": "https://github.com/clojure/brew-install/releases/download/1.12.6.1673/clojure-tools-1.12.6.1673.tar.gz",
       "windows": "https://github.com/clojure/brew-install/releases/download/1.12.6.1673/clojure-tools.zip",
       "linux": "https://github.com/clojure/brew-install/releases/download/1.12.6.1673/clojure-tools-1.12.6.1673.tar.gz"
+    },
+    "1.12.6.1678": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.6.1678/clojure-tools-1.12.6.1678.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.6.1678/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.6.1678/clojure-tools-1.12.6.1678.tar.gz"
+    },
+    "1.12.7.1681": {
+      "macos": "https://github.com/clojure/brew-install/releases/download/1.12.7.1681/clojure-tools-1.12.7.1681.tar.gz",
+      "windows": "https://github.com/clojure/brew-install/releases/download/1.12.7.1681/clojure-tools.zip",
+      "linux": "https://github.com/clojure/brew-install/releases/download/1.12.7.1681/clojure-tools-1.12.7.1681.tar.gz"
     }
   }
 }
