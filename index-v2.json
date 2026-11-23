@@ -1737,7 +1737,8 @@
       },
       "11.0.33.1+1": {
         "macos": {
-          "amd64": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33.1%2B1/OpenJDK11U-jdk_x64_mac_hotspot_11.0.33.1_1.tar.gz"
+          "amd64": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33.1%2B1/OpenJDK11U-jdk_x64_mac_hotspot_11.0.33.1_1.tar.gz",
+          "aarch64": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33.1%2B1/OpenJDK11U-jdk_aarch64_mac_hotspot_11.0.33.1_1.tar.gz"
         },
         "linux": {
           "amd64": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33.1%2B1/OpenJDK11U-jdk_x64_linux_hotspot_11.0.33.1_1.tar.gz"
@@ -2076,7 +2077,8 @@
           "amd64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jdk_x64_windows_hotspot_17.0.21.1_2.zip"
         },
         "linux": {
-          "amd64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jdk_x64_linux_hotspot_17.0.21.1_2.tar.gz"
+          "amd64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jdk_x64_linux_hotspot_17.0.21.1_2.tar.gz",
+          "aarch64": "https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.21.1%2B2/OpenJDK17U-jdk_aarch64_linux_hotspot_17.0.21.1_2.tar.gz"
         }
       },
       "18+36": {
@@ -2415,13 +2417,15 @@
       },
       "21.0.13.1+2": {
         "macos": {
+          "amd64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_x64_mac_hotspot_21.0.13.1_2.tar.gz",
           "aarch64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_aarch64_mac_hotspot_21.0.13.1_2.tar.gz"
         },
         "windows": {
           "amd64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_x64_windows_hotspot_21.0.13.1_2.zip"
         },
         "linux": {
-          "amd64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_x64_linux_hotspot_21.0.13.1_2.tar.gz"
+          "amd64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_x64_linux_hotspot_21.0.13.1_2.tar.gz",
+          "aarch64": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_aarch64_linux_hotspot_21.0.13.1_2.tar.gz"
         }
       },
       "22+36": {
@@ -3057,7 +3061,8 @@
     "3.9.16": "https://downloads.apache.org/maven/maven-3/3.9.16/binaries/apache-maven-3.9.16-bin.zip",
     "3.10.0-rc-1": "https://archive.apache.org/dist/maven/maven-3/3.10.0-rc-1/binaries/apache-maven-3.10.0-rc-1-bin.zip",
     "3.10.0": "https://archive.apache.org/dist/maven/maven-3/3.10.0/binaries/apache-maven-3.10.0-bin.zip",
-    "3.10.1": "https://downloads.apache.org/maven/maven-3/3.10.1/binaries/apache-maven-3.10.1-bin.zip",
+    "3.10.1": "https://archive.apache.org/dist/maven/maven-3/3.10.1/binaries/apache-maven-3.10.1-bin.zip",
+    "3.10.2": "https://downloads.apache.org/maven/maven-3/3.10.2/binaries/apache-maven-3.10.2-bin.zip",
     "4.0.0-rc-1": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-1/binaries/apache-maven-4.0.0-rc-1-bin.zip",
     "4.0.0-rc-2": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-2/binaries/apache-maven-4.0.0-rc-2-bin.zip",
     "4.0.0-rc-3": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-3/binaries/apache-maven-4.0.0-rc-3-bin.zip",
