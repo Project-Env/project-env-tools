@@ -988,6 +988,7 @@
         "linux": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.13_9.tar.gz"
       },
       "21.0.13.1+2": {
+        "macos": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_x64_mac_hotspot_21.0.13.1_2.tar.gz",
         "windows": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_x64_windows_hotspot_21.0.13.1_2.zip",
         "linux": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13.1%2B2/OpenJDK21U-jdk_x64_linux_hotspot_21.0.13.1_2.tar.gz"
       },
@@ -1433,7 +1434,8 @@
     "3.9.16": "https://downloads.apache.org/maven/maven-3/3.9.16/binaries/apache-maven-3.9.16-bin.zip",
     "3.10.0-rc-1": "https://archive.apache.org/dist/maven/maven-3/3.10.0-rc-1/binaries/apache-maven-3.10.0-rc-1-bin.zip",
     "3.10.0": "https://archive.apache.org/dist/maven/maven-3/3.10.0/binaries/apache-maven-3.10.0-bin.zip",
-    "3.10.1": "https://downloads.apache.org/maven/maven-3/3.10.1/binaries/apache-maven-3.10.1-bin.zip",
+    "3.10.1": "https://archive.apache.org/dist/maven/maven-3/3.10.1/binaries/apache-maven-3.10.1-bin.zip",
+    "3.10.2": "https://downloads.apache.org/maven/maven-3/3.10.2/binaries/apache-maven-3.10.2-bin.zip",
     "4.0.0-rc-1": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-1/binaries/apache-maven-4.0.0-rc-1-bin.zip",
     "4.0.0-rc-2": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-2/binaries/apache-maven-4.0.0-rc-2-bin.zip",
     "4.0.0-rc-3": "https://archive.apache.org/dist/maven/maven-4/4.0.0-rc-3/binaries/apache-maven-4.0.0-rc-3-bin.zip",
