@@ -596,6 +596,7 @@
         "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u512-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u512b09.tar.gz"
       },
       "8.0.514+1": {
+        "macos": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u514-b01/OpenJDK8U-jdk_x64_mac_hotspot_8u514b01.tar.gz",
         "linux": "https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u514-b01/OpenJDK8U-jdk_x64_linux_hotspot_8u514b01.tar.gz"
       },
       "11.0.12+7": {
@@ -730,6 +731,7 @@
       },
       "11.0.33.1+1": {
         "macos": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33.1%2B1/OpenJDK11U-jdk_x64_mac_hotspot_11.0.33.1_1.tar.gz",
+        "windows": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33.1%2B1/OpenJDK11U-jdk_x64_windows_hotspot_11.0.33.1_1.zip",
         "linux": "https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.33.1%2B1/OpenJDK11U-jdk_x64_linux_hotspot_11.0.33.1_1.tar.gz"
       },
       "16.0.2+7": {
@@ -1384,7 +1386,8 @@
     "9.8.2": "https://github.com/gradle/gradle-distributions/releases/download/v9.8.2/gradle-9.8.2-bin.zip",
     "9.9.0": "https://github.com/gradle/gradle-distributions/releases/download/v9.9.0/gradle-9.9.0-bin.zip",
     "9.9.1": "https://github.com/gradle/gradle-distributions/releases/download/v9.9.1/gradle-9.9.1-bin.zip",
-    "9.9.2": "https://github.com/gradle/gradle-distributions/releases/download/v9.9.2/gradle-9.9.2-bin.zip"
+    "9.9.2": "https://github.com/gradle/gradle-distributions/releases/download/v9.9.2/gradle-9.9.2-bin.zip",
+    "9.9.3": "https://github.com/gradle/gradle-distributions/releases/download/v9.9.3/gradle-9.9.3-bin.zip"
   },
   "mavenVersions": {
     "3.0.4": "https://archive.apache.org/dist/maven/maven-3/3.0.4/binaries/apache-maven-3.0.4-bin.zip",
